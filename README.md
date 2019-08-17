@@ -7,7 +7,7 @@ Project Name: Matrimonial site
 <h2> Installation </h2>
 Step - 1:
 
-Create one data base in MySql and import mplan.sql file.
+Create one data base in MySql and import matrimonial.sql file.
 
 Step - 2:
 
