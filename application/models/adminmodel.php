@@ -1,0 +1,140 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+/**
+ * Matri
+ *
+ * This model represents matrimonial user  data base. It can be used
+ * for address access, insert, delete.
+ *
+ * @package	models
+ * Class Name   Matri
+ * @author	shiva manhar (shivamanhar)
+ * Date         22/4/2015
+ * 
+ */
+class Adminmodel extends CI_Model
+{
+    function total_muser_data()
+    {
+        $this->db->select('users.*, user_profiles.*, education_field.*,
+                            education_level.*, working_as.*, working_with.*, user_family.*,
+                            user_file.*, userfolder.*, user_background.*, user_hobbies.*,
+                            user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
+                            countries.name as country , states.name as state, users.id as muser_id,
+                              cities.name as city, height.id as hid, users.id as main_id');
+        $this->db->from('users');
+        $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
+        $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
+        $this->db->join('education_field','education_field.id = user_edu.edu_field_id', 'left');
+        $this->db->join('education_level','education_level.id = user_edu.edu_level_id','left');
+        $this->db->join('working_as','working_as.id = user_edu.work_as_id', 'left');
+        $this->db->join('working_with','working_with.id =user_edu.work_with_id', 'left');
+        $this->db->join('user_family','user_family.user_id = users.id', 'left');
+       
+        $this->db->join('user_file','user_file.user_id = users.id', 'left');
+        $this->db->join('userfolder','userfolder.user_id = users.id', 'left');
+        $this->db->join('user_background','user_background.user_id = users.id', 'left');        
+        $this->db->join('user_hobbies', 'user_hobbies.user_id = users.id',  'left');
+        $this->db->join('user_lifestyle', 'user_lifestyle.user_id = users.id',  'left');
+        $this->db->join('mother_tongue', 'mother_tongue.id= user_profiles.mother_tongue_id',  'left');
+        $this->db->join('countries', 'countries.id = user_profiles.country_id',  'left');
+        $this->db->join('cities', 'cities.id = user_profiles.city_id',  'left');
+        $this->db->join('states', 'states.id = user_profiles.state_id',  'left');
+        $this->db->join('religion', 'religion.id = user_background.religion_id',  'left');
+        $this->db->join('community', 'community.id = user_background.community_id',  'left');
+        $this->db->join('height', 'height.id = user_profiles.height',  'left');
+        //$this->db->join('user_package_opt','user_package_opt.userid = users.id', 'left');
+        $this->db->where("role ='2'");
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function pending_package_request()
+    {
+        $this->db->select('users.*, user_profiles.*, education_field.*,
+                            education_level.*, working_as.*, working_with.*, user_family.*,
+                            user_file.*, userfolder.*, user_background.*, user_hobbies.*,
+                            user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
+                            countries.name as country , states.name as state, users.id as muser_id,
+                              cities.name as city, height.id as hid, users.id as main_id');
+                              
+        $this->db->from('users');
+        $this->db->join('user_package_opt','user_package_opt.userid = users.id', 'left');
+        $this->db->join('packagelist','user_package_opt.package_id = packagelist.id', 'left');
+        $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
+        $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
+        $this->db->join('education_field','education_field.id = user_edu.edu_field_id', 'left');
+        $this->db->join('education_level','education_level.id = user_edu.edu_level_id','left');
+        $this->db->join('working_as','working_as.id = user_edu.work_as_id', 'left');
+        $this->db->join('working_with','working_with.id =user_edu.work_with_id', 'left');
+        $this->db->join('user_family','user_family.user_id = users.id', 'left');
+       
+        $this->db->join('user_file','user_file.user_id = users.id', 'left');
+        $this->db->join('userfolder','userfolder.user_id = users.id', 'left');
+        $this->db->join('user_background','user_background.user_id = users.id', 'left');        
+        $this->db->join('user_hobbies', 'user_hobbies.user_id = users.id',  'left');
+        $this->db->join('user_lifestyle', 'user_lifestyle.user_id = users.id',  'left');
+        $this->db->join('mother_tongue', 'mother_tongue.id= user_profiles.mother_tongue_id',  'left');
+        $this->db->join('countries', 'countries.id = user_profiles.country_id',  'left');
+        $this->db->join('cities', 'cities.id = user_profiles.city_id',  'left');
+        $this->db->join('states', 'states.id = user_profiles.state_id',  'left');
+        $this->db->join('religion', 'religion.id = user_background.religion_id',  'left');
+        $this->db->join('community', 'community.id = user_background.community_id',  'left');
+        $this->db->join('height', 'height.id = user_profiles.height',  'left');
+        $this->db->where("role ='2' ");
+        $this->db->where("user_package_opt.package_status ='0'");
+        $query = $this->db->get();
+        return $query;
+    }
+    function user_details($field_val)
+    {
+        $this->db->select('users.*, user_profiles.*, education_field.*,
+                            education_level.*, working_as.*, working_with.*, user_family.*,
+                            user_file.*, userfolder.*, user_background.*, user_hobbies.*,
+                            user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
+                            user_package_opt.*, packagelist.*, countries.name as country , states.name as state, users.id as muser_id,
+                              cities.name as city, height.id as hid, users.id as main_id');
+        $this->db->from('users');
+        $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
+        $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
+        $this->db->join('education_field','education_field.id = user_edu.edu_field_id', 'left');
+        $this->db->join('education_level','education_level.id = user_edu.edu_level_id','left');
+        $this->db->join('working_as','working_as.id = user_edu.work_as_id', 'left');
+        $this->db->join('working_with','working_with.id =user_edu.work_with_id', 'left');
+        $this->db->join('user_family','user_family.user_id = users.id', 'left');
+       
+        $this->db->join('user_file','user_file.user_id = users.id', 'left');
+        $this->db->join('userfolder','userfolder.user_id = users.id', 'left');
+        $this->db->join('user_background','user_background.user_id = users.id', 'left');        
+        $this->db->join('user_hobbies', 'user_hobbies.user_id = users.id',  'left');
+        $this->db->join('user_lifestyle', 'user_lifestyle.user_id = users.id',  'left');
+        $this->db->join('mother_tongue', 'mother_tongue.id= user_profiles.mother_tongue_id',  'left');
+        $this->db->join('countries', 'countries.id = user_profiles.country_id',  'left');
+        $this->db->join('cities', 'cities.id = user_profiles.city_id',  'left');
+        $this->db->join('states', 'states.id = user_profiles.state_id',  'left');
+        $this->db->join('religion', 'religion.id = user_background.religion_id',  'left');
+        $this->db->join('community', 'community.id = user_background.community_id',  'left');
+
+        $this->db->join('height', 'height.id = user_profiles.height',  'left');
+        $this->db->join('user_package_opt', 'user_package_opt.userid = users.id', 'left');
+        $this->db->join('packagelist', 'user_package_opt.package_id = packagelist.id',  'left');
+
+        $this->db->where($field_val);
+        $this->db->where('file_name IS NOT NULL');
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function get_all_user_package($field_val){
+        $this->db->select('user_package_opt.*,packagelist.*,users.*,user_package_opt.id as pack_request_id, packagelist.id as package_id,');
+        $this->db->from('user_package_opt');
+        $this->db->join('packagelist','user_package_opt.package_id = packagelist.id', 'left');
+        $this->db->join('users','user_package_opt.userid = users.id', 'left');
+        $this->db->where($field_val);
+        $query = $this->db->get();
+        return $query;
+    }
+   
+}
+/* end of matri class */
+?>

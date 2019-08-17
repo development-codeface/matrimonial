@@ -1,0 +1,24 @@
+.custom-scrollbar{ 
+  position:relative;
+  
+  .custom-scrollbar-handle{
+    display:none; 
+    width:4px; 
+    height:40px; 
+    background-color:#f00;
+    display:block; 
+    top:0; 
+    right:0; 
+    position:absolute;
+  }
+  
+  .custom-scrollbar-container{ 
+    overflow-x:hidden;
+    
+    .custom-scrollbar-scrolling-content{
+      overflow-y:scroll;
+      width:calc(100% + 20px);
+      
+    }
+  }
+}
