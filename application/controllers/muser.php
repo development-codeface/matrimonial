@@ -106,38 +106,16 @@ class Muser extends CI_Controller
 		
 		$config['base_url'] = base_url().'muser/ajaxMaches';		
 		$config['total_rows'] = $this->matri->total_muser_data($field_val)->num_rows();
+		$data['totalcount']   = $config['total_rows'];
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;
 		//$page_segment = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;	
 		
 		$data['matches'] = $this->muse->mymatch($field_val, $config['per_page'], 0/*$page_segment*/);
-
-		//print_r ($field_val); die();
-		
 		$config['first_link']  = 'First';
-		$config['div']         = 'postList';
-		/*
-		$config['full_tag_open'] 	= "<nav> <ul class='pagination'>";
-		$config['full_tag_close'] 	= '</ul> </nav>';
-		$config['cur_tag_open'] 	= '<li class="active"><a >';
-		$config['cur_tag_close'] 	= '</a></li>';
-		$config['next_tag_open']	 = '<li>';
-		$config['next_tag_close'] 	= '</li>';
-		$config['prev_tag_open'] 	= '<li>';
-		$config['prev_tag_close'] 	= '</li>';
-		$config['num_tag_open'] 	= "<li>";
-		$config['num_tag_close'] 	= '</li>';
-		$config['first_link'] 		= 'First';
-		$config['first_tag_open'] 	= '<li>';
-		$config['first_tag_close'] 	= '</li>';
-		$config['last_link'] 		= 'Last';
-		$config['last_tag_open'] 	= '<li>';
-		$config['last_tag_close'] 	= '</li>';*/
-		
+		$config['div']         = 'matches_change';
 		$this->ajax_pagination->initialize($config);
-		
-		
 		//$this->pagination->initialize($config); 
 		$data['create_link'] = $this->pagination->create_links();
 		$data['page'] =     'muser/matches';
@@ -159,6 +137,7 @@ class Muser extends CI_Controller
 		);
 		$config['base_url'] = base_url().'muser/ajaxMaches';		
 		$config['total_rows'] = $this->matri->total_muser_data($field_val)->num_rows();
+		$data['totalcount']   = $config['total_rows'];
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;
@@ -196,6 +175,8 @@ class Muser extends CI_Controller
 		
 		$config['base_url'] = base_url().'muser/ajaxMaches';		
 		$config['total_rows'] = $this->matri->total_muser_data($field_val)->num_rows();
+		$data['totalcount']   = $config['total_rows'];
+		
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;
@@ -205,7 +186,7 @@ class Muser extends CI_Controller
 		
 		//pagination configuration
 		$config['first_link']  = 'First';
-		$config['div']         = 'postList'; //parent div tag id
+		$config['div']         = 'matches_change'; //parent div tag id
 		/*
 		$config['full_tag_open'] 	= "<nav> <ul class='pagination'>";
 		$config['full_tag_close'] 	= '</ul> </nav>';
@@ -253,6 +234,7 @@ class Muser extends CI_Controller
  		);
 		$config['base_url'] = base_url().'muser/ajaxShortlist';		
 		$config['total_rows'] = $this->matri->myshortlist($field_val);
+		$data['totalcount']   = $config['total_rows'];
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;
@@ -288,6 +270,8 @@ class Muser extends CI_Controller
 		 );
 		$config['base_url'] = base_url().'muser/ajaxInterested';		
 		$config['total_rows'] = $this->matri->myInterested($field_val);
+		$data['totalcount']   = $config['total_rows'];
+		$data['totalcount']   = $config['total_rows'];
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;
@@ -608,7 +592,7 @@ class Muser extends CI_Controller
 		$where_data = array(
 					   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
 					   'activated' => 1,
-					   'profile_img'=>1
+					   'user_file.profile_img'=>1
 			);
 		$data = array(
 			      'user_id' 	=> 	$this->tank_auth->get_user_id(),
@@ -816,6 +800,7 @@ class Muser extends CI_Controller
 			$config['base_url'] = base_url().'muser/ajaxFilter_data';
 			
 			$config['total_rows'] = $this->matri->total_muser_data($where_data)->num_rows();
+			$data['totalcount']   = $config['total_rows'];
 			$config['per_page'] 	= 9; 
 			$config["uri_segment"] = 3;
 			$config["num_links"] = 3;

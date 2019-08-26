@@ -196,7 +196,7 @@ class Matri extends CI_Model
         $this->db->join('community', 'community.id = user_background.community_id',  'left');
         
         $this->db->where($field_val);
-        $this->db->where('file_name IS NOT NULL');
+        //$this->db->where('file_name IS NOT NULL');
         $this->db->order_by("users.id", "desc"); 
         $this->db->limit($per_page, $page_segment);       
         $query = $this->db->get();

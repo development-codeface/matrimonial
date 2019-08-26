@@ -20,7 +20,7 @@
                                                 <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" class="title"><?php echo ucfirst($row->firstname); ?></a>
                                
                                             </h3>
-                                            <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" class="image-wrapper background-image">
+                                            <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" class="image-wrapper background-image" style="background-image: url(<?php echo (isset($row->path)) ?  $row->path : base_url()."img/img_not_avalable.jpg";?>);">
                                             <?php
                                                 if($row->path != NULL){?>
                                                         <img src="<?php echo $row->path;?>"  alt="">

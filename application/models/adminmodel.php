@@ -14,7 +14,7 @@
  */
 class Adminmodel extends CI_Model
 {
-    function total_muser_data()
+    function total_muser_data($count, $start)
     {
         $this->db->select('users.*, user_profiles.*, education_field.*,
                             education_level.*, working_as.*, working_with.*, user_family.*,
@@ -45,6 +45,8 @@ class Adminmodel extends CI_Model
         $this->db->join('height', 'height.id = user_profiles.height',  'left');
         //$this->db->join('user_package_opt','user_package_opt.userid = users.id', 'left');
         $this->db->where("role ='2'");
+        if(isset($start))
+            $this->db->limit($count, $start); 
         $query = $this->db->get();
         return $query;
     }

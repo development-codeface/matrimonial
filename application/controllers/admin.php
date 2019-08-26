@@ -24,8 +24,20 @@ class Admin extends CI_Controller
 		{
 			$user_id = $this->tank_auth->get_user_id();
 		}
-		$data['main_id'] = (int)$user_id;		
-		$data['matches'] = $this->adminmodel->total_muser_data();
+		$data['main_id'] = (int)$user_id;
+		$config['base_url'] = base_url().'admin/alluser';	
+		$config['total_rows'] = $this->adminmodel->total_muser_data(NULL,NULL)->num_rows();
+		$data['totalcount']      = $config['total_rows'];
+		$config['per_page'] 	= 9; 
+		$config["uri_segment"] = 3;
+		$config["num_links"] = 3;	
+		//$data['matches'] = $this->muse->mymatch($field_val, $config['per_page'], 0/*$page_segment*/);
+		$config['first_link']  = 'First';
+		$config['div']         = 'matches_change';
+		$this->ajax_pagination->initialize($config);
+		$data['create_link'] = $this->pagination->create_links();
+
+		$data['matches'] = $this->adminmodel->total_muser_data($config['per_page'], 0);
 		$data['page'] =     'admin/adminhome';
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
@@ -232,6 +244,37 @@ class Admin extends CI_Controller
         );
 		$this->update->global_update('users','id', $userid , $data);
 		redirect('admin');
+	}
+
+	function alluser(){
+		$page = $this->input->post('page');
+		if(!$page){
+			$offset = 0;
+		}else{
+			$offset = $page;
+		}
+        
+		$user_id = $this->tank_auth->get_user_id();
+		
+		$data['main_id'] = (int)$user_id;
+		$config['base_url'] = base_url().'admin/alluser';	
+		$config['total_rows'] = $this->adminmodel->total_muser_data(NULL,NULL)->num_rows();
+		$data['totalcount']      = $config['total_rows'];
+		$config['per_page'] 	= 9; 
+		$config["uri_segment"] = 3;
+		$config["num_links"] = 3;	
+		//$data['matches'] = $this->muse->mymatch($field_val, $config['per_page'], 0/*$page_segment*/);
+		$config['first_link']  = 'First';
+		$config['div']         = 'matches_change';
+		$this->ajax_pagination->initialize($config);
+		$data['create_link'] = $this->pagination->create_links();
+
+		$data['matches'] = $this->adminmodel->total_muser_data($config['per_page'], $offset);
+		$data['page'] =     'admin/adminhome';
+		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
+		$this->load->view('muser/ajaxMaches', $data);
 	}
         
 }
