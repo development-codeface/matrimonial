@@ -30,7 +30,8 @@ class Muser extends CI_Controller
 			);
 
 		$field_match = array(
-			'gender' => $this->muse->sex_match($this->tank_auth->get_user_id())
+			'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
+			'activated' => 1
 		);
 
 		$data['main_id'] = (int)$user_id;		
@@ -99,7 +100,7 @@ class Muser extends CI_Controller
 		
 		$field_val = array(
 				   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
-				   'profile_img'=>1
+				   'activated' => 1
 		);
 				
 		
@@ -153,7 +154,8 @@ class Muser extends CI_Controller
 		$user_id = $this->tank_auth->get_user_id();
 		$field_val = array(
 				   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
-				   'profile_img'=>1
+				   'activated' => 1
+				   
 		);
 		$config['base_url'] = base_url().'muser/ajaxMaches';		
 		$config['total_rows'] = $this->matri->total_muser_data($field_val)->num_rows();
@@ -188,7 +190,7 @@ class Muser extends CI_Controller
 		
 		$field_val = array(
 				   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
-				   'profile_img'=>1
+				   'activated' => 1
 		);
 				
 		
@@ -319,7 +321,8 @@ class Muser extends CI_Controller
 		
 		$preligion_id = NULL;
 		$where_field = array(
-				     'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
+					 'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
+					 'activated' => 1,
 				     'profile_img'=>1
 				     );
 		foreach($data['partner_background']->result_array() as $row)
@@ -358,6 +361,7 @@ class Muser extends CI_Controller
 			{
 				$field_val = array(
 				   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
+				   'activated' => 1,
 				   'user_background.religion_id' => $preligion_id,
 				);
 			}
@@ -365,6 +369,7 @@ class Muser extends CI_Controller
 			{
 				$field_val = array(
 				   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
+				   'activated' => 1
 				   );
 					
 			}
@@ -426,8 +431,7 @@ class Muser extends CI_Controller
 		$user_id = $this->tank_auth->get_user_id();
 		$field_val = array
 				(
-                   'users.id' => $this->tank_auth->get_user_id(),
-				   'profile_img' => 1
+                   'users.id' => $this->tank_auth->get_user_id()
 				);				
 		$data['matches'] 		= 	$this->matri->total_muser_data($field_val);
 		$data['page'] 			=     	'muser/photo';
@@ -461,23 +465,33 @@ class Muser extends CI_Controller
 					$myfile = fopen("upload/".$create_file_name, "w") or die("Unable to open file!");
 					$txt = file_get_contents($this->input->post('image-data'));
 					fwrite($myfile, $txt);
-			
-					$new_profile_image = array(
+					$insert_data = array(
 						'user_id' =>$this->tank_auth->get_user_id(),
-						//'img_type'=>$_FILES['userfile']['type'],
-						'file_name' =>file_get_contents($this->input->post('image-data')),
+						'img_type'=>"jpg",
+						'file_name' =>'', //file_get_contents($this->input->post('image-data')),
 						'thumb'=>'',
 						'profile_img' => 1,
 						'upload_date' => strtotime(date('d-m-Y')),
-					);
+						'path'=>base_url()."upload/".$create_file_name
+						);
+
 					$profile_image = array(
 						'profile_img' => 1,
+						'img_type'=>"jpg",
+						'user_id' =>$this->tank_auth->get_user_id(),
 						'path'=>base_url()."upload/".$create_file_name
 					);
 					if($file_name != NULL)
 					{
 						
-						$this->matri->global_update('user_file',$field, $profile_image);
+						//$this->matri->global_update('user_file',$field, $profile_image);
+						$user_file_id = $this->matri->insert_update_file($this->tank_auth->get_user_id(),$insert_data);
+						/*$update_user_data = array(
+							'user_id' =>$this->tank_auth->get_user_id(),
+							'profile_pic'=>$user_file_id
+							);
+						$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $update_user_data);*/
+					    
 						//$this->matri->global_insert('user_file', $new_profile_image);
 						$this->photo();
 					}
@@ -593,6 +607,7 @@ class Muser extends CI_Controller
 		$get_user_search = $this->matri->global_get('user_search', array('user_id'=>$this->tank_auth->get_user_id()));
 		$where_data = array(
 					   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
+					   'activated' => 1,
 					   'profile_img'=>1
 			);
 		$data = array(
@@ -654,6 +669,7 @@ class Muser extends CI_Controller
 			//'user_lifestyle.drink' 		=> $this->input->post('drink'),
 			'user_profiles.disability'		=> $this->input->post('disability'),
 			'user_profiles.hiv_positive'		=> $this->input->post('hiv_positive'),
+			'activated' => 1
 		);
 		
 		if (is_array($field_val) && count($field_val) >= 1)
@@ -776,6 +792,7 @@ class Muser extends CI_Controller
 			//'user_lifestyle.drink' 		=> $this->input->post('drink'),
 			'user_profiles.disability'		=> $disability,
 			'user_profiles.hiv_positive'		=> $hiv_positive,
+			'activated' => 1
 		);
 		
 		if (is_array($field_val) && count($field_val) >= 1)

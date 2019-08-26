@@ -92,7 +92,7 @@
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">In Your Own Word</label>
                                         <div>
-                                            <textarea name="own_words" rows="5"  style="height:100px;text-align:left;line-height:normal"><?php echo ucwords($this->muse->display_value('user_hobbies', array('user_id' => $this->tank_auth->get_user_id()), 'own_words')) ?></textarea>
+                                            <textarea name="own_words" rows="5"  style="height:100px;text-align:left;line-height:normal"><?php echo $this->muse->get_about_hobbies($this->tank_auth->get_user_id()) ?></textarea>
                                         </div>
                                     </div>
                                 <!--end form-group-->

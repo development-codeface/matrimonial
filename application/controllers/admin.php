@@ -107,6 +107,132 @@ class Admin extends CI_Controller
 		
 		echo ("package added sucess fully!!! ");
 	}
+
+	function blockeduser(){		
+		$data['matches'] = $this->adminmodel->total_blocked_user();
+		$data['page'] =     'admin/adminblockuser';
+		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
+		$this->load->view('site_theme/site_containt', $data); 
+	}
+
+	function newphotoupdate(){
+		$data['matches'] = $this->adminmodel->new_newphotoupdate();
+		$data['page'] =     'admin/adminphotoupdated';
+		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
+		$this->load->view('site_theme/site_containt', $data); 
+	}
+	function approveimage(){
+		$imageid 		= $this->input->post('updateid');
+		$imagestatus 	= $this->input->post('status');
+		$updateImg = $this->matri->global_get('update_user_file', array('id'=>$imageid));
+		$profile_path = "";
+		$user_id = "";
+		foreach($updateImg->result() as $row){
+			$profile_path       = $row->path;
+			$user_id   			= $row->user_id;
+		}	
+		if($imagestatus == 0){
+			
+			$profile_image = array(
+				'profile_img' => 1,
+				'img_type'=>"jpg",
+				'user_id' =>$user_id ,
+				'path'=>$profile_path 
+			);
+			$field = array(
+				'user_file.user_id' => $user_id,
+				'profile_img' => 1
+				);
+			$this->matri->global_update('user_file',$field, $profile_image);
+			
+			$update_user_data = array(
+				'user_id' =>$user_id,
+				'profile_pic'=>$profile_path
+				);
+			//$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $update_user_data);
+			$this->adminmodel->delete_image_update($imageid);
+
+		}else if($imagestatus == 1){
+			$this->adminmodel->delete_image_update($imageid);
+		}
+
+		redirect('/fulluserdetail/'.$user_id);
+	}
+
+	function approveuserinfo(){
+		$updateid 		= $this->input->post('updateid');
+		$imagestatus 	= $this->input->post('status');
+		$updateprofile = $this->matri->global_get('user_update', array('id'=>$updateid));
+			$profile_aboutus = "";
+			$profile_aboutus_hobbies = "";
+            $user_id = "";
+			foreach($updateprofile->result() as $row){
+        		$profile_aboutus       				= $row->description;
+				$profile_aboutus_hobbies   			= $row->abouthobbies;
+				$user_id                            = $row->user_id;
+			}
+		if($imagestatus == 0){
+			
+			$field = array(
+				'user_id' => $user_id
+				);
+			if(!empty($profile_aboutus)){
+				
+				$profile_update = array(
+					'about_me' => $profile_aboutus
+				);
+				
+				$this->matri->global_update('user_profiles',$field, $profile_update);
+			}
+			
+			if(!empty($profile_aboutus_hobbies)){
+				
+				$profile_update_hobbies = array(
+					'own_words' => $profile_aboutus_hobbies
+				);
+				
+				$this->matri->global_update('user_hobbies',$field, $profile_update_hobbies);
+			}
+			$this->adminmodel->delete_profile_update($updateid);
+
+		}else if($imagestatus == 1){
+			$this->adminmodel->delete_profile_update($updateid);
+		}
+
+		redirect('/fulluserdetail/'.$user_id);
+	}
+
+	function profileupdate(){
+		$data['matches'] = $this->adminmodel->profileUpdateRequest();
+		$data['page'] =     'admin/recentprofileupdate';
+		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
+		$this->load->view('site_theme/site_containt', $data);
+	}
+
+	function inactiveuser(){
+		$data['matches'] = $this->adminmodel->total_inactive_user();
+		$data['page'] =     'admin/inactiveusers';
+		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
+		$this->load->view('site_theme/site_containt', $data);
+	}
+
+	function activateuser(){
+		$activate = $this->input->post('activate');
+		$userid = $this->input->post('userid');
+		$data = array(
+                'activated' => ($activate == "yes") ? 1 : 0, 
+        );
+		$this->update->global_update('users','id', $userid , $data);
+		redirect('admin');
+	}
         
 }
 

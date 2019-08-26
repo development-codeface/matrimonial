@@ -31,10 +31,14 @@
         $disability       = $row->disability;
         $hiv_positive     = $row->hiv_positive;
         $aboutme          = $row->about_me;
+        $mobilenumber     = $row->mobile_no;
+        $email            = $row->email;
         $isFetured        = false;    /*(isset($row->packagestatus) && ($row->packagestatus == 1)) ;*/
         $hobbieword       = $row->own_words;
         $age              = $this->muse->agecal($row->dob)." Year";
         $image            = isset($row->path) ?  $row->path : "img/img_not_avalable.jpg";
+        if($userid == $this->tank_auth->get_user_id() && isset($row->updateprofilepic))
+            $image     = $row->updateprofilepic;
     }
   }
   ?>
@@ -109,9 +113,21 @@
                                              <dt>Cast:&nbsp;&nbsp;</dt>
                                             <dd> <?php if(isset($community)){echo ucwords($community);} else {echo "NULL";} ?></dd>
                                              <dt>Mobile No:&nbsp;&nbsp;</dt>
-                                            <dd>    <a href="#" class=" " onclick="getcontactinf(<?php echo $userid ?>)">View Now</a></dd>
+                                            <dd>   
+                                            <?php if($main_id != $this->tank_auth->get_user_id()){?> 
+                                                <a href="#" class=" " onclick="getcontactinf(<?php echo $userid ?>)">View Now</a>
+                                            <?php } else {?>
+                                                <a href="#" class=" " ><?php echo $mobilenumber ?></a>
+                                            <?php } ?>
+                                            </dd>
                                            <dt>Email Id:&nbsp;&nbsp;</dt>
-                                            <dd>    <a href="#" class=" " onclick="getcontactinf(<?php echo $userid ?>)">View Now</a></dd>
+                                            <dd> 
+                                            <?php if($main_id != $this->tank_auth->get_user_id()){?>   
+                                                <a href="#" class=" " onclick="getcontactinf(<?php echo $userid ?>)">View Now</a>
+                                            <?php } else {?>
+                                                <a href="#" class=" " ><?php echo $email  ?></a>
+                                            <?php } ?>
+                                            </dd>
                                         </dl>
                         </div>
                         
@@ -121,11 +137,13 @@
                     </div>
                     
                     <!--end container-->
-                </div><div class="col-md-12 col-sm-12">
+                </div>
+                <?php if($main_id != $this->tank_auth->get_user_id()){?>
+                <div class="col-md-12 col-sm-12">
                     <a href="#" class="btn btn-primary text-caps small" onclick="interestset(<?php echo $userid ?>)">
                     <i class="fa fa-heart-o" aria-hidden="true"></i> Send interest</a> 
                     <a href="#" class="btn btn-secondary text-caps small" onclick="shortlistme(<?php echo $userid ?>)" ><i class="fa fa-star-o" aria-hidden="true"></i> Shortlist </a> 
-                    <?php if($main_id != $this->tank_auth->get_user_id()){?>
+                    
                         <a href="#" class="btn btn-secondary text-caps small"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Send Message </a> 
                         <h3 style="margin-top:8px;margin-bottom:8px"> Send Message </h3>
 				        <?php echo $this->input->get('msg');?>
@@ -134,8 +152,9 @@
                             <input type="hidden" value="<?php echo $main_id; ?>" name="send_to">
                             <input type="submit" value="Send" class="btn btn-primary">
                         </form>
-			        <?php }?>
+			        
                     </div>
+                <?php }?>
                     
                       <!--end Gallery Carousel--> </div>
 

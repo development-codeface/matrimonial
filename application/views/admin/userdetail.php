@@ -36,6 +36,12 @@
         $age              = $this->muse->agecal($row->dob)." Year";
         $aboutme          = $row->about_me;
         $image            = isset($row->path) ?  $row->path : "img/img_not_avalable.jpg";
+        $filepdated       = $row->updated_profile;
+        $activate         = $row->activated;
+        $update_file_id   = $row->updatefileid;
+        $update_about_us  = $row->useraboutus;
+        $update_description  = $row->abouthobbies;
+        $update_profId    = $row->update_profile_id; 
     }
   }
   $packagelist=array();
@@ -321,6 +327,31 @@
 
                                 </form>
                             </section>
+
+                            <section class=" signinbox">
+                                <form class="hero-form form" action="<?php echo base_url();?>admin/activateuser" method="post">   
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <h2>Activate User</h2>
+                                        <div>
+                                            Yes  <input type="radio"  name="activate" value="yes" required <?php if ($activate == 1) echo "checked"; ?> > 
+                                            No   <input type="radio"  name="activate" value="no"  required <?php if ($activate == 0) echo "checked"; ?> > 
+                                        </div>
+                                    </div>
+                                   <input type="hidden" name="userid" value="<?php echo $userid?>" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <input type="submit" value="save" />
+                                    </div>
+                                </div>
+
+                                </form>
+                            </section>
+
+
+
+
                             <?php if(isset($packagelist)) { ?>
                                 <section class=" signinbox">
                                       
@@ -373,9 +404,85 @@
 
                                     
                                 </section>
+
                             <?php } ?>
 
 
+
+                            <?php if(isset($filepdated)){ ?>
+                                <section class=" signinbox">
+                                    <form class="hero-form form" action="<?php echo base_url();?>admin/approveimage" method="post"> 
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <h2>Updated Profile Image</h2> 
+                                                <img src="<?php echo $filepdated; ?>" alt="" data-hash="1">
+                                            </div>   
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="title" class="col-form-label required">Approve</label>
+                                                    <select name="status" id="religion">
+                                                        <option value="-1"> Select</option>
+                                                        <option value="0"> Approves</option>
+                                                        <option value="1"> Rejected</option>
+                                                    </select>
+                                                </div>
+                                                <!--end form-group-->
+                                            </div>
+                                            <!--end col-md-8-->
+                                        </div>
+                                        <input type="hidden" name="updateid" value="<?php echo $update_file_id;?>" />
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                    <input type="submit" value="save" />
+                                            </div>
+                                        </div>
+
+                                    </form>  
+                                </section>
+                            <?php } ?>
+
+                            <?php if(isset($update_about_us) || isset($update_description)){ ?>
+                                <section class=" signinbox">
+                                    <form class="hero-form form" action="<?php echo base_url();?>admin/approveuserinfo" method="post"> 
+                                        <h2>Updated Profile</h2> 
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <dt ><label >updated about us&nbsp;</label> </dt>
+                                                <dd ><label >&nbsp;<?php echo $update_about_us ?></label></dd>
+
+                                                <dt ><label >Updated hobbies&nbsp;</label> </dt>
+                                                <dd ><label >&nbsp;<?php echo $update_description ?></label></dd>
+
+                                                
+                                            </div>   
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="title" class="col-form-label required">Approve </label>
+                                                    <select name="status" id="religion">
+                                                        <option value="-1"> Select</option>
+                                                        <option value="0"> Approves</option>
+                                                        <option value="1"> Rejected</option>
+                                                    </select>
+                                                </div>
+                                                <!--end form-group-->
+                                            </div>
+                                            <!--end col-md-8-->
+                                        </div>
+                                        <input type="hidden" name="updateid" value="<?php echo $update_profId;?>" />
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                    <input type="submit" value="save" />
+                                            </div>
+                                        </div>
+
+                                    </form>  
+                                </section>
+                            <?php } ?>
                             
 
                             

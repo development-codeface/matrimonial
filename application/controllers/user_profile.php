@@ -120,11 +120,16 @@ class User_profile extends CI_Controller
                         'body_type'=>$this->input->post('body_type'),
                         'disability'=>$this->input->post('disability'),
 						'hiv_positive'=>$this->input->post('hiv_positive'),
-						'about_me'  =>$this->input->post('aboutme'),
+						'about_me'  =>"",
 						'profile_complete'=>1
-                );
-                $this->matri->global_upldate('user_profiles','user_id', $this->tank_auth->get_user_id(), $data);
-		$this->profile_image();
+				);
+				$updateInfo = array (
+					'description' => $this->input->post('aboutme'),
+					'user_id' => $this->tank_auth->get_user_id()
+				);
+				$this->matri->global_upldate('user_profiles','user_id', $this->tank_auth->get_user_id(), $data);
+				$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $updateInfo);
+				$this->profile_image();
             }
         }
 	
@@ -154,17 +159,34 @@ class User_profile extends CI_Controller
 					$txt = file_get_contents($this->input->post('image-data'));
 					fwrite($myfile, $txt);
 			
-					$insert_data = array(
-							'user_id' =>$this->tank_auth->get_user_id(),
+					$insert_data_latest = array(
+							'user_id' =>0,
 							'img_type'=>"jpg",
 							'file_name' =>'', //file_get_contents($this->input->post('image-data')),
 							'thumb'=>'',
+							'user_id' => $this->tank_auth->get_user_id(),
 							'profile_img' => 1,
 							'upload_date' => strtotime(date('d-m-Y')),
 							'path'=>base_url()."upload/".$create_file_name
 							);
+							$insert_data = array(
+								'user_id' =>0,
+								'img_type'=>"jpg",
+								'file_name' =>'', //file_get_contents($this->input->post('image-data')),
+								'thumb'=>'',
+								'user_id' => $this->tank_auth->get_user_id(),
+								'profile_img' => 1,
+								'upload_date' => strtotime(date('d-m-Y')),
+								'path'=>$this->muse->get_usersex($this->tank_auth->get_user_id()) == 'male' ?  base_url()."upload/male_avatar.png" : base_url()."upload/male_avatar.png" 
+								);
 			
-					$insert_id = $this->matri->global_insert('user_file', $insert_data);
+					$insert_id_old = $this->matri->global_insert('user_file', $insert_data);
+					$insert_id = $this->matri->insert_update_file($this->tank_auth->get_user_id(),$insert_data_latest);
+                    $update_user_data = array(
+						'user_id' =>$this->tank_auth->get_user_id(),
+						'profile_pic'=>$insert_id_old
+						);
+					//$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $update_user_data);	
 					if($insert_id < 0)
 					{
 						

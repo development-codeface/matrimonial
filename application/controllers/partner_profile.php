@@ -115,7 +115,7 @@ class Partner_Profile extends CI_Controller
             $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean');
             $this->form_validation->set_rules('marital_status','Marital Status','xss_clean');
             $this->form_validation->set_rules('heightto','Height','xss_clean');
-	    $this->form_validation->set_rules('height','Height','xss_clean');
+	    	$this->form_validation->set_rules('height','Height','xss_clean');
             $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean');
             $this->form_validation->set_rules('body_type','Body Type','xss_clean');
             $this->form_validation->set_rules('disability','Disability','xss_clean');

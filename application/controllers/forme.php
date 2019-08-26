@@ -31,8 +31,8 @@ class Forme extends CI_Controller
                      );
 
                      $field_match = array(
-                        'gender' => $this->muse->sex_match($this->tank_auth->get_user_id())
-                       
+                        'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
+                        'activated' => 1
                      );
                 
                     $data['main_id'] = $user_id;

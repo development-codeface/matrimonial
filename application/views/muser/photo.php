@@ -37,7 +37,7 @@
                                                         <?php     
                                                             if($this->muse->display_value('user_file', array('user_id'=>$this->tank_auth->get_user_id(), 'profile_img'=>1), 'user_id') >= 1)
                                                             {
-                                                                echo "<img src = '".$this->muse->display_value('user_file', array('user_id'=>$this->tank_auth->get_user_id(), 'profile_img'=>1), 'path')."'  style='border: 2px solid #FE4D01;' alt='mplan' class='img-responsive img-thumbnail' id='item-img-output' >";
+                                                                echo "<img src = '".$this->muse->display_my_photo(array('users.id'=>$this->tank_auth->get_user_id()))."'  style='border: 2px solid #FE4D01;' alt='mplan' class='img-responsive img-thumbnail' id='item-img-output' >";
                                                             }else{
                                                                 redirect('update_profile/photo');
                                                             }?>

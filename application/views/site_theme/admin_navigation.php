@@ -7,18 +7,18 @@
                                             <a href="<?php echo base_url();?>admin/paymentrequest">Payment request</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo base_url();?>muser/index/<?php echo $this->tank_auth->get_user_id(); ?>">My Profile </a>
+                                            <a href="<?php echo base_url();?>admin/newphotoupdate">Photo update Request</a>
                                         </li>
                                         <li>
-                                            <a href="<?php echo base_url();?>partner_profile/partner_basic_info/<?php echo $this->tank_auth->get_user_id(); ?>">Blocked user</a>
+                                            <a href="<?php echo base_url();?>admin/blockeduser">Blocked user</a>
                                         </li>
-                                       <!--<li>
-                                            <a href="<?php echo base_url();?>muser/photo/">Manage Photos </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>inbox/">Messages</a>
+                                       <li>
+                                            <a href="<?php echo base_url();?>admin/profileupdate">Profile Update Request </a>
                                         </li>
                                         <li>
+                                            <a href="<?php echo base_url();?>admin/inactiveuser">Activate Request</a>
+                                        </li>
+                                        <!--<li>
                                             <a href="short_listed.html">Short listed<span>3</span></a>
                                         </li>
                                         <li>

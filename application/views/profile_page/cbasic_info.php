@@ -175,7 +175,7 @@
                                 <div class="col-md-12">        
                                     <div class="form-group">
                                             <label for="details" class="col-form-label">About yourself</label>
-                                            <textarea name="aboutme" id="details" class="form-control" rows="4" axlength="500"><?php echo $this->muse->display_basic_info('user_profiles', array('user_id' => $this->tank_auth->get_user_id()), 'about_me'); ?></textarea>
+                                            <textarea name="aboutme" id="details" class="form-control" rows="4" axlength="500"><?php echo $this->muse->get_aboutus($this->tank_auth->get_user_id()); ?></textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">

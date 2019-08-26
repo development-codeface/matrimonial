@@ -269,6 +269,72 @@ class Muse
 			}
 		}
 	}
+
+	function get_usersex($user_id = null)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		
+		if($user_id == NULL)
+		{
+			return 0;
+		}
+		else
+		{
+			$user = $ci->matri->global_where('users', array('id'=>$user_id));
+			foreach($user->result() as $row)
+			{
+				$sex = $row->gender;
+			}
+			return $sex;
+		}
+	}
+
+	function get_aboutus($user_id = null)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$my_value = NULL;
+		
+		$data['get_value'] = $ci->matri->get_user_about(array('users.id'=>$user_id));
+		
+		foreach($data['get_value']->result() as $row)
+		{
+			$aboutus = NULL;
+			if(isset($row->description) && !empty($row->description)){
+				$aboutus = $row->description;
+			}else {
+				$aboutus = $row->about_me;
+			}
+		}		
+			return $aboutus;
+	}
+
+	function get_about_hobbies($user_id = null){
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$my_value = NULL;
+		
+		$data['get_value'] = $ci->matri->get_user_about_hobbies(array('users.id'=>$user_id));
+		$aboutus_hobbies = NULL;
+		foreach($data['get_value']->result() as $row)
+		{
+			
+			
+			
+			if(isset($row->abouthobbies) && !empty($row->abouthobbies) ){
+				$aboutus_hobbies = $row->abouthobbies;
+				break;
+			}else {
+				$aboutus_hobbies = $row->own_words;
+				break;
+			}
+		}
+			
+			return $aboutus_hobbies;
+	}
+
+	
 	
 	//function for data match //	
 	function mymatch($field_val , $per_page, $page_segment)
@@ -400,6 +466,23 @@ class Muse
 		foreach($data['get_value']->result() as $row)
 		{
 			$my_value = $row->$field;
+		}		
+			return $my_value; 		
+		
+	}
+
+	function display_my_photo($where_field)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$my_value = NULL;
+		$data['get_value'] = $ci->matri->getUserPhoto($where_field);
+		foreach($data['get_value']->result() as $row)
+		{
+			if(isset($row->userfilepath))
+				$my_value = $row->userfilepath;
+			else 
+				$my_value = $row->path;	
 		}		
 			return $my_value; 		
 		

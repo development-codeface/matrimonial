@@ -209,7 +209,8 @@ class Matri extends CI_Model
                             user_file.*, userfolder.*, user_background.*, user_hobbies.*,
                             user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
                             countries.name as country , states.name as state, users.id as muser_id,
-                              cities.name as city, height.id as hid, users.id as main_id,user_package_opt.package_status as packagestatus');
+                            cities.name as city, height.id as hid, users.id as main_id,user_package_opt.package_status as packagestatus,
+                            update_user_file.path as updateprofilepic');
         $this->db->from('users');
         $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
         $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
@@ -233,9 +234,8 @@ class Matri extends CI_Model
 
         $this->db->join('height', 'height.id = user_profiles.height',  'left');
         $this->db->join('user_package_opt','user_package_opt.userid = users.id', 'left');
+        $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
         $this->db->where($field_val);
-        
-        
         $query = $this->db->get();
         return $query;
     }
@@ -339,6 +339,16 @@ class Matri extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    function getUserPhoto($field_val){
+        $this->db->select('users.*,user_file.*,update_user_file.path as userfilepath');
+        $this->db->from('users');
+        $this->db->join('user_file','user_file.user_id = users.id', 'left');
+        $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
+        $this->db->where($field_val);
+        $query = $this->db->get();
+        return $query;
+    } 
     
     /*get partner background */
     function get_partner_background($field_val)
@@ -557,6 +567,55 @@ class Matri extends CI_Model
         $this->db->where('file_name IS NOT NULL');
         $this->db->order_by("RAND()"); 
         $this->db->limit(5, 0); 
+        $this->db->where($field_val);      
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function adduserUpdate($user_id,$field_val){
+        $this->db->where('user_id',$user_id);
+        $q = $this->db->get('user_update');
+        if ( $q->num_rows() > 0 ) 
+        {
+            $this->db->where('user_id',$user_id);
+            $this->db->update('user_update',$field_val);
+        } else {
+            $this->db->insert('user_update',$field_val);
+        }
+    }
+
+    function insert_update_file($user_id,$field_val){
+        $result;
+        $this->db->where('user_id',$user_id);
+        $q = $this->db->get('update_user_file');
+        if ( $q->num_rows() > 0 ) 
+        {
+            $this->db->where('user_id',$user_id);
+            $this->db->update('update_user_file',$field_val);
+            $result = $q->result_array()[0]['id'];
+        } else {
+            $this->db->insert('update_user_file',$field_val);
+            $result =  $this->db->insert_id();
+        }
+
+        return $result; 
+    }
+
+    function get_user_about($field_val){
+        $this->db->select('users.*, user_profiles.*, user_update.*');
+        $this->db->from('users');
+        $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
+        $this->db->join('user_update','user_update.user_id = users.id', 'left');
+        $this->db->where($field_val);      
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function get_user_about_hobbies($field_val){
+        $this->db->select('users.*, user_hobbies.*, user_update.*');
+        $this->db->from('users');
+        $this->db->join('user_hobbies','user_hobbies.user_id = users.id', 'left');
+        $this->db->join('user_update','user_update.user_id = users.id', 'left');
         $this->db->where($field_val);      
         $query = $this->db->get();
         return $query;

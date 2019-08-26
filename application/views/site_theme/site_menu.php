@@ -28,16 +28,26 @@ margin: 0px;">
                         <!--end left-->
                         <ul class="right" class="right" style="padding: 9px;">
                            
-                            <li>
-                                <a href="#">
-                                    <i class="fa fa-sign-in"></i>Sign In
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo base_url();?>auth/register">
-                                    <i class="fa fa-pencil-square-o"></i>Register
-                                </a>
-                            </li>
+                        <?php if(isset($user_id) && !empty(trim($user_id))) { 
+                                
+                                ?>
+                             <li>
+                                 <a href="<?php echo base_url();?>auth/logout">
+                                     <i class="fa fa-sign-in"></i>Sign Out 
+                                 </a>
+                             </li>
+                            <?php }else {?>
+                                 <li>
+                                     <a href="<?php echo base_url(); ?>auth/signin">
+                                         <i class="fa fa-sign-in"></i>Sign In
+                                     </a>
+                                 </li>
+                                 <li>
+                                     <a href="<?php echo base_url(); ?>">
+                                         <i class="fa fa-pencil-square-o"></i>Register
+                                     </a>
+                                 </li>
+                            <?php } ?>
                         </ul>
                         <!--end right-->
                     </div>

@@ -683,11 +683,18 @@ class Update_Profile extends CI_Controller
 	    
 				    'cook_food' 	=>  $this->input->post('cook_food'),
 	    
-				    'own_words' 	=>  $this->input->post('own_words'),
+				    'own_words' 	=>  '',
 	    
 			    );
 	    
-			    $this->matri->global_insert('user_hobbies', $data);
+				$this->matri->global_insert('user_hobbies', $data);
+				
+				$updateInfo = array ( 
+					'abouthobbies' => $this->input->post('own_words'), 
+					'user_id' => $this->tank_auth->get_user_id() 
+				);  
+				$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $updateInfo);
+
 	    
 			    $this->hobbies();
 	    
@@ -763,14 +770,19 @@ class Update_Profile extends CI_Controller
                         'disability'=>$this->input->post('disability'),
 
 						'hiv_positive'=>$this->input->post('hiv_positive'),
-						
-						'about_me'  =>$this->input->post('aboutme'),
 
-			'profile_complete'=>1
+			            'profile_complete'=>1
 
-                );
+				);
+				
+				$updateInfo = array (
+					'description' => $this->input->post('aboutme'),
+					'user_id' => $this->tank_auth->get_user_id()
+				);
 
-                $this->update->global_update('user_profiles','user_id', $this->tank_auth->get_user_id(), $data);
+				$this->update->global_update('user_profiles','user_id', $this->tank_auth->get_user_id(), $data);
+				$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $updateInfo);
+
 
 		$this->index();
 
@@ -1047,10 +1059,15 @@ class Update_Profile extends CI_Controller
 				    'fav_books' 	=>  "",                                               
 				    'pre_movies' 	=>  $pre_movies,
 				    'cook_food' 	=>  $this->input->post('cook_food'),
-				    'own_words' 	=>  $this->input->post('own_words'),
 				);
 	            
-			    $this->update->global_update('user_hobbies','user_id', $this->tank_auth->get_user_id(), $data);
+				$this->update->global_update('user_hobbies','user_id', $this->tank_auth->get_user_id(), $data);
+				$updateInfo = array ( 
+					'abouthobbies' => $this->input->post('own_words'), 
+					'user_id' => $this->tank_auth->get_user_id() 
+				);  
+				$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $updateInfo);
+
 			    $this->hobbies();
 	    
 			}
