@@ -210,7 +210,7 @@ class Matri extends CI_Model
                             user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
                             countries.name as country , states.name as state, users.id as muser_id,
                             cities.name as city, height.id as hid, users.id as main_id,user_package_opt.package_status as packagestatus,
-                            update_user_file.path as updateprofilepic');
+                            update_user_file.path as updateprofilepic,nashathram.name as star,user_edu.annual_income as annual_income');
         $this->db->from('users');
         $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
         $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
@@ -222,7 +222,8 @@ class Matri extends CI_Model
        
         $this->db->join('user_file','user_file.user_id = users.id', 'left');
         $this->db->join('userfolder','userfolder.user_id = users.id', 'left');
-        $this->db->join('user_background','user_background.user_id = users.id', 'left');        
+        $this->db->join('user_background','user_background.user_id = users.id', 'left'); 
+        $this->db->join('nashathram','nashathram.id = user_background.nakshathram', 'left');        
         $this->db->join('user_hobbies', 'user_hobbies.user_id = users.id',  'left');
         $this->db->join('user_lifestyle', 'user_lifestyle.user_id = users.id',  'left');
         $this->db->join('mother_tongue', 'mother_tongue.id= user_profiles.mother_tongue_id',  'left');

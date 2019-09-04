@@ -8,12 +8,16 @@ $email = array(
 );
 ?>
 <?php echo form_open($this->uri->uri_string()); ?>
-<table>
+<!--<table>
 	<tr>
 		<td><?php echo form_label('Email Address', $email['id']); ?></td>
 		<td><?php echo form_input($email); ?></td>
 		<td style="color: red;"><?php echo form_error($email['name']); ?><?php echo isset($errors[$email['name']])?$errors[$email['name']]:''; ?></td>
 	</tr>
-</table>
+</table> 
 <?php echo form_submit('send', 'Send'); ?>
-<?php echo form_close(); ?>
+<?php echo form_close(); ?> -->
+
+<div>
+   <h3> Please Contact admin for Activating this account</h3>
+</div>

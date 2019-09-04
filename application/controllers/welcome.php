@@ -83,7 +83,7 @@ class Welcome extends CI_Controller
 				$query = $this->matri->global_insert('feedback_message', $data);
 				if($query>0)
 				{
-					echo "Message Successful Send";
+					echo "Message Successful Sent";
 				}
 			}
 			else

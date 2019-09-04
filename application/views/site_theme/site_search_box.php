@@ -6,7 +6,7 @@
                                    <div class="form-group">
                                         <select name="martial_status" onchange="filter_data(this.value)" id="martial_status">
 				                            <option value=""> Marital Status </option>
-				                            <option value="never married"> Never Married </option>
+				                            <option value="never married"> Not Married </option>
 				                            <option value="divorced"> Divorced  </option>
 				                            <option value="awaiting divorced"> Awaiting Divorced </option>
 				                            <option value="widowed"> Widowed </option>

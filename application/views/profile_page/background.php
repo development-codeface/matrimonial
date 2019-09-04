@@ -69,6 +69,18 @@
                                 </div>
                                 <!--end col-md-8-->
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="title" class="col-form-label required">Nakshathram</label>
+                                        <?php $this->muse->get_nashathram();?>
+                                    </div>
+                                <!--end form-group-->
+                                </div>
+                                <!--end col-md-8-->
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

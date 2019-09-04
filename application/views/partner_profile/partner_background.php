@@ -74,6 +74,7 @@
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Community</label>
                                                                     <div id="community">
+                                                                    
                                                                     </div>
                                                                 </div>
                                                                 <!--end form-group-->
@@ -85,7 +86,9 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Sub Community</label>
-                                                                    <input type="text" name="sub_commuinty" style="width:95%" value="<?php echo set_value('sub_commuinty'); ?>">
+                                                                    
+                                                                        <input type="text" name="sub_commuinty" style="width:95%" value="<?php echo set_value('sub_commuinty'); ?>">
+                                                                    
                                                                 </div>
                                                                 <!--end form-group-->
                                                             </div>

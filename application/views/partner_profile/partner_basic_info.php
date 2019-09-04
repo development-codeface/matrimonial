@@ -69,7 +69,9 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">State</label>
-                                                                    <?php echo $this->address->state();?>
+                                                                    <div id="state">
+                                                                        <?php echo $this->address->state();?>
+                                                                    </div>
                                                                 </div>
                                                                 <!--end form-group-->
                                                             </div>
@@ -79,7 +81,9 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">City</label>
-                                                                    <?php echo $this->address->city();?>
+                                                                    <div id="city">
+                                                                        <?php echo $this->address->city();?>
+                                                                    </div>
                                                                 </div>
                                                                 <!--end form-group-->
                                                             </div>
@@ -112,7 +116,7 @@
                                                                     <label for="title" class="col-form-label required">Marital Status</label>
                                                                     <select name="marital_status">
                                                                         <option value=""> Select </option>
-                                                                        <option value='never married' <?php echo set_select( 'marital_status', 'never married'); ?> selected> Never Married </option>
+                                                                        <option value='never married' <?php echo set_select( 'marital_status', 'never married'); ?> selected> Not Married </option>
                                                                         <option value="divorced" <?php echo set_select( 'marital_status', 'divorced'); ?>> Divorced </option>
                                                                         <option value="awaiting divorced" <?php echo set_select( 'marital_status', 'awaiting divorced'); ?>> Awaiting Divorced </option>
                                                                         <option value="widowed" <?php echo set_select( 'marital_status', 'widowed'); ?>> Widowed </option>

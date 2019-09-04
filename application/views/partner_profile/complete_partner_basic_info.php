@@ -89,8 +89,10 @@ if(isset($matches))
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="form-group">
-                                                            <label for="title" class="col-form-label required">State</label>
-                                                            <?php echo $this->address->state($this->muse->display_basic_info('user_profiles', array('user_profiles.id'=>$this->tank_auth->get_user_id()), 'country_id'));?>
+                                                                <label for="title" class="col-form-label required">State</label>
+                                                                <div id="state">
+                                                                    <?php echo $this->address->state($this->muse->display_basic_info('partner_basic', array('user_id'=>$muser_id), 'pcountry_id'));?>
+                                                                </div>
                                                             </div>
                                                             <!--end form-group-->
                                                         </div>
@@ -100,7 +102,9 @@ if(isset($matches))
                                                         <div class="col-md-6">
                                                             <div class="form-group">
                                                             <label for="title" class="col-form-label required">City</label>
-                                                            <?php echo $this->address->city($this->muse->display_basic_info('user_profiles',  array('user_profiles.id'=>$this->tank_auth->get_user_id()), 'state_id'));?>
+                                                            <div id="city">
+                                                                <?php echo $this->address->city($this->muse->display_basic_info('partner_basic', array('user_id'=> $muser_id), 'pstate_id'));?>
+                                                            </div>
                                                             </div>
                                                             <!--end form-group-->
                                                         </div>
@@ -125,7 +129,7 @@ if(isset($matches))
                                                             <label for="title" class="col-form-label required">Marital Status</label>
                                                             <select name="marital_status">
                                                                 <option value=""> Select </option>
-                                                                <option value='never married'  <?php echo set_select('marital_status', 'never married'); ?> selected> Never Married </option>
+                                                                <option value='never married'  <?php echo set_select('marital_status', 'never married'); ?> selected> Not Married </option>
                                                                 <option value="divorced" <?php echo set_select('marital_status', 'divorced'); ?>> Divorced </option>
                                                                 <option value="awaiting divorced" <?php echo set_select('marital_status', 'awaiting divorced'); ?>> Awaiting Divorced </option>
                                                                 <option value="widowed" <?php echo set_select('marital_status', 'widowed'); ?>> Widowed </option>  
@@ -273,44 +277,45 @@ if(isset($matches))
                                         </div>
                                     </div>  
                                     <!-- for change value -->
+                                    <script src="<?php echo base_url();?>js/address.js"></script> 
                                     <script type="text/javascript">
                                         $(document).ready(function(){
-                                    $country_id 		= $('input[name=country_id]').val();
-                                    $state_id 		= $('input[name=state_id]').val();
-                                    $city_id 		= $('input[name=city_id]').val();
-                                    $mtonuge_id 		= $('input[name=mtonge_id]').val();
-                                    
-                                    $page 		= $('input[name=mpage]').val();
-                                    $pageto		= $('input[name=mpageto]').val();
-                                    
-                                    $pheight		= $('input[name=pheight]').val();
-                                    $pheightto		= $('input[name=pheightto]').val();
-                                    
-                                    $user_marital_status 	= $('input[name=user_marital_status]').val();
-                                    $uskin_tone		= $('input[name=uskin_tone]').val();
-                                    $ubody_type		= $('input[name=ubody_type]').val();
-                                    $udisability 		= $('input[name=udisability]').val();
-                                    $uhiv_positive 	= $('input[name=uhiv_positive ]').val();
-                                    $('select[name=country]').val($country_id);
-                                    $('select[name=state]').val($state_id);
-                                    $('select[name=city]').val($city_id);
-                                    
-                                    $('select[name=mtongue]').val($mtonuge_id);
-                                    
-                                    $('select[name=age]').val($page);
-                                    $('select[name=ageto]').val($pageto);
-                                    
-                                    $('select[name=height]').val($pheight);
-                                    $('select[name=heightto]').val($pheightto);
-                                    
-                                    $('select[name=marital_status]').val($user_marital_status);
-                                    $('input:radio[name=skin_tone][value='+$uskin_tone+']').attr("checked", "checked");
-                                    $('input:radio[name=body_type][value='+$ubody_type+']').attr("checked", "checked");
-                                    $('input:radio[name=disability][value='+$udisability+']').attr("checked", "checked");
-                                    $('input:radio[name=hiv_positive][value='+$uhiv_positive+']').attr("checked", "checked");
-                                    });
+                                            $country_id 		= $('input[name=country_id]').val();
+                                            $state_id 		= $('input[name=state_id]').val();
+                                            $city_id 		= $('input[name=city_id]').val();
+                                            $mtonuge_id 		= $('input[name=mtonge_id]').val();
+                                            
+                                            $page 		= $('input[name=mpage]').val();
+                                            $pageto		= $('input[name=mpageto]').val();
+                                            
+                                            $pheight		= $('input[name=pheight]').val();
+                                            $pheightto		= $('input[name=pheightto]').val();
+                                            
+                                            $user_marital_status 	= $('input[name=user_marital_status]').val();
+                                            $uskin_tone		= $('input[name=uskin_tone]').val();
+                                            $ubody_type		= $('input[name=ubody_type]').val();
+                                            $udisability 		= $('input[name=udisability]').val();
+                                            $uhiv_positive 	= $('input[name=uhiv_positive ]').val();
+                                            $('select[name=country]').val($country_id);
+                                            $('select[name=state]').val($state_id);
+                                            $('select[name=city]').val($city_id);
+                                            
+                                            $('select[name=mtongue]').val($mtonuge_id);
+                                            
+                                            $('select[name=age]').val($page);
+                                            $('select[name=ageto]').val($pageto);
+                                            
+                                            $('select[name=height]').val($pheight);
+                                            $('select[name=heightto]').val($pheightto);
+                                            
+                                            $('select[name=marital_status]').val($user_marital_status);
+                                            $('input:radio[name=skin_tone][value='+$uskin_tone+']').attr("checked", "checked");
+                                            $('input:radio[name=body_type][value='+$ubody_type+']').attr("checked", "checked");
+                                            $('input:radio[name=disability][value='+$udisability+']').attr("checked", "checked");
+                                            $('input:radio[name=hiv_positive][value='+$uhiv_positive+']').attr("checked", "checked");
+                                        });
                                     </script>
-                                    <script src="<?php echo base_url();?>js/address.js"></script>       
+                                          
                                 </div>
                                 <!--end row-->
                             </div>

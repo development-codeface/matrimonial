@@ -31,6 +31,7 @@
                         <input type="hidden" name="udiet" value="<?php echo $this->muse->display_value('user_lifestyle', array('user_id' => $this->tank_auth->get_user_id()), 'diet');?>">
                         <input type="hidden" name="usmoke" value="<?php echo $this->muse->display_value('user_lifestyle', array('user_id'=>$this->tank_auth->get_user_id()), 'smoke');?>">
                         <input type="hidden" name="udrink" value="<?php echo $this->muse->display_value('user_lifestyle',array('user_id'=>$this->tank_auth->get_user_id()), 'drink');?>">
+                        <input type="hidden" name="nashathramval" value="<?php echo $this->muse->display_value('user_background',array('user_id'=>$this->tank_auth->get_user_id()), 'nakshathram');?>">
                         <section class=" signinbox">
                             <h2>Religion</h2>
                             <div class="error">
@@ -41,7 +42,13 @@
                                     echo form_error('smoke');
                                     echo form_error('drink');
                                 ?>
-                            </div>    
+                            </div> 
+                            <div class="message">
+                                <?php
+                                   if(isset($message))
+                                    echo $message;
+                                ?>
+                            </div>   
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -74,6 +81,17 @@
                                 </div>
                                 <!--end col-md-8-->
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="title" class="col-form-label required">Nakshathram</label>
+                                        <?php $this->muse->get_nashathram();?>
+                                    </div>
+                                <!--end form-group-->
+                                </div>
+                                <!--end col-md-8-->
+                            </div>
+                            
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -174,6 +192,8 @@
 
 	  $drink 		= $('input[name=udrink]').val();
 
+      $nashthram    = ($('input[name=nashathramval]').val())
+
 	  $('select[name=religion]').val($religion_id);
 
 	  $('select[name=community]').val($community_id);
@@ -183,6 +203,8 @@
 	  $('select[name=work_as]').val($work_as);
 
 	  $('select[name=annual_income]').val($annual_income);
+
+      $('select[name=nashathram]').val($nashthram);
 	  
 	  $('input:radio[name=diet][value='+$diet+']').attr("checked", "checked");
 

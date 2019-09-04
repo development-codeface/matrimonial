@@ -93,7 +93,7 @@
                                         <label for="title" class="col-form-label required">Marital Status</label>
                                         <select name="marital_status" required>
                                             <option value=""> Select </option>
-                                            <option value='never married'  <?php echo set_select('marital_status', 'never married'); ?> > Never Married </option>
+                                            <option value='never married'  <?php echo set_select('marital_status', 'never married'); ?> > Not Married </option>
                                             <option value="divorced" <?php echo set_select('marital_status', 'divorced'); ?>> Divorced </option>
                                             <option value="awaiting divorced" <?php echo set_select('marital_status', 'awaiting divorced'); ?>> Awaiting Divorced </option>
                                             <option value="widowed" <?php echo set_select('marital_status', 'widowed'); ?>> Widowed </option>

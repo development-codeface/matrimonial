@@ -22,7 +22,7 @@
                        <!--============ Section Title===================================================================-->
                          <section class=" signinbox" id="matches_change">  
                             <?php if(isset($matches)){ ?> 
-                                <h2> Matches (<?php echo $totalcount ?> Profiles) </h2>
+                                <h2> <?php echo $totalcount ?> Profiles </h2>
                             <?php } ?>
 
                             <!--============ Items ==========================================================================-->

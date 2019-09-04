@@ -306,7 +306,8 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/send_again_form', $data);
+			$data['page'] = 'auth/send_again_form';
+			$this->load->view('site_theme/partner_containt', $data);
 		}
 	}
 
@@ -366,7 +367,9 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/forgot_password_form', $data);
+			$data['page'] = 'auth/forgot_password_form';
+			$this->load->view('site_theme/partner_containt', $data);
+			//$this->load->view('auth/forgot_password_form', $data);
 		}
 	}
 

@@ -271,7 +271,6 @@ class Muser extends CI_Controller
 		$config['base_url'] = base_url().'muser/ajaxInterested';		
 		$config['total_rows'] = $this->matri->myInterested($field_val);
 		$data['totalcount']   = $config['total_rows'];
-		$data['totalcount']   = $config['total_rows'];
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;
@@ -892,7 +891,7 @@ class Muser extends CI_Controller
 		$profileid = $this->input->post('packageId');
 		$user_id = $this->tank_auth->get_user_id();
 
-		$isProfileshortlisted = $this->matri->global_get('user_shortlist', array('user_id'=>$this->tank_auth->get_user_id()));
+		$isProfileshortlisted = $this->matri->global_get('user_shortlist', array('user_id'=>$this->tank_auth->get_user_id(), 'profile_id' =>$profileid));
 		if($isProfileshortlisted->num_rows() < 1){
 			$data = array(
 				'user_id'=>$user_id,
@@ -940,7 +939,7 @@ class Muser extends CI_Controller
 		$profileid = $this->input->post('packageId');
 		$user_id = $this->tank_auth->get_user_id();
 
-		$isProfileshortlisted = $this->matri->global_get('user_interested', array('user_id'=>$this->tank_auth->get_user_id()));
+		$isProfileshortlisted = $this->matri->global_get('user_interested', array('user_id'=>$this->tank_auth->get_user_id(),'profile_id' =>$profileid));
 		if($isProfileshortlisted->num_rows() < 1){
 			$data = array(
 				'user_id'=>$user_id,

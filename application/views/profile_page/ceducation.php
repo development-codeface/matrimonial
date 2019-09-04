@@ -48,7 +48,13 @@ $edu_where = array(
                                 echo form_error('work_with');
                                 echo form_error('work_as'); 
                                 echo form_error('annual_income');
+
                             ?> </div>
+                            <div class="message">
+                                <?php
+                                
+                                ?>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

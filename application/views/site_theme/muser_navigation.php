@@ -22,7 +22,7 @@
                                             <a href="<?php echo base_url();?>muser/shortlistprofile">Your Shorlist profiles</a>
                                         </li>
                                         <li>    
-                                            <a href="<?php echo base_url();?>muser/interestedprofile">Interest sended</a>
+                                            <a href="<?php echo base_url();?>muser/interestedprofile">Interest sent</a>
                                         </li>
                                         <!--<li>
                                             <a href="short_listed.html">Short listed<span>3</span></a>

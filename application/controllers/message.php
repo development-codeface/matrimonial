@@ -60,7 +60,7 @@ class Message extends CI_Controller
 			$this->_send_email($mail_data['name']."has sent you a message",$mail_data['email'], $mail_data);
 			 if(($this->matri->global_insert('send_message', $data)>0) AND ($this->matri->global_insert('message_inbox', $send_data)>0))
 			 {
-				redirect('forme/get_user/'.$this->input->post('send_to')."?msg=Message successful send");	
+				redirect('forme/get_user/'.$this->input->post('send_to')."?msg=Message successful sent");	
 			 }
 		}
         }

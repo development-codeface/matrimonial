@@ -51,13 +51,13 @@ $family_status = array(
 		       'middle' => 'Middle Class'
 		       );
 $brother = array(
-                 'type' => 'text',
+                 'type' => 'number',
                  'name' => 'brother',
                  'value' => set_value('brother'),
                  
                  );
 $sister = array(
-                'type' => 'text',
+                'type' => 'number',
                  'name' => 'sister',
                  'value' => set_value('sister'),
                 
@@ -164,7 +164,7 @@ $sister = array(
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="title" class="col-form-label required">Brother's</label>
+                                        <label for="title" class="col-form-label required">Number of Brother(s)</label>
                                         <?php echo form_input($brother);?>
                                     </div>
                                 <!--end form-group-->
@@ -175,7 +175,7 @@ $sister = array(
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="title" class="col-form-label required">Sister's</label>
+                                        <label for="title" class="col-form-label required">Number of Sister(s)</label>
                                         <?php echo form_input($sister);?>
                                     </div>
                                 <!--end form-group-->

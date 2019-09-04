@@ -102,7 +102,7 @@ Pkerala Marriage <br> T B junction,<br> Attingal, Kerala, 695101
                                 </div>
                             </div>
                             <!--end col-md-4-->
-                        </div> <div class="col-md-12 "> <p class="foot_cr" >Designed and Developed by <a href="contact.html"> Codeface Technlogies </a></p> </div>
+                        </div> <div class="col-md-12 "> <p class="foot_cr" >Copyright © 2019 <a href="http://pkeralamarry.com"> Pkeralamarry </a>. Powered by <a href="http://codefacetech.com/"> Codeface Technlogies </a></p> </div>
                     </div>
                         <!--end row-->
     

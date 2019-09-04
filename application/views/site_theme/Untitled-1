@@ -222,7 +222,7 @@
 
                     <option value=""> Select </option>
 
-                    <option value='never married'  <?php echo set_select('marital_status', 'never married'); ?> > Never Married </option>
+                    <option value='never married'  <?php echo set_select('marital_status', 'never married'); ?> > Not Married </option>
 
                     <option value="divorced" <?php echo set_select('marital_status', 'divorced'); ?>> Divorced </option>
 

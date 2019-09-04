@@ -118,7 +118,7 @@ class Update_Profile extends CI_Controller
                                         $data['keywords'] ='mplan.in, Matrimonial,shaadi, free register , marriage , community, religion';
 
                                         $data['descripation'] ='mplan.in trusted matrimonial website. register now free at mplan.in marriage. you can access mobile number.';
-
+											
                                         $this->load->view('site_theme/update_containt',$data);
 
 				}
@@ -449,7 +449,9 @@ class Update_Profile extends CI_Controller
 
                         'community_id' => $this->input->post('community'),
 			
-			            'sub_community' => $this->input->post('sub_community'),
+						'sub_community' => $this->input->post('sub_community'),
+						
+						'nakshathram'  => $this->input->post('nashathram'),
 
 				);
 				
@@ -834,14 +836,13 @@ class Update_Profile extends CI_Controller
 
                         'work_as_id' => $this->input->post('work_as'),
 
-                        'annual_income' => $this->input->post('annual_income'),
-
+						'annual_income' => $this->input->post('annual_income'),
                         
 
                 );
 
 		$this->update->global_update('user_edu','user_id', $this->tank_auth->get_user_id(), $data);
-
+		$this->form_validation->set_message('sucess', "Updated Sucessfully");
 		$this->education();
 
 	    }
@@ -886,8 +887,9 @@ class Update_Profile extends CI_Controller
 
                         'community_id' => $this->input->post('community'),
 
-			            'sub_community' => $this->input->post('sub_community')
-
+						'sub_community' => $this->input->post('sub_community'),
+						
+                        'nakshathram'  => $this->input->post('nashathram'),
                         
 
                 );

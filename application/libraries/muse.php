@@ -89,6 +89,25 @@ class Muse
 		}
 		echo "</select>";
 	}
+
+	function get_nashathram($event= NULL)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$data['nashathram'] = $ci->matri->global_select('nashathram');
+		 echo "<select name='nashathram' id='nashathram' ".$event.">";
+                            echo "<option value=''>  Religion </option>";
+		    if(isset($data['nashathram']))
+                            {
+                                foreach($data['nashathram']->result() as $row)
+                                {
+                                    echo "<option value='".$row->id."'>".ucfirst($row->name)."</option>";
+                                }
+                            }
+		echo "</select>";
+                         
+	}
+
 	function edu_level($event= NULL)
 	{
 		$ci =  & get_instance();

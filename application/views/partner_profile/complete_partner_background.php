@@ -77,7 +77,9 @@ if(isset($matches))
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Community</label>
-                                                                    <?php $this->muse->get_community($this->muse->display_value('user_background', array('user_id' => $this->tank_auth->get_user_id()), 'religion_id'));?>
+                                                                    <div id="community">
+                                                                        <?php $this->muse->get_community($this->muse->partner_background($partner_key, 'preligion_id'));?>
+                                                                    </div>
                                                                 </div>
                                                                 <!--end form-group-->
                                                             </div>

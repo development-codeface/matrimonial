@@ -45,13 +45,13 @@ $family_status = array(
 );
 
 $brother = array(
-                 'type' => 'text',
+                 'type' => 'number',
                  'name' => 'brother',
                  'value' => $this->muse->display_value('user_family', array('user_id' =>$this->tank_auth->get_user_id()), 'brother'),                
                  );
 
 $sister = array(
-                'type' => 'text',
+                'type' => 'number',
                 'name' => 'sister',
                 'value' => $this->muse->display_value('user_family', array('user_id' =>$this->tank_auth->get_user_id()), 'sister'),   
                 );
@@ -109,6 +109,13 @@ $sister = array(
                                                 ?>
                                                 </div>
 
+                                                <div class="message">
+                                                    <?php
+                                                    if(isset($message))
+                                                        echo $message;
+                                                    ?>
+                                                </div>
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
@@ -163,7 +170,7 @@ $sister = array(
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="title" class="col-form-label required">Brother's</label>
+                                                            <label for="title" class="col-form-label required">Number of Brother(s)</label>
                                                             <?php echo form_input($brother);?>
                                                         </div>
                                                     <!--end form-group-->
@@ -174,7 +181,7 @@ $sister = array(
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
-                                                            <label for="title" class="col-form-label required">Sister's</label>
+                                                            <label for="title" class="col-form-label required">Number of Sister(s)</label>
                                                             <?php echo form_input($sister);?>
                                                         </div>
                                                     <!--end form-group-->

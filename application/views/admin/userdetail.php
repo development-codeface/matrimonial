@@ -30,6 +30,8 @@
         $packageid        = $row->package_id;
         $packagename      = $row->pack_name;
         $packagePrize     = $row->pack_prize;
+        $mobile_no        = $row->mobile_no;
+        $email            = $row->email;
         $packagestatus    = $row->package_status;
         $isFetured        = false; //(isset($row->packagestatus) && ($row->packagestatus == 1)) ;
         $hobbieword       = $row->own_words;
@@ -38,6 +40,15 @@
         $image            = isset($row->path) ?  $row->path : "img/img_not_avalable.jpg";
         $filepdated       = $row->updated_profile;
         $activate         = $row->activated;
+        $star             = $row->star;
+        $father_name        =   $row->father_name;
+        $mother_name        =   $row->mother_name;
+        $father_status       =   $row->father_status;
+        $mother_status          =   $row->mother_status;
+        $family_status          =   $row->family_status;
+        $brother         =   $row->brother;
+        $sister         =   $row->sister;
+        $annual_income  = $row->annual_income;
         $update_file_id   = $row->updatefileid;
         $update_about_us  = $row->useraboutus;
         $update_description  = $row->abouthobbies;
@@ -122,9 +133,9 @@
                                              <dt>Cast:&nbsp;&nbsp;</dt>
                                             <dd> <?php if(isset($community)){echo ucwords($community);} else {echo "NULL";} ?></dd>
                                              <dt>Mobile No:&nbsp;&nbsp;</dt>
-                                            <dd>    <a href="#" class=" ">View Now</a></dd>
+                                            <dd> <?php echo $mobile_no   ?></dd>
                                            <dt>Email Id:&nbsp;&nbsp;</dt>
-                                            <dd>    <a href="#" class=" ">View Now</a></dd>
+                                            <dd>    <?php echo $email ?></dd>
                                         </dl>
                         </div>
                         
@@ -202,13 +213,13 @@
                                             <dt ><label class="b-w">Caste</label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($community)){echo ucwords($community);} else {echo "NULL";} ?></label></dd>
                                             <dt ><label class="b-w">Sub cast</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">Not Specified</label></dd>
+                                            <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($sub_community)){echo ucwords($sub_community);} else {echo "Not Specified";} ?></label></dd>
                                              <dt ><label class="b-w">Star</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">Ayilyam</label></dd>
+                                            <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($star)){echo ucwords($star);} else {echo "";} ?> </label></dd>
                                            
                                         </dl>
                                     </div>
-                                    <div class="col-md-6">
+                                    <!-- <div class="col-md-6">
                                         <h2>&nbsp;</h2>
                                         <dl>
                                             <dt ><label class="b-w">Zodiac/star sign </label> </dt>
@@ -220,24 +231,24 @@
                                             <dt ><label class="b-w">Dosham</label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w">Slight papam</label></dd>
                                         </dl>
-                                    </div>
+                                    </div> -->
                                     
                                 </div>
                             </section>
                             <!--end Details and Locations-->
                              <!--Details & Location-->
-                            <section class=" signinbox">
+                             <section class=" signinbox">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <h2>Family Detail</h2>
 
                                         <dl>
                                             <dt ><label class="b-w">Family Type&nbsp;</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;Nuclear Family</label></dd>
-                                            <dt ><label class="b-w">Family Value</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">Orthodox</label></dd>
-                                            <dt ><label class="b-w">Family Status</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">Middle class</label></dd>
+                                            <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;<?php if(isset($family_status)){echo ucwords($family_status);} else {echo "NULL";} ?></label></dd>
+                                            <dt ><label class="b-w">Father Name</label> </dt>
+                                            <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;<?php if(isset($father_name)){echo ucwords($father_name);} else {echo "NULL";} ?></label></dd>
+                                            <dt ><label class="b-w"> Mother Name</label> </dt>
+                                            <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;<?php if(isset($mother_name)){echo ucwords($mother_name);} else {echo "NULL";} ?></label></dd>
                                             
                                            
                                         </dl>
@@ -245,12 +256,14 @@
                                     <div class="col-md-6">
                                         <h2>&nbsp;</h2>
                                         <dl> 
-                                            <dt ><label class="b-w">Native</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">Not Specified</label></dd>
-                                            <dt ><label class="b-w">Brothers </label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">One </label></dd>
-                                            <dt ><label class="b-w">Sisters </label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">None</label></dd>
+                                            <dt ><label class="b-w">Father occupation</label> </dt>
+                                            <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;<?php if(isset($father_status)){echo ucwords($father_status);} else {echo "NULL";} ?></label></dd>
+                                            <dt ><label class="b-w">Monther Occupation </label> </dt>
+                                            <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;<?php if(isset($mother_status)){echo ucwords($mother_status);} else {echo "NULL";} ?> </label></dd>
+                                            <dt ><label class="b-w">Brother </label> </dt>
+                                            <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;<?php if(isset($brother)){echo ucwords($brother);} else {echo "NULL";} ?></label></dd>
+                                            <dt ><label class="b-w">Sister </label> </dt>
+                                            <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;<?php if(isset($sister)){echo ucwords($sister);} else {echo "NULL";} ?></label></dd>
                                             
                                         </dl>
                                     </div>
@@ -261,9 +274,10 @@
 
                              <!--Description-->
                             <section class=" signinbox">
-                                <h2>About Family</h2>
+                                <h2>About Hobbies</h2>
                                 <p>
-                                    <?php if(isset($hobbieword)){echo ucwords($hobbieword);} else {echo "";} ?>
+                                <?php if(isset($hobbieword)){echo ucwords($hobbieword);} else {echo "";} ?>
+                                
                                 </p>
                             </section>
                             <!--end Description-->
@@ -275,10 +289,8 @@
                                         <dl>
                                             <dt ><label class="b-w">Education&nbsp;</label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;<?php if(isset($edu_level)){echo ucwords($edu_level);} else {echo "NULL";} ?></label></dd>
-                                            <dt ><label class="b-w">College</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">MGCE</label></dd>
-                                            <dt ><label class="b-w">School</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">VPSHSS</label></dd>
+                                            <dt ><label class="b-w">Occupation</label> </dt>
+                                            <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($work_as)){echo ucwords($work_as);} else {echo "NULL";} ?> </label></dd>
                                             
                                            
                                         </dl>
@@ -286,14 +298,12 @@
                                     <div class="col-md-6">
                                         <h2>&nbsp;</h2>
                                         <dl> 
-                                            <dt ><label class="b-w">Occupation</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($work_as)){echo ucwords($work_as);} else {echo "NULL";} ?></label></dd>
+                                            
                                             <dt ><label class="b-w">Company Name</label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($work_with)){echo ucwords($work_with);} else {echo "NULL";} ?></label></dd>
                                             <dt ><label class="b-w">Yearly Income </label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">6 lac</label></dd>
-                                            <dt ><label class="b-w">Sisters </label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">None</label></dd>
+                                            <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($annual_income)){echo ucwords($annual_income);} else {echo "NULL";} ?></label></dd>
+                                            
                                             
                                         </dl>
                                     </div>

@@ -21,7 +21,7 @@ class Adminmodel extends CI_Model
                             user_file.*, userfolder.*, user_background.*, user_hobbies.*,
                             user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
                             countries.name as country , states.name as state, users.id as muser_id,
-                              cities.name as city, height.id as hid, users.id as main_id');
+                              cities.name as city, height.id as hid, users.id as main_id,nashathram.name as star,user_edu.annual_income as annual_income');
         $this->db->from('users');
         $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
         $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
@@ -33,7 +33,8 @@ class Adminmodel extends CI_Model
        
         $this->db->join('user_file','user_file.user_id = users.id', 'left');
         $this->db->join('userfolder','userfolder.user_id = users.id', 'left');
-        $this->db->join('user_background','user_background.user_id = users.id', 'left');        
+        $this->db->join('user_background','user_background.user_id = users.id', 'left');
+        $this->db->join('nashathram','nashathram.id = user_background.nakshathram', 'left');        
         $this->db->join('user_hobbies', 'user_hobbies.user_id = users.id',  'left');
         $this->db->join('user_lifestyle', 'user_lifestyle.user_id = users.id',  'left');
         $this->db->join('mother_tongue', 'mother_tongue.id= user_profiles.mother_tongue_id',  'left');
@@ -96,7 +97,7 @@ class Adminmodel extends CI_Model
                             user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
                             user_package_opt.*, packagelist.*, countries.name as country , states.name as state, users.id as muser_id,
                             cities.name as city, height.id as hid, users.id as main_id,update_user_file.path as updated_profile,update_user_file.id as updatefileid,
-                            user_update.description as useraboutus,user_update.abouthobbies as abouthobbies,user_update.id as update_profile_id');
+                            user_update.description as useraboutus,user_update.abouthobbies as abouthobbies,user_update.id as update_profile_id,nashathram.name as star,user_edu.annual_income as annual_income');
         $this->db->from('users');
         $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
         $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
@@ -108,7 +109,8 @@ class Adminmodel extends CI_Model
        
         $this->db->join('user_file','user_file.user_id = users.id', 'left');
         $this->db->join('userfolder','userfolder.user_id = users.id', 'left');
-        $this->db->join('user_background','user_background.user_id = users.id', 'left');        
+        $this->db->join('user_background','user_background.user_id = users.id', 'left');
+        $this->db->join('nashathram','nashathram.id = user_background.nakshathram', 'left');         
         $this->db->join('user_hobbies', 'user_hobbies.user_id = users.id',  'left');
         $this->db->join('user_lifestyle', 'user_lifestyle.user_id = users.id',  'left');
         $this->db->join('mother_tongue', 'mother_tongue.id= user_profiles.mother_tongue_id',  'left');

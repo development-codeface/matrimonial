@@ -37,6 +37,12 @@
                                     echo form_error('own_words');
                                 ?>
                             </div>
+                            <div class="message">
+                                <?php
+                                if(isset($message))
+                                    echo $message;
+                                ?>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
