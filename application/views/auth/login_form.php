@@ -704,7 +704,7 @@ margin: 0px;">
                           }
                         }
                         ?>
-                         <a href="submit.html" class="item call-to-action">
+                         <a href="auth/login" class="item call-to-action">
                             <div class="wrapper" style=" background: #fff; border: 1px solid #d9d9d9;}">
                                 <div class="title" >
                                     <i class="fa fa-plus-square-o"></i>

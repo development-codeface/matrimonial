@@ -412,7 +412,7 @@
                                                 <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" class="title"><?php echo ucfirst($row->firstname); ?></a>
                                
                                             </h3>
-                                            <a href="single-listing-1.html" class="image-wrapper background-image">
+                                            <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" class="image-wrapper background-image">
                                             <?php if($row->path != NULL){?>
                                                         <img src="<?php echo $row->path;?>"  alt="">
                                                 <?php }else{?>                                                                    
