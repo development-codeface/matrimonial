@@ -203,7 +203,7 @@ class Partner_Profile extends CI_Controller
                         
                 );
                 $this->matri->global_insert('partner_edu', $data);
-		
+				$this->complete_edu();
             }
 	}	
 	/*after complete partner profile */
@@ -229,7 +229,7 @@ class Partner_Profile extends CI_Controller
                                                
                 );
                 $this->matri->global_insert('partner_background', $data);
-		$this->complete_background();
+		        $this->complete_background();
             }
 	}
 	//partner lifestyle insert

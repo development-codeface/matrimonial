@@ -103,7 +103,8 @@ class User_profile extends CI_Controller
             $this->form_validation->set_rules('hiv_positive','HIV Positive','xss_clean|strip_tags');
             if($this->form_validation->run() == false)
             {
-                $this->index();
+				echo "validation error !!!!"; die();
+				$this->index();
             }
             else
             {
@@ -127,7 +128,7 @@ class User_profile extends CI_Controller
 					'description' => $this->input->post('aboutme'),
 					'user_id' => $this->tank_auth->get_user_id()
 				);
-				$this->matri->global_upldate('user_profiles','user_id', $this->tank_auth->get_user_id(), $data);
+				$this->matri->global_insert('user_profiles',$data);
 				$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $updateInfo);
 				$this->profile_image();
             }
