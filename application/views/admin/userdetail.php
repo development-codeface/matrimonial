@@ -32,6 +32,8 @@
         $packagePrize     = $row->pack_prize;
         $mobile_no        = $row->mobile_no;
         $email            = $row->email;
+        $state            = $row->state;
+        $city            = $row->city;
         $packagestatus    = $row->package_status;
         $isFetured        = false; //(isset($row->packagestatus) && ($row->packagestatus == 1)) ;
         $hobbieword       = $row->own_words;
@@ -123,7 +125,7 @@
                             </h1>
                            
                             <h4 class="location">
-                                <a href="#">Trivandrum, Kerala</a>
+                                <a href="#"><?php if(isset($city)){echo ucwords($city);} else {echo "";}?> , <?php if(isset($state)){echo ucwords($state);} else {echo "";}?> </a>
                             </h4>
                              <dl style="padding-top:30px;">
                                             <dt>Age:&nbsp;&nbsp; </dt>

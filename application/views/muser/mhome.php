@@ -34,6 +34,8 @@
         $mobilenumber     = $row->mobile_no;
         $email            = $row->email;
         $star             = $row->star;
+        $state            = $row->state;
+        $city            = $row->city;
 
         $father_name        =   $row->father_name;
         $mother_name        =   $row->mother_name;
@@ -114,7 +116,7 @@
                             </h1>
                            
                             <h4 class="location">
-                                <a href="#">Trivandrum, Kerala</a>
+                            <a href="#"><?php if(isset($city)){echo ucwords($city);} else {echo "";}?> , <?php if(isset($state)){echo ucwords($state);} else {echo "";}?> </a>
                             </h4>
                              <dl style="padding-top:30px;">
                                             <dt>Age:&nbsp;&nbsp; </dt>
