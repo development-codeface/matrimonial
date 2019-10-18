@@ -3,6 +3,10 @@
                                 <!--============ Side Bar Search Form ===============================================-->
                                 <form action="<?php echo base_url();?>muser/filter_data" class="sidebar-form form" method="post" id="mfilter">
                                 <input type="hidden" value="<?php echo $this->muse->sex_match($this->tank_auth->get_user_id()); ?>" name="gender" id="gender">    
+                                <div class="form-group">
+                                    <label for="email" class="col-form-label required ">Search keyword</label>
+                                    <input type="text" name="keysearch" value="" id="keysearch" class="form-control valid" placeholder="Search name/id">
+                                </div>
                                    <div class="form-group">
                                         <select name="martial_status" onchange="filter_data(this.value)" id="martial_status">
 				                            <option value=""> Marital Status </option>
@@ -52,7 +56,7 @@
                                                 Veg
                                                 </label>
                                                 <label>
-                                                <input type="radio" name="diet" value="non veg" title="Diet" onclick="filter_data(this.value)" <?php echo set_radio('diet', 'non veg'); ?>> Non-Veg
+                                                <input type="radio" name="diet" value="non-veg" title="Diet" onclick="filter_data(this.value)" <?php echo set_radio('diet', 'non veg'); ?>> Non-Veg
                                                 </label>
                                                 <label>
                                                 <input type="radio" name="diet" value="jain" title="Diet" onclick="filter_data(this.value)" <?php echo set_radio('diet', 'jain'); ?>> Jain
@@ -68,7 +72,7 @@
                                     </div>
                                     <!--end form-group-->
                                     
-                                    <!--<input type="submit" value="Search" class="btn btn-primary width-100 btn-success"> -->
+                                    <input type="button" value="Search" onclick="filter_data(this.value)" class="btn btn-primary width-100 btn-success">
                                     <input type="hidden" id="url" value="<?php echo base_url();?>">
                                     <!--end alternative-search-form-->
                                 </form>

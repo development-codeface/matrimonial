@@ -10,6 +10,7 @@
         $name             = $row->firstname." ".$row->lastname;
         $marital_status   = $row->marital_status;
         $heightto         = $row->global_height;
+        $weight           = $row->weight;
         $mtongue          = $row->mtongue;
         $skin_tone        = $row->skin_tone;
         $body_type        = $row->body_type;
@@ -111,7 +112,7 @@
 
                             <div class="float-right float-xs-none price">
                             <div class="id opacity-50">
-                                <strong>ID: </strong>NH347921
+                                <strong>ID: </strong><?php echo $userid ?>
                             </div>
                         </div>
 
@@ -175,7 +176,7 @@
                                             <dt ><label class="b-w">Height (cms)</label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($heightto)){echo $heightto;} else {echo "NULL";}?> </label></dd>
                                              <dt ><label class="b-w">Weight (Kg)</label> </dt>
-                                            <dd class="text-align-right dt-bg"><label class="b-w">50.00</label></dd>
+                                            <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($weight)){echo $weight;} else {echo "NULL";}?></label></dd>
                                            <dt ><label class="b-w">Marital Status </label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($marital_status)){echo ucwords($marital_status);} else {echo "NULL";}?> </label></dd>
                                             <dt ><label class="b-w">Mother Tongue </label> </dt>

@@ -228,7 +228,15 @@ class Partner_Profile extends CI_Controller
                         'psub_community' => $this->input->post('subcommunity'),
                                                
                 );
-                $this->matri->global_insert('partner_background', $data);
+				$this->matri->global_insert('partner_background', $data);
+				
+				$lifedata = array (
+					'user_id' => $this->tank_auth->get_user_id(),
+					'pdiet'   => strip_tags(trim($this->input->post('diet'))),
+					'psmoke'  => strip_tags(trim($this->input->post('smoke'))),
+					'pdrink'  => strip_tags(trim($this->input->post('drink'))),
+				);
+				$this->matri->global_insert('partner_lifestyle', $lifedata);
 		        $this->complete_background();
             }
 	}

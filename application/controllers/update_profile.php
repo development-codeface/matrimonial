@@ -725,7 +725,9 @@ class Update_Profile extends CI_Controller
 
             $this->form_validation->set_rules('marital_status','Marital Status','xss_clean|trim|strip_tags');
 
-            $this->form_validation->set_rules('heightto','Height','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('heightto','Height','xss_clean|trim|strip_tags');
+			
+			$this->form_validation->set_rules('weight','Height','xss_clean|trim|strip_tags');
 
             $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean|trim|strip_tags');
 
@@ -763,7 +765,9 @@ class Update_Profile extends CI_Controller
 
                         'marital_status'=>$this->input->post('marital_status'),
 
-                        'height'=>$this->input->post('heightto'),
+						'height'=>$this->input->post('heightto'),
+						
+						'weight' => $this->input->post('weight'),
 
                         'skin_tone'=>$this->input->post('skin_tone'),
 

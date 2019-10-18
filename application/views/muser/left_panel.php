@@ -30,24 +30,27 @@
 			<h4 style="margin-top:10px;"> Diet</h4>
 			<ul style="list-style:none;margin-top:8px;margin-left:10px;">
 					<li>    <input type="radio" name="diet" value="veg" title="Diet" onclick="filter_data(this.value)" <?php echo set_radio('diet', 'veg'); ?>> Veg &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" name="diet" value="non veg" title="Diet" onclick="filter_data(this.value)" <?php echo set_radio('diet', 'non veg'); ?>> Non-Veg 
+						<input type="radio" name="diet" value="non-veg" title="Diet" onclick="filter_data(this.value)" <?php echo set_radio('diet', 'non veg'); ?>> Non-Veg 
 					<li>	<input type="radio" name="diet" value="jain" title="Diet" onclick="filter_data(this.value)" <?php echo set_radio('diet', 'jain'); ?>> Jain &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="radio" name="diet" value="vegan" title="Diet" onclick="filter_data(this.value)" <?php echo set_radio('diet', 'vegan'); ?>> Vegan
 			
 			
 			
              
-			</ul-->
+			</ul>
 			
 			<h4 style="margin-top:10px;"> Disability </h4>
 			<ul style="list-style:none;margin-top:8px;margin-left:10px;">
 			<li>	<input type="radio" name="disability" value="yes" onchange="filter_data(this.value)"> Yes &nbsp;&nbsp;&nbsp; <input type="radio" name="disability" value="no" onchange="filter_data(this.value)" checked>No   
 			</ul>
-			
-			<h4 style="margin-top:10px;"> HIV Positive</h4>
-			<ul style="list-style:none;margin-top:8px;margin-left:10px;">
-			<li><input type="radio" name="hiv_positive" value="yes" onchange="filter_data(this.value)"> Yes &nbsp;&nbsp;&nbsp;<input type="radio" name="hiv_positive" value="no" onchange="filter_data(this.value)" checked>No  
-			</ul>
+
+			<div style="display:none">
+				<h4 style="margin-top:10px;"> HIV Positive</h4>
+				<ul style="list-style:none;margin-top:8px;margin-left:10px;">
+				<li><input type="radio" name="hiv_positive" value="yes" onchange="filter_data(this.value)"> Yes &nbsp;&nbsp;&nbsp;<input type="radio" name="hiv_positive" value="no" onchange="filter_data(this.value)" checked>No  
+				</ul>
+            </div>
+
 			<ul style="list-style:none;margin-top:8px;">
 				<li> <input type="submit" value="Filter" class="btn btn-success"></li>
 			</ul>

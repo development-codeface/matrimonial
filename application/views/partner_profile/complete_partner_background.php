@@ -102,7 +102,7 @@ if(isset($matches))
                                                                     <label for="title" class="col-form-label required">Diet</label>
                                                                     <div>
                                                                         <input type="radio" name="diet" value="veg" title="Veg"> Veg
-                                                                        <input type="radio" name="diet" value="non veg" title="Non-Veg"> Non-Veg
+                                                                        <input type="radio" name="diet" value="non-veg" title="Non-Veg"> Non-Veg
                                                                         <input type="radio" name="diet" value="jain" title="Jain"> Jain
                                                                         <input type="radio" name="diet" value="vegan" title="Vegan"> Vegan
                                                                         <div>
@@ -210,8 +210,9 @@ if(isset($matches))
 	  $('select[name=community]').val($community_id);
 	  $('select[name=work_with]').val($work_with);
 	  $('select[name=work_as]').val($work_as);
-	  $('select[name=annual_income]').val($annual_income);
-	  $('input:radio[name=diet][value='+$pdiet+']').attr("checked", "checked");
+      $('select[name=annual_income]').val($annual_income);
+      $('input:radio[name=diet]').filter('[value='+$pdiet+']').prop('checked', true);
+	  //$('input:radio[name=diet][value='+$pdiet+']').attr("checked", "checked");
 	  $('input:radio[name=smoke][value='+$psmoke+']').attr("checked", "checked");
 	  $('input:radio[name=drink][value='+$pdrink+']').attr("checked", "checked");
 	  

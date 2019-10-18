@@ -165,13 +165,6 @@
                                                                 <!--end form-group-->
                                                             </div>
                                                             <!--end col-md-8-->
-                                                            <div class="col-md-6">
-                                                                <div class="form-group">
-                                                                    <label for="title" class="col-form-label required">Height To </label>
-                                                                    <?php $this->muse->gheight('heightto', 'cheight');?>
-                                                                </div>
-                                                                <!--end form-group-->
-                                                            </div>
                                                             <!--end col-md-8-->
                                                         </div>
                                                         <div class="row">
@@ -218,7 +211,7 @@
                                                             <!--end col-md-8-->
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-6" style="display:none">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">HIV Positive</label>
                                                                     <div>

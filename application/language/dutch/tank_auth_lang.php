@@ -9,6 +9,7 @@ $lang['auth_incorrect_password'] = 'Ongeldig wachtwoord';
 $lang['auth_incorrect_login'] = 'Ongeldig gebruikersnaam';
 $lang['auth_incorrect_email_or_username'] = 'Ongeldig gebruikersnaam';
 $lang['auth_email_in_use'] = 'Uw e-mailadres bestaat al. Gebruik een ander';
+$lang['auth_mobile_in_use'] = 'Uw e-mailadres bestaat al. Gebruik een ander';
 $lang['auth_username_in_use'] = 'Uw gebruikersnaam bestaat al. Probeer een ander';
 $lang['auth_current_email'] = 'Dit is uw huidige e-mailadres';
 $lang['auth_incorrect_captcha'] = 'Uw bevestigingscode komt niet overeen met die in de afbeelding.';

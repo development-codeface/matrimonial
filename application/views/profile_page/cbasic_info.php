@@ -123,6 +123,17 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
+                                        <label for="title" class="col-form-label required">Weight</label>
+                                        <?php $this->muse->gweight('weight', '45' ,"id='weight' required");?>
+                                    </div>
+                                <!--end form-group-->
+                                </div>
+                                <!--end col-md-8-->
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
                                         <label for="title" class="col-form-label required">Skin Tone</label>
                                         <div>
                                             <input type="radio" name="skin_tone" value="very fair" <?php echo set_radio('skin_tone', 'very fair'); ?> > Very Fair
@@ -164,8 +175,8 @@
                                 </div>
                                 <!--end col-md-8-->
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="row" >
+                                <div class="col-md-6" style="display:none">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">HIV Positive</label>
                                         <div>
@@ -204,6 +215,8 @@
                     <input type="hidden" name="ubody_type" value="<?php echo $this->muse->display_basic_info('user_profiles', array('user_id' =>$this->tank_auth->get_user_id()), 'body_type');?>">
                     <input type="hidden" name="udisability" value="<?php echo $this->muse->display_basic_info('user_profiles', array('user_id' => $this->tank_auth->get_user_id()), 'disability');?>">  
                     <input type="hidden" name="uhiv_positive" value="<?php echo $this->muse->display_basic_info('user_profiles', array( 'user_id' =>$this->tank_auth->get_user_id()), 'hiv_positive');?>">
+                    <input type="hidden" name="uhiv_weight" value="<?php echo $this->muse->display_basic_info('user_profiles', array( 'user_id' =>$this->tank_auth->get_user_id()), 'weight');?>">
+                    
                 </div>
                 <div class="tab-pane fade" id="two-pills" role="tabpanel" aria-labelledby="two-tab-pills"></div>
                 <div class="tab-pane fade" id="three-pills" role="tabpanel" aria-labelledby="three-tab-pills">
@@ -250,10 +263,10 @@
 	  $mtonuge_id 		= $('input[name=mtonge_id]').val();
 
 	  
-
+    
 	  $user_height		= $('input[name=user_height]').val();
 
-	  
+	  $weight           = $('input[name=uhiv_weight]').val(); 
 
 	  $user_marital_status 	= $('input[name=user_marital_status]').val();
 
@@ -273,7 +286,7 @@
 
 	  $('select[name=heightto]').val($user_height);
 
-	  
+	  $('select[name=weight]').val($weight);
 
 	  $('select[name=mtongue]').val($mtonuge_id);
 

@@ -148,7 +148,7 @@
 
                         <input type="radio" name="diet" value="veg" title="diet" required> Veg
 
-                        <input type="radio" name="diet" value="non veg" title="diet" required> Non-Veg
+                        <input type="radio" name="diet" value="non-veg" title="diet" required> Non-Veg
 
                         <input type="radio" name="diet" value="jain" title="diet" required> Jain
 

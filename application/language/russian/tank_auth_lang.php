@@ -5,6 +5,7 @@ $lang['auth_incorrect_password'] = 'Неправильный пароль';
 $lang['auth_incorrect_login'] = 'Неправильный логин';
 $lang['auth_incorrect_email_or_username'] = 'Неправильный логин или email';
 $lang['auth_email_in_use'] = 'Этот email уже занят. Пожалуйста, укажите другой.';
+$lang['auth_mobile_in_use'] = 'Этот email уже занят. Пожалуйста, укажите другой.';
 $lang['auth_username_in_use'] = 'Этот логин уже занят. Пожалуйста, укажите другой.';
 $lang['auth_current_email'] = 'Это ваш текущий email';
 $lang['auth_incorrect_captcha'] = 'Введенные вами символы не соответствуют символам на картинке.';

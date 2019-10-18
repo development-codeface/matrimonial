@@ -359,6 +359,7 @@ class Muser extends CI_Controller
 			
 			$config['base_url'] = base_url().'muser/desired_partner/';
 			$config['total_rows'] = $this->matri->total_desired_partner($where_field)->num_rows();
+			$data['totalcount']   = $config['total_rows'];
 			$config['per_page'] 	= 5; 
 			$config["uri_segment"] = 3;
 			$config["num_links"] = 3;
@@ -586,6 +587,7 @@ class Muser extends CI_Controller
 		$diet			= '';
 		$disability		= '';
 		$hiv_positive		= '';
+		$keySearch      = $this->input->post('keysearch');
 		
 		$get_user_search = $this->matri->global_get('user_search', array('user_id'=>$this->tank_auth->get_user_id()));
 		$where_data = array(
@@ -593,10 +595,12 @@ class Muser extends CI_Controller
 					   'activated' => 1,
 					   'user_file.profile_img'=>1
 			);
+		$insertData = array(
+			'user_id' 	=> 	$this->tank_auth->get_user_id(),
+			'gender'		=>	$this->muse->sex_match($this->tank_auth->get_user_id()),
+			'profile_img'	=>	1);
+
 		$data = array(
-			      'user_id' 	=> 	$this->tank_auth->get_user_id(),
-			      'gender'		=>	$this->muse->sex_match($this->tank_auth->get_user_id()),
-			      'profile_img'	=>	1,
 			      'marital_status'	=>	$this->input->post('martial_status'),
 			      'religion_id'	=>	$this->input->post('religion'),
 			      'mother_tongue_id'=>	$this->input->post('mtongue'),
@@ -608,13 +612,26 @@ class Muser extends CI_Controller
 			      'disability'	=>	$this->input->post('disability'),
 			      'hiv_positive'	=>	$this->input->post('hiv_positive')
 		);
+		if (is_array($data) && count($data) >= 1)
+		{
+			foreach ($data as $data_key => $data_data)
+			{
+				if(isset($data_data) && strlen($data_data) > 0)
+				{
+					$insertData[$data_key] = $data_data;
+				}				
+			}
+		}
+
+
 		if($get_user_search->num_rows()<=0)
 		{		
-			$this->matri->global_insert('user_search', $data);
+			$this->matri->global_insert('user_search', $insertData);
 		}
 		else
 		{
-			$this->matri->global_upldate_where('user_search',array('user_id'=>$this->tank_auth->get_user_id()),$data);
+			
+			$this->matri->global_upldate_where('user_search',array('user_id'=>$this->tank_auth->get_user_id()),$insertData);
 		}
 		if($get_user_search->num_rows()>0)
 		{
@@ -659,7 +676,7 @@ class Muser extends CI_Controller
 		{
 			foreach ($field_val as $field_key => $field_data)
 			{
-				if($field_data)
+				if(isset($field_data) )
 				{
 					$where_data[$field_key] = $field_data;
 				}				
@@ -674,13 +691,13 @@ class Muser extends CI_Controller
 			
 			$config['base_url'] = base_url().'muser/ajaxFilter_data';
 			
-			$config['total_rows'] = $this->matri->total_muser_data($where_data)->num_rows();
+			$data['totalcount'] = $this->matri->total_muser_data_search($where_data,$keySearch)->num_rows();
 			$config['per_page'] 	= 9; 
 			$config["uri_segment"] = 3;
 			$config["num_links"] = 3;
 			$page_segment = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0; //Today Change
 			
-			$data['matches'] = $this->muse->mymatch($where_data, $config['per_page'], 0/*$page_segment*/);
+			$data['matches'] = $this->muse->mymatch_search($where_data, $keySearch,$config['per_page'], 0/*$page_segment*/);
 			
 			//pagination configuration
 			$config['first_link']  = 'First';
@@ -782,7 +799,7 @@ class Muser extends CI_Controller
 		{
 			foreach ($field_val as $field_key => $field_data)
 			{
-				if($field_data)
+				if(isset($field_data))
 				{
 					 $where_data[$field_key] = $field_data;
 				}
@@ -917,6 +934,7 @@ class Muser extends CI_Controller
 		//$result = $this->matri->myshortlist($field_val);
 		$config['base_url'] = base_url().'muser/ajaxShortlist';		
 		$config['total_rows'] =  0;
+		$data['totalcount']   = $config['total_rows'];
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;	
@@ -965,6 +983,7 @@ class Muser extends CI_Controller
 		//$result = $this->matri->myshortlist($field_val);
 		$config['base_url'] = base_url().'muser/ajaxInterested';		
 		$config['total_rows'] =  0;
+		$data['totalcount']   = $config['total_rows'];
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;	

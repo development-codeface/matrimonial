@@ -78,7 +78,7 @@ if(isset($matches))
                     <td class="col-md-2"> Diet </td>
                     <td class="col-md-4">
                         <input type="radio" name="diet" value="veg" title="diet" required> Veg
-                        <input type="radio" name="diet" value="non veg" title="diet" required> Non-Veg
+                        <input type="radio" name="diet" value="non-veg" title="diet" required> Non-Veg
                         <input type="radio" name="diet" value="jain" title="diet" required> Jain
                         <input type="radio" name="diet" value="vegan" title="diet" required> Vegan
                     </td>

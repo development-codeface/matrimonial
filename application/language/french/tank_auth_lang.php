@@ -5,6 +5,7 @@ $lang['auth_incorrect_password'] = 'Mot de passe incorrect';
 $lang['auth_incorrect_login'] = 'Authentification incorrect';
 $lang['auth_incorrect_email_or_username'] = 'Authentification ou courriel inexistant';
 $lang['auth_email_in_use'] = 'Courriel déjà utilisé par un autre usager. S.v.p., choisir un nouveau courriel.';
+$lang['auth_mobile_in_use'] = 'Courriel déjà utilisé par un autre usager. S.v.p., choisir un nouveau courriel.';
 $lang['auth_username_in_use'] = 'Ce nom est déjà utilisé, s.v.p. choisissez un nom différent.';
 $lang['auth_current_email'] = 'Ceci est votre courriel actuel';
 $lang['auth_incorrect_captcha'] = 'Votre code de confirmation ne correspond pas à celui de l\'image.';

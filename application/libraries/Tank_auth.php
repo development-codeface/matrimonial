@@ -234,7 +234,9 @@ class Tank_auth
 		} elseif (!$this->ci->users->is_email_available($email)) {
 			$this->error = array('email' => 'auth_email_in_use');
 
-		} else {
+		} elseif(!$this->ci->users->is_mobile_available($mobile_no)){
+			$this->error = array('email' => 'auth_mobile_in_use');
+		}else {
 			// Hash password using phpass
 			$hasher = new PasswordHash(
 					$this->ci->config->item('phpass_hash_strength', 'tank_auth'),

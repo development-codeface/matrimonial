@@ -5,6 +5,7 @@ $lang['auth_incorrect_password'] = 'パスワードが正しくありません';
 $lang['auth_incorrect_login'] = '不正なログインです';
 $lang['auth_incorrect_email_or_username'] = 'ユーザー名もメールアドレスも登録されていません';
 $lang['auth_email_in_use'] = 'メールアドレスはすでに使われています。他のメールアドレスをお使いください。';
+$lang['auth_mobile_in_use'] = 'メールアドレスはすでに使われています。他のメールアドレスをお使いください。';
 $lang['auth_username_in_use'] = 'ユーザー名はすでに使われています。他のユーザー名をお使いください。.';
 $lang['auth_current_email'] = 'これが現在お使いのメールアドレスです';
 $lang['auth_incorrect_captcha'] = '確認コードが提示したイメージと異なっています。';

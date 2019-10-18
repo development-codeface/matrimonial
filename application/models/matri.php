@@ -202,6 +202,95 @@ class Matri extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+    function muser_data_search( $field_val,$keywordVal, $per_page, $page_segment)
+    {
+        $this->db->select('users.*, user_profiles.*, education_field.*,
+                            education_level.*, working_as.*, working_with.*, user_family.*,
+                            user_file.*, userfolder.*, user_background.*, user_hobbies.*,
+                            user_lifestyle.* , mother_tongue.* , religion.*, community.*, 
+                            countries.name as country , states.name as state, users.id as muser_id,
+                              cities.name as city , users.id as main_id');
+        $this->db->from('users');
+        $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
+        $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
+        $this->db->join('education_field','education_field.id = user_edu.edu_field_id', 'left');
+        $this->db->join('education_level','education_level.id = user_edu.edu_level_id','left');
+        $this->db->join('working_as','working_as.id = user_edu.work_as_id', 'left');
+        $this->db->join('working_with','working_with.id =user_edu.work_with_id', 'left');
+        $this->db->join('user_family','user_family.user_id = users.id', 'left');
+       
+        $this->db->join('user_file','user_file.user_id = users.id', 'left');
+        $this->db->join('userfolder','userfolder.user_id = users.id', 'left');
+        $this->db->join('user_background','user_background.user_id = users.id', 'left');        
+        $this->db->join('user_hobbies', 'user_hobbies.user_id = users.id',  'left');
+        $this->db->join('user_lifestyle', 'user_lifestyle.user_id = users.id',  'left');
+        $this->db->join('mother_tongue', 'mother_tongue.id= user_profiles.mother_tongue_id',  'left');
+        $this->db->join('countries', 'countries.id = user_profiles.country_id',  'left');
+        $this->db->join('cities', 'cities.id = user_profiles.city_id',  'left');
+        $this->db->join('states', 'states.id = user_profiles.state_id',  'left');
+        $this->db->join('religion', 'religion.id = user_background.religion_id',  'left');
+        $this->db->join('community', 'community.id = user_background.community_id',  'left');
+        
+        $this->db->where($field_val);
+        if(isset($keywordVal)){
+            $this->db->like('users.username', $keywordVal, 'both');
+            $this->db->or_like('users.id', $keywordVal, 'both');
+            $this->db->or_like('users.firstname', $keywordVal, 'both');
+            $this->db->or_like('users.lastname', $keywordVal, 'both');
+        }
+        //$this->db->where('file_name IS NOT NULL');
+        $this->db->order_by("users.id", "desc"); 
+        $this->db->limit($per_page, $page_segment);       
+        $query = $this->db->get();
+        return $query;
+    }
+
+    function total_muser_data_search($field_val,$key)
+    {
+        $this->db->select('users.*, user_profiles.*, education_field.*,
+                            education_level.*, working_as.*, working_with.*, user_family.*,
+                            user_file.*, userfolder.*, user_background.*, user_hobbies.*,
+                            user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
+                            countries.name as country , states.name as state, users.id as muser_id,
+                            cities.name as city, height.id as hid, users.id as main_id,user_package_opt.package_status as packagestatus,
+                            update_user_file.path as updateprofilepic,nashathram.name as star,user_edu.annual_income as annual_income');
+        $this->db->from('users');
+        $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
+        $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
+        $this->db->join('education_field','education_field.id = user_edu.edu_field_id', 'left');
+        $this->db->join('education_level','education_level.id = user_edu.edu_level_id','left');
+        $this->db->join('working_as','working_as.id = user_edu.work_as_id', 'left');
+        $this->db->join('working_with','working_with.id =user_edu.work_with_id', 'left');
+        $this->db->join('user_family','user_family.user_id = users.id', 'left');
+       
+        $this->db->join('user_file','user_file.user_id = users.id', 'left');
+        $this->db->join('userfolder','userfolder.user_id = users.id', 'left');
+        $this->db->join('user_background','user_background.user_id = users.id', 'left'); 
+        $this->db->join('nashathram','nashathram.id = user_background.nakshathram', 'left');        
+        $this->db->join('user_hobbies', 'user_hobbies.user_id = users.id',  'left');
+        $this->db->join('user_lifestyle', 'user_lifestyle.user_id = users.id',  'left');
+        $this->db->join('mother_tongue', 'mother_tongue.id= user_profiles.mother_tongue_id',  'left');
+        $this->db->join('countries', 'countries.id = user_profiles.country_id',  'left');
+        $this->db->join('cities', 'cities.id = user_profiles.city_id',  'left');
+        $this->db->join('states', 'states.id = user_profiles.state_id',  'left');
+        $this->db->join('religion', 'religion.id = user_background.religion_id',  'left');
+        $this->db->join('community', 'community.id = user_background.community_id',  'left');
+
+        $this->db->join('height', 'height.id = user_profiles.height',  'left');
+        $this->db->join('user_package_opt','user_package_opt.userid = users.id', 'left');
+        $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
+        $this->db->where($field_val);
+        if(isset($key)){
+            $this->db->like('users.username', $key, 'both');
+            $this->db->or_like('users.id', $key, 'both');
+            $this->db->or_like('users.firstname', $key, 'both');
+            $this->db->or_like('users.lastname', $key, 'both');
+        }
+         
+        $query = $this->db->get();
+
+        return $query;
+    }
     function total_muser_data($field_val)
     {
         $this->db->select('users.*, user_profiles.*, education_field.*,
@@ -240,6 +329,7 @@ class Matri extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
     /*method for Desired Partner */
     function desired_partner_data( $field_val, $per_page, $page_segment)
     {

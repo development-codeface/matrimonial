@@ -113,6 +113,16 @@
                                 </div>
                                 <!--end col-md-8-->
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="title" class="col-form-label required">Weights</label>
+                                        <?php $this->muse->gweight('weight', '45' ,"id='weight' required");?>
+                                    </div>
+                                <!--end form-group-->
+                                </div>
+                                <!--end col-md-8-->
+                            </div>
 
                             <div class="row">
                                 <div class="col-md-6">
@@ -158,8 +168,8 @@
                                 </div>
                                 <!--end col-md-8-->
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="row" >
+                                <div class="col-md-6" style="display:none">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">HIV Positive</label>
                                         <div>

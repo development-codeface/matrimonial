@@ -87,7 +87,7 @@
                                         <label for="title" class="col-form-label required">Diet</label>
                                         <div>
                                             <input type="radio" name="diet" value="veg" title="diet"> Veg
-                                            <input type="radio" name="diet" value="non veg" title="diet"> Non-Veg
+                                            <input type="radio" name="diet" value="non-veg" title="diet"> Non-Veg
                                             <input type="radio" name="diet" value="jain" title="diet" > Jain
                                             <input type="radio" name="diet" value="vegan" title="diet" > Vegan
                                         </div>

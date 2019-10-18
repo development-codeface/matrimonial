@@ -18,7 +18,7 @@
                     <td class="col-md-2"> Diet </td>
                     <td class="col-md-4">
                         <input type="radio" name="diet" value="veg" title="Diet"  > Veg
-                        <input type="radio" name="diet" value="non veg" title="Diet" > Non-Veg
+                        <input type="radio" name="diet" value="non-veg" title="Diet" > Non-Veg
                         <input type="radio" name="diet" value="jain" title="Diet" > Jain
                         <input type="radio" name="diet" value="vegan" title="Diet" > Vegan
                     </td>

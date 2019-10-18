@@ -96,7 +96,8 @@ class User_profile extends CI_Controller
             $this->form_validation->set_rules('city','City','xss_clean|strip_tags');
             $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean|strip_tags');
             $this->form_validation->set_rules('marital_status','Marital Status','xss_clean|strip_tags');
-            $this->form_validation->set_rules('heightto','Height','xss_clean|strip_tags');
+			$this->form_validation->set_rules('heightto','Height','xss_clean|strip_tags');
+			$this->form_validation->set_rules('weight','Height','xss_clean|strip_tags');
             $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean|strip_tags');
             $this->form_validation->set_rules('body_type','Body Type','xss_clean|strip_tags');
             $this->form_validation->set_rules('disability','Disability','xss_clean|strip_tags');
@@ -116,7 +117,8 @@ class User_profile extends CI_Controller
                         'city_id'=>$this->input->post('city'),
                         'mother_tongue_id'=>$this->input->post('mtongue'),
                         'marital_status'=>$this->input->post('marital_status'),
-                        'height'=>$this->input->post('heightto'),
+						'height'=>$this->input->post('heightto'),
+						'weight' => $this->input->post('weight'),
                         'skin_tone'=>$this->input->post('skin_tone'),
                         'body_type'=>$this->input->post('body_type'),
                         'disability'=>$this->input->post('disability'),

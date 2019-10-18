@@ -5,6 +5,7 @@ $lang['auth_incorrect_password'] = 'Contraseña incorrecta';
 $lang['auth_incorrect_login'] = 'Login incorrecto';
 $lang['auth_incorrect_email_or_username'] = 'El usuario o email no existen';
 $lang['auth_email_in_use'] = 'Email en uso. Por favor, seleccione otro.';
+$lang['auth_mobile_in_use'] = 'Email en uso. Por favor, seleccione otro.';
 $lang['auth_username_in_use'] = 'Nombre de usuario en uso. Por favor, seleccione otro.';
 $lang['auth_current_email'] = 'Este es su email actual';
 $lang['auth_incorrect_captcha'] = 'Su código de confirmación no concuerda con el de la imagen.';

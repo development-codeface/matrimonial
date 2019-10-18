@@ -5,6 +5,7 @@ $lang['auth_incorrect_password'] = 'Parolă greșită';
 $lang['auth_incorrect_login'] = 'Nume utilizator greșit';
 $lang['auth_incorrect_email_or_username'] = 'Adresa e-mail sau utilizatorul nu există';
 $lang['auth_email_in_use'] = 'Adresa e-mail este deja utilizată de către un alt utilizator. Folosește o altă adresă e-mail.';
+$lang['auth_mobile_in_use'] = 'Adresa e-mail este deja utilizată de către un alt utilizator. Folosește o altă adresă e-mail.';
 $lang['auth_username_in_use'] = 'Numele utilizator deja există. Va trebui să alegi un alt nume utilizator.';
 $lang['auth_current_email'] = 'Aceasta este adresa e-mail atașată contului tău';
 $lang['auth_incorrect_captcha'] = 'Codul de confirmare nu este identic cu cel din imagine.';

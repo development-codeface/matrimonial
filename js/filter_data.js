@@ -15,6 +15,9 @@ function filter_data(data)
         var hiv_positive = $('input[name=hiv_positive]:checked').val();
         
         var heightto = $('select[name=heightto]').val();
+
+        var keysearch = $('#keysearch').val();
+        
         
         var country = $('select[name=country]').val();
         
@@ -56,9 +59,11 @@ function filter_data(data)
                edu_field:edu_field,
                work_with:work_with,
                work_as:work_as,
+               keysearch:keysearch,
                religion:religion
                },function(data){
                 $('#matches_change').html(data);
+                document.getElementById('matches_change').focus();
                 
                 });
 }

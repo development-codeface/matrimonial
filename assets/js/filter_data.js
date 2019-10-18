@@ -13,8 +13,12 @@ function filter_data(data)
         var disability = $('input[name=disability]:checked').val();
         
         var hiv_positive = $('input[name=hiv_positive]:checked').val();
+
+        var smoke = $('input[name=smoke]:checked').val();
         
         var heightto = $('select[name=heightto]').val();
+
+        var keysearch = $('#keysearch').val();
         
         var country = $('select[name=country]').val();
         
@@ -47,6 +51,7 @@ function filter_data(data)
                disability:disability,
                hiv_positive:hiv_positive,
                heightto:heightto,
+               keysearch:keysearch,
                country:country,
                state:state,
                city:city,
@@ -59,6 +64,7 @@ function filter_data(data)
                religion:religion
                },function(data){
                 $('#matches_change').html(data);
+                document.getElementById('matches_change').scrollIntoView();
                 
                 });
 }
@@ -218,6 +224,7 @@ $(document).ready(function(){
                  select.selectize({
                          onDropdownOpen: dropdownOpen,
                          onDropdownClose: dropdownClose,
+
                          allowEmptyOption: true,        
                  });    
 
@@ -233,6 +240,7 @@ $(document).ready(function(){
                         select.selectize({
                                 onDropdownOpen: dropdownOpen,
                                 onDropdownClose: dropdownClose,
+
                                 allowEmptyOption: true,        
                         });
                    });
@@ -249,6 +257,7 @@ $(document).ready(function(){
                         select.selectize({
                                 onDropdownOpen: dropdownOpen,
                                 onDropdownClose: dropdownClose,
+
                                 allowEmptyOption: true,        
                         });
                 });

@@ -119,6 +119,23 @@ class Users extends CI_Model
 	}
 
 	/**
+	 * Check if mobile available for registering
+	 *
+	 * @param	string
+	 * @return	bool
+	 */
+	function is_mobile_available($mobile)
+	{
+		$this->db->select('1', FALSE);
+		$this->db->where('LOWER(mobile_no)=', strtolower($mobile));
+		$this->db->or_where('LOWER(mobile_no)=', strtolower($mobile));
+
+		$query = $this->db->get($this->table_name);
+		return $query->num_rows() == 0;
+	}
+
+
+	/**
 	 * Create new user record
 	 *
 	 * @param	array

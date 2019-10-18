@@ -32,7 +32,27 @@ class Muse
 				  });
 			</script>";
 	}
-        function mother_tongue($event= NULL)
+
+	function gweight($hname=NULL, $class=NULL, $event=NULL)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$data['gheight'] = $ci->matri->global_select('weight');
+		echo "<select name='".$hname."' class='".$class."' ".$event.">";
+		echo "<option value=''>Select </option>";
+		foreach($data['gheight']->result() as $row)
+		{
+			echo "<option value='".$row->height_value."' ". set_select($hname, $row->height_value) .">".$row->height_value."</option>";
+		}
+			echo "</select>";
+			echo "<script type='text/javascript'>
+			$(document).ready(function(){
+			$('select[name=$hname]').val(11);
+				  });
+			</script>";
+	}
+
+    function mother_tongue($event= NULL)
         {
             $ci =  & get_instance();
             $ci->load->model('matri');
@@ -364,6 +384,14 @@ class Muse
 		return $data;
 	}
 
+	function mymatch_search($field_val ,$keywordVal, $per_page, $page_segment)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$data = $ci->matri->muser_data_search($field_val,$keywordVal, $per_page, $page_segment);
+		return $data;
+	}
+	
 	//functio for get shotlisted//
 	function myshortlist($field_val , $per_page, $page_segment){
 		$ci =  & get_instance();

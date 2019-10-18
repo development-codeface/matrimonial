@@ -5,6 +5,7 @@ $lang['auth_incorrect_password'] = "Password non corretta";
 $lang['auth_incorrect_login'] = "Login non corretto";
 $lang['auth_incorrect_email_or_username'] = "Login o indirizzo e-mail non esistenti";
 $lang['auth_email_in_use'] = "Indirizzo e-mail gi&agrave; presente. Perfavore, seleziona un nuovo indirizzo.";
+$lang['auth_mobile_in_use'] = "Indirizzo e-mail gi&agrave; presente. Perfavore, seleziona un nuovo indirizzo.";
 $lang['auth_username_in_use'] = "Username gi&agrave; esistente. Perfavore seleziona un nuovo username.";
 $lang['auth_current_email'] = "Questa &egrave; la tua e-mail attuale";
 $lang['auth_incorrect_captcha'] = "Il codice inserito non &egrave; uguale a quello dell'immagine.";
