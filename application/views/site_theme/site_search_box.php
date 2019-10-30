@@ -22,7 +22,7 @@
                                     </div>
 
                                     <div class="form-group" id="community">
-                                        <select onchange="filter_data(this.value)" > <option value=""> Community </option></select>
+                                        <select onchange="filter_data(this.value)" name="community"> <option value=""> Community </option></select>
                                     </div>
 
                                     <!--end form-group-->

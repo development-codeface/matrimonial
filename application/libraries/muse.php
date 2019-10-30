@@ -116,7 +116,7 @@ class Muse
 		$ci->load->model('matri');
 		$data['nashathram'] = $ci->matri->global_select('nashathram');
 		 echo "<select name='nashathram' id='nashathram' ".$event.">";
-                            echo "<option value=''>  Religion </option>";
+                            echo "<option value=''>  Star </option>";
 		    if(isset($data['nashathram']))
                             {
                                 foreach($data['nashathram']->result() as $row)

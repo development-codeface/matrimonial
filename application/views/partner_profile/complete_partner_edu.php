@@ -45,11 +45,11 @@ $edu_where = 		 $this->tank_auth->get_user_id();
                                                         <h2>Parner Education</h2>
                                                         <div class="error">
                                                             <?php
-                                                            echo form_error('edu_level');
-                                                            echo form_error('edu_field');
-                                                            echo form_error('work_with');
-                                                            echo form_error('work_as');
-                                                            echo form_error('annual_income');
+                                                            echo '<p>'.form_error('edu_level').'</p>';
+                                                            echo '<p>'.form_error('edu_field').'</p>';
+                                                            echo '<p>'.form_error('work_with').'</p>';
+                                                            echo '<p>'.form_error('work_as').'</p>';
+                                                            echo '<p>'.form_error('annual_income').'</p>';
                                                             ?>
                                                         </div>
                                                         <div class="row">

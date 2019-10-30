@@ -232,16 +232,17 @@ class Matri extends CI_Model
         $this->db->join('community', 'community.id = user_background.community_id',  'left');
         
         $this->db->where($field_val);
-        if(isset($keywordVal)){
+        if(isset($keywordVal) && strlen($keywordVal)){
             $this->db->like('users.username', $keywordVal, 'both');
             $this->db->or_like('users.id', $keywordVal, 'both');
             $this->db->or_like('users.firstname', $keywordVal, 'both');
             $this->db->or_like('users.lastname', $keywordVal, 'both');
         }
         //$this->db->where('file_name IS NOT NULL');
+        
         $this->db->order_by("users.id", "desc"); 
-        $this->db->limit($per_page, $page_segment);       
-        $query = $this->db->get();
+        $this->db->limit($per_page, $page_segment);     
+        $query = $this->db->get();  
         return $query;
     }
 
@@ -252,7 +253,7 @@ class Matri extends CI_Model
                             user_file.*, userfolder.*, user_background.*, user_hobbies.*,
                             user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
                             countries.name as country , states.name as state, users.id as muser_id,
-                            cities.name as city, height.id as hid, users.id as main_id,user_package_opt.package_status as packagestatus,
+                            cities.name as city, height.id as hid, users.id as main_id,
                             update_user_file.path as updateprofilepic,nashathram.name as star,user_edu.annual_income as annual_income');
         $this->db->from('users');
         $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
@@ -277,18 +278,15 @@ class Matri extends CI_Model
         $this->db->join('community', 'community.id = user_background.community_id',  'left');
 
         $this->db->join('height', 'height.id = user_profiles.height',  'left');
-        $this->db->join('user_package_opt','user_package_opt.userid = users.id', 'left');
         $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
         $this->db->where($field_val);
-        if(isset($key)){
+        if(isset($key) && strlen($key) > 0){
             $this->db->like('users.username', $key, 'both');
             $this->db->or_like('users.id', $key, 'both');
             $this->db->or_like('users.firstname', $key, 'both');
             $this->db->or_like('users.lastname', $key, 'both');
         }
-         
         $query = $this->db->get();
-
         return $query;
     }
     function total_muser_data($field_val)

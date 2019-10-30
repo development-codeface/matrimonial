@@ -29,12 +29,12 @@
                             <h2>Hobbies</h2>
                             <div class="error">
                                 <?php
-                                    echo form_error('hobbies');
-                                    echo form_error('interests');
-                                    echo form_error('fav_music');
-                                    echo form_error('pre_movies');
-                                    echo form_error('cook_food');
-                                    echo form_error('own_words');
+                                    echo '<p>'.form_error('hobbies').'</p>';
+                                    echo '<p>'.form_error('interests').'</p>';
+                                    echo '<p>'.form_error('fav_music').'</p>';
+                                    echo '<p>'.form_error('pre_movies').'</p>';
+                                    echo '<p>'.form_error('cook_food').'</p>';
+                                    echo '<p>'.form_error('own_words').'</p>';
                                 ?>
                             </div>
                             <div class="message">

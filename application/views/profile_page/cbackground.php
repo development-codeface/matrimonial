@@ -36,11 +36,11 @@
                             <h2>Religion</h2>
                             <div class="error">
                                 <?php
-                                    echo form_error('religion');
-                                    echo form_error('community');
-                                    echo form_error('diet');
-                                    echo form_error('smoke');
-                                    echo form_error('drink');
+                                    echo '<p>'.form_error('religion').'</p>';
+                                    echo '<p>'.form_error('community').'</p>';
+                                    echo '<p>'.form_error('diet').'</p>';
+                                    echo '<p>'.form_error('smoke').'</p>';
+                                    echo '<p>'.form_error('drink').'</p>';
                                 ?>
                             </div> 
                             <div class="message">

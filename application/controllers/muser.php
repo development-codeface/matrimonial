@@ -593,12 +593,12 @@ class Muser extends CI_Controller
 		$where_data = array(
 					   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
 					   'activated' => 1,
-					   'user_file.profile_img'=>1
+					   
 			);
 		$insertData = array(
 			'user_id' 	=> 	$this->tank_auth->get_user_id(),
-			'gender'		=>	$this->muse->sex_match($this->tank_auth->get_user_id()),
-			'profile_img'	=>	1);
+			'gender'		=>	!$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : '',
+			);
 
 		$data = array(
 			      'marital_status'	=>	$this->input->post('martial_status'),
@@ -607,7 +607,9 @@ class Muser extends CI_Controller
 			      'country_id'	=>	$this->input->post('country'),
 			      'state_id'	=>	$this->input->post('state'),
 			      'city_id'		=>	$this->input->post('city'),
-			      'edu_id'		=>	$this->input->post('edu_level'),
+				  'edu_id'		=>	$this->input->post('edu_level'),
+				  'keyword'     =>  $this->input->post('keysearch'),
+				  'community_id'	=> $this->input->post('community'),
 			      'diet'		=>	$this->input->post('diet'),
 			      'disability'	=>	$this->input->post('disability'),
 			      'hiv_positive'	=>	$this->input->post('hiv_positive')
@@ -619,6 +621,8 @@ class Muser extends CI_Controller
 				if(isset($data_data) && strlen($data_data) > 0)
 				{
 					$insertData[$data_key] = $data_data;
+				}else{
+					$insertData[$data_key] = 0;
 				}				
 			}
 		}
@@ -637,7 +641,6 @@ class Muser extends CI_Controller
 		{
 			foreach($get_user_search->result() as $row)
 			{
-				$profile_img 		= 1;
 				$matrial_status 	= $row->marital_status;
 				$religion_id		= $row->religion_id;
 				$mother_tongue_id	= $row->mother_tongue_id;
@@ -652,13 +655,14 @@ class Muser extends CI_Controller
 		}
 		
 		$field_val = array(
-			'gender' 				=> $this->muse->sex_match($this->tank_auth->get_user_id()),
-			'user_profiles.marital_status'		=> $this->input->post('martial_status'),			
+			'gender' 				=> !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : '',
+			'user_profiles.marital_status'		=> $this->input->post('martial_status'),	
 			'user_background.religion_id'		=> $this->input->post('religion'),			
 			'user_profiles.mother_tongue_id'	=> $this->input->post('mtongue'),
 			'user_profiles.country_id'		=> $this->input->post('country'),
 			'user_profiles.state_id'		=> $this->input->post('state'),
-			'user_profiles.city_id'			=> $this->input->post('city'),			
+			'user_profiles.city_id'			=> $this->input->post('city'),
+			'user_background.community_id'	=> $this->input->post('community'),
 			//'users.profile_for'			=> $this->input->post('profile_for'),			
 			'education_level.id' 			=> $this->input->post('edu_level'),
 			//'education_field.id' 			=> $this->input->post('edu_field'),
@@ -667,8 +671,8 @@ class Muser extends CI_Controller
 			//'user_lifestyle.smoke' 		=> $this->input->post('smoke'),
 			'user_lifestyle.diet' 			=> $this->input->post('diet'),
 			//'user_lifestyle.drink' 		=> $this->input->post('drink'),
-			'user_profiles.disability'		=> $this->input->post('disability'),
-			'user_profiles.hiv_positive'		=> $this->input->post('hiv_positive'),
+			//'user_profiles.disability'		=> $this->input->post('disability'),
+			//'user_profiles.hiv_positive'		=> $this->input->post('hiv_positive'),
 			'activated' => 1
 		);
 		
@@ -676,7 +680,7 @@ class Muser extends CI_Controller
 		{
 			foreach ($field_val as $field_key => $field_data)
 			{
-				if(isset($field_data) )
+				if(isset($field_data) && strlen($field_data) > 0)
 				{
 					$where_data[$field_key] = $field_data;
 				}				
@@ -690,8 +694,8 @@ class Muser extends CI_Controller
 			$user_id = $this->tank_auth->get_user_id();
 			
 			$config['base_url'] = base_url().'muser/ajaxFilter_data';
-			
-			$data['totalcount'] = $this->matri->total_muser_data_search($where_data,$keySearch)->num_rows();
+			$config['total_rows'] = $this->matri->total_muser_data_search($where_data,$keySearch)->num_rows();
+			$data['totalcount'] = $config['total_rows'];
 			$config['per_page'] 	= 9; 
 			$config["uri_segment"] = 3;
 			$config["num_links"] = 3;
@@ -701,7 +705,7 @@ class Muser extends CI_Controller
 			
 			//pagination configuration
 			$config['first_link']  = 'First';
-			$config['div']         = 'postList'; //parent div tag id
+		    $config['div']         = 'matches_change';
 		
 			/*
 			$config['full_tag_open'] 	= "<nav> <ul class='pagination'>";
@@ -750,9 +754,11 @@ class Muser extends CI_Controller
 		$state_id		= '';
 		$city_id		= '';
 		$edu_id			= '';
+		$comminity      = '';
 		$diet			= '';
 		$disability		= '';
 		$hiv_positive		= '';
+		$keySearch      = '';
 		
 		$get_user_search = $this->matri->global_get('user_search', array('user_id'=>$this->tank_auth->get_user_id()));
 		
@@ -760,7 +766,7 @@ class Muser extends CI_Controller
 		{
 			foreach($get_user_search->result() as $row)
 			{
-				$profile_img 		= 1;
+
 				$matrial_status 	= $row->marital_status;
 				$religion_id		= $row->religion_id;
 				$mother_tongue_id	= $row->mother_tongue_id;
@@ -769,19 +775,22 @@ class Muser extends CI_Controller
 				$city_id		= $row->city_id;
 				$edu_id			= $row->edu_id;
 				$diet			= $row->diet;
+				$comminity      = $row->community_id;
 				$disability		= $row->disability;
 				$hiv_positive		= $row->hiv_positive;
+				$keySearch      = $row->keyword == 0 ? "" :  $row->keyword;
 			}
 		}
 		
 		$field_val = array(
-			'gender' 				=> $this->muse->sex_match($this->tank_auth->get_user_id()),
+			'gender' 				=> !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : '',
 			'user_profiles.marital_status'		=> $matrial_status ,			
 			'user_background.religion_id'		=> $religion_id,			
 			'user_profiles.mother_tongue_id'	=> $mother_tongue_id,
 			'user_profiles.country_id'		=> $country_id ,
 			'user_profiles.state_id'		=> $state_id,
-			'user_profiles.city_id'			=> $city_id,			
+			'user_profiles.city_id'			=> $city_id,
+            'user_background.community_id'	=> $comminity,
 			//'users.profile_for'			=> $this->input->post('profile_for'),			
 			'education_level.id' 			=> $edu_id,
 			//'education_field.id' 			=> $this->input->post('edu_field'),
@@ -790,22 +799,25 @@ class Muser extends CI_Controller
 			//'user_lifestyle.smoke' 		=> $this->input->post('smoke'),
 			'user_lifestyle.diet' 			=> $diet,
 			//'user_lifestyle.drink' 		=> $this->input->post('drink'),
-			'user_profiles.disability'		=> $disability,
-			'user_profiles.hiv_positive'		=> $hiv_positive,
+			//'user_profiles.disability'		=> $disability,
+			//'user_profiles.hiv_positive'		=> $hiv_positive,
 			'activated' => 1
 		);
+		
 		
 		if (is_array($field_val) && count($field_val) >= 1)
 		{
 			foreach ($field_val as $field_key => $field_data)
 			{
-				if(isset($field_data))
+				if(isset($field_data) && $field_data != '0'  &&  strlen($field_data) > 0)
 				{
 					 $where_data[$field_key] = $field_data;
 				}
 				
 			}
 		}
+
+		
 		
 		if($where_data !=NULL)
 		{
@@ -815,18 +827,18 @@ class Muser extends CI_Controller
 			
 			$config['base_url'] = base_url().'muser/ajaxFilter_data';
 			
-			$config['total_rows'] = $this->matri->total_muser_data($where_data)->num_rows();
+			$config['total_rows'] = $this->matri->total_muser_data_search($where_data,$keySearch)->num_rows();
 			$data['totalcount']   = $config['total_rows'];
 			$config['per_page'] 	= 9; 
 			$config["uri_segment"] = 3;
 			$config["num_links"] = 3;
 			$page_segment = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0; //Today Change
 			
-			$data['matches'] = $this->muse->mymatch($where_data, $config['per_page'], $offset/*$page_segment*/);
+			$data['matches'] = $this->muse->mymatch_search($where_data, $keySearch,$config['per_page'], $offset/*$page_segment*/);
 			
 			//pagination configuration
 			$config['first_link']  = 'First';
-			$config['div']         = 'postList'; //parent div tag id
+			$config['div']         = 'matches_change'; //parent div tag id
 			
 			$this->ajax_pagination->initialize($config);
 			//$this->pagination->initialize($config); 

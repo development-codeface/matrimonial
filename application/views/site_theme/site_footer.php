@@ -143,7 +143,7 @@ Pkerala Marriage <br> T B junction,<br> Attingal, Kerala, 695101
 	<script src="<?php echo base_url(); ?>assets/js/masonry.pkgd.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/icheck.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets/js/jquery.validate.min.js"></script>
-    <script src="<?php echo base_url(); ?>assets/js/filter_data.js"></script>
+    <script src="<?php echo base_url(); ?>assets/js/filter_data.js?version=2"></script>
     <script src="<?php echo base_url();?>assets/js/croppie.js"></script>
 	<script src="<?php echo base_url();?>assets/js/icheck.min.js"></script>
 	<script src="<?php echo base_url();?>assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>

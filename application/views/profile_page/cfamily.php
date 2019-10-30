@@ -99,13 +99,13 @@ $sister = array(
                                             <h2>My family</h2>
                                                 <div class="error">
                                                 <?php
-                                                    echo form_error('father_name');
-                                                    echo form_error('mother_name');
-                                                    echo form_error('father_status');
-                                                    echo form_error('mother_status');
-                                                    echo form_error('family_status');
-                                                    echo form_error('brother');
-                                                    echo form_error('sister');
+                                                    echo '<p>'.form_error('father_name').'</p>';
+                                                    echo '<p>'.form_error('mother_name').'</p>';
+                                                    echo '<p>'.form_error('father_status').'</p>';
+                                                    echo '<p>'.form_error('mother_status').'</p>';
+                                                    echo '<p>'.form_error('family_status').'</p>';
+                                                    echo '<p>'.form_error('brother').'</p>';
+                                                    echo '<p>'.form_error('sister').'</p>';
                                                 ?>
                                                 </div>
 

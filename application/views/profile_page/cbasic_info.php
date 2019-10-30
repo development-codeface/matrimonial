@@ -29,15 +29,15 @@
                             <h2>Personal Information</h2>
                             <div class="error">
                                 <?php
-                                    echo form_error('country');
-                                    echo form_error('state');
-                                    echo form_error('city');
-                                    echo form_error('marital_status');
-                                    echo form_error('heightto');
-                                    echo form_error('skin_tone');
-                                    echo form_error('body_type');
-                                    echo form_error('disability');
-                                    echo form_error('hiv_positive');
+                                    echo '<p>'.form_error('country').'</p>';
+                                    echo '<p>'.form_error('state').'</p>';
+                                    echo '<p>'.form_error('city').'</p>';
+                                    echo '<p>'.form_error('marital_status').'</p>';
+                                    echo '<p>'.form_error('heightto').'</p>';
+                                    echo '<p>'.form_error('skin_tone').'</p>';
+                                    echo '<p>'.form_error('body_type').'</p>';
+                                    echo '<p>'.form_error('disability').'</p>';
+                                    echo '<p>'.form_error('hiv_positive').'</p>';
                                 ?>
                             </div>
                             <div class="message">
@@ -50,7 +50,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">Country</label>
-                                        <?php echo $this->address->country();?>
+                                        <?php echo $this->address->country(true);?>
                                     </div>
                                     <!--end form-group-->
                                 </div>

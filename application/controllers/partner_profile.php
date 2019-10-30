@@ -109,17 +109,16 @@ class Partner_Profile extends CI_Controller
 	{
 			
             $this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
-            $this->form_validation->set_rules('country','Country','xss_clean');
-            $this->form_validation->set_rules('state','State','xss_clean');
-            $this->form_validation->set_rules('city','City','xss_clean');
-            $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean');
-            $this->form_validation->set_rules('marital_status','Marital Status','xss_clean');
-            $this->form_validation->set_rules('heightto','Height','xss_clean');
-	    	$this->form_validation->set_rules('height','Height','xss_clean');
-            $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean');
-            $this->form_validation->set_rules('body_type','Body Type','xss_clean');
-            $this->form_validation->set_rules('disability','Disability','xss_clean');
-            $this->form_validation->set_rules('hiv_positive','HIV Positive','xss_clean');
+            $this->form_validation->set_rules('country','Country','required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('state','State','required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('city','City','required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('mtongue','Mother Tongue','required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('marital_status','Marital Status','required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('heightto','Height','required|xss_clean|strip_tags');
+	    	$this->form_validation->set_rules('height','Height','required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('skin_tone','Skin Tone','required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('body_type','Body Type','required|xss_clean|strip_tags');
+            $this->form_validation->set_rules('disability','Disability','required|xss_clean|strip_tags');
             if($this->form_validation->run() == false)
             {
                 $this->partner_basic_info($this->tank_auth->get_user_id());
@@ -166,7 +165,7 @@ class Partner_Profile extends CI_Controller
                         'pskin_tone'=>$this->input->post('skin_tone'),
                         'pbody_type'=>$this->input->post('body_type'),
                         'pdisability'=>$this->input->post('disability'),
-                        'phiv_positive'=>$this->input->post('hiv_positive'),
+                        'phiv_positive'=>0,
 			'pprofile_complete'=>1
                 );
 		
@@ -180,11 +179,11 @@ class Partner_Profile extends CI_Controller
 	function pinsert_education()
 	{
 		$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
-		$this->form_validation->set_rules('edu_level','Education Level','xss_clean');
-		$this->form_validation->set_rules('edu_field','Education field','xss_clean');
-		$this->form_validation->set_rules('work_with','Working With','xss_clean');
-		$this->form_validation->set_rules('work_as','Working As','xss_clean');
-		$this->form_validation->set_rules('annual_income','Annual Income','xss_clean');
+		$this->form_validation->set_rules('edu_level','Education Level','required|xss_clean');
+		$this->form_validation->set_rules('edu_field','Education field','required|xss_clean');
+		$this->form_validation->set_rules('work_with','Working With','required|xss_clean');
+		$this->form_validation->set_rules('work_as','Working As','required|xss_clean');
+		$this->form_validation->set_rules('annual_income','Annual Income','required|xss_clean');
             
             if($this->form_validation->run() == false)
             {
@@ -211,8 +210,11 @@ class Partner_Profile extends CI_Controller
 	{
 		$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 		$this->form_validation->set_rules('religion','Religion','required|xss_clean');
-		$this->form_validation->set_rules('community','Community','xss_clean');
-		$this->form_validation->set_rules('sub_community','Community','xss_clean');
+		$this->form_validation->set_rules('community','Community','required|xss_clean');
+		$this->form_validation->set_rules('sub_community','Community','required|xss_clean');
+		$this->form_validation->set_rules('diet','Diet','required|xss_clean');
+		$this->form_validation->set_rules('smoke','Smoke','required|xss_clean');
+		$this->form_validation->set_rules('drink','Drink','required|xss_clean');
             if($this->form_validation->run() == false)
             {
                 
@@ -365,17 +367,17 @@ class Partner_Profile extends CI_Controller
 	public function update_pbasic_info()
 	{
 		$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
-            $this->form_validation->set_rules('country','Country','xss_clean');
-            $this->form_validation->set_rules('state','State','xss_clean');
-            $this->form_validation->set_rules('city','City','xss_clean');
-            $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean');
-            $this->form_validation->set_rules('marital_status','Marital Status','xss_clean');
-            $this->form_validation->set_rules('heightto','Height','xss_clean');
-	    $this->form_validation->set_rules('height','Height','xss_clean');
-            $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean');
-            $this->form_validation->set_rules('body_type','Body Type','xss_clean');
-            $this->form_validation->set_rules('disability','Disability','xss_clean');
-            $this->form_validation->set_rules('hiv_positive','HIV Positive','xss_clean');
+            $this->form_validation->set_rules('country','Country','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('state','State','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('city','City','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('marital_status','Marital Status','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('heightto','Height','xss_clean|trim|required|strip_tags');
+	    $this->form_validation->set_rules('height','Height','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('body_type','Body Type','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('disability','Disability','xss_clean|trim|required|strip_tags');
+            
             if($this->form_validation->run() == false)
             {
                 $this->partner_basic_info($this->tank_auth->get_user_id());
@@ -422,7 +424,7 @@ class Partner_Profile extends CI_Controller
                         'pskin_tone'=>$this->input->post('skin_tone'),
                         'pbody_type'=>$this->input->post('body_type'),
                         'pdisability'=>$this->input->post('disability'),
-                        'phiv_positive'=>$this->input->post('hiv_positive'),
+                        'phiv_positive'=>0,
 			'pprofile_complete'=>1
                 );
 		
@@ -435,11 +437,11 @@ class Partner_Profile extends CI_Controller
 	{
 		$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 		$this->form_validation->set_rules('religion','Religion','required|xss_clean');
-		$this->form_validation->set_rules('community','Community','xss_clean');
-		$this->form_validation->set_rules('sub_community','Community','xss_clean');
-		$this->form_validation->set_rules('diet','Diet','xss_clean|trim');
-		$this->form_validation->set_rules('smoke','Smoke','xss_clean|trim');
-		$this->form_validation->set_rules('drink','Drink','xss_clean|trim');
+		$this->form_validation->set_rules('community','Community','required|xss_clean');
+		$this->form_validation->set_rules('sub_community','Community','required|xss_clean');
+		$this->form_validation->set_rules('diet','Diet','required|xss_clean');
+		$this->form_validation->set_rules('smoke','Smoke','required|xss_clean');
+		$this->form_validation->set_rules('drink','Drink','required|xss_clean');
             if($this->form_validation->run() == false)
             {
                 
@@ -499,11 +501,11 @@ class Partner_Profile extends CI_Controller
 	function update_pedu()
 	{
 		$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
-		$this->form_validation->set_rules('edu_level','Education Level','xss_clean');
-		$this->form_validation->set_rules('edu_field','Education field','xss_clean');
-		$this->form_validation->set_rules('work_with','Working With','xss_clean');
-		$this->form_validation->set_rules('work_as','Working As','xss_clean');
-		$this->form_validation->set_rules('annual_income','Annual Income','xss_clean');
+		$this->form_validation->set_rules('edu_level','Education Level','required|xss_clean');
+		$this->form_validation->set_rules('edu_field','Education field','required|xss_clean');
+		$this->form_validation->set_rules('work_with','Working With','required|xss_clean');
+		$this->form_validation->set_rules('work_as','Working As','required|xss_clean');
+		$this->form_validation->set_rules('annual_income','Annual Income','required|xss_clean');
             
             if($this->form_validation->run() == false)
             {

@@ -161,15 +161,15 @@ class Update_Profile extends CI_Controller
 
 			$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 	    
-			$this->form_validation->set_rules('edu_level','Education Level','xss_clean');
+			$this->form_validation->set_rules('edu_level','Education Level','required|xss_clean');
 	    
-			$this->form_validation->set_rules('edu_field','Education field','xss_clean');
+			$this->form_validation->set_rules('edu_field','Education field','required|xss_clean');
 	    
-			$this->form_validation->set_rules('work_with','Working With','xss_clean');
+			$this->form_validation->set_rules('work_with','Working With','required|xss_clean');
 	    
-			$this->form_validation->set_rules('work_as','Working As','xss_clean');
+			$this->form_validation->set_rules('work_as','Working As','required|xss_clean');
 	    
-			$this->form_validation->set_rules('annual_income','Annual Income','xss_clean');
+			$this->form_validation->set_rules('annual_income','Annual Income','required|xss_clean');
 	    
 			
 	    
@@ -417,17 +417,19 @@ class Update_Profile extends CI_Controller
 
 		$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 
-		$this->form_validation->set_rules('religion','Religion','trim|xss_clean');
+		$this->form_validation->set_rules('religion','Religion','trim|required|xss_clean');
 
-		$this->form_validation->set_rules('community','Community','trim|xss_clean');
+		$this->form_validation->set_rules('community','Community','trim|required|xss_clean');
 
-		$this->form_validation->set_rules('sub_community','Sub Community','trim|xss_clean');
+		$this->form_validation->set_rules('nashathram','Star','trim|required|xss_clean'); 
+
+		$this->form_validation->set_rules('sub_community','Sub Community','trim|required|xss_clean');
 		
-		$this->form_validation->set_rules('diet','Diet','xss_clean');
+		$this->form_validation->set_rules('diet','Diet','required|xss_clean');
 
-		$this->form_validation->set_rules('smoke','Smoke','xss_clean');
+		$this->form_validation->set_rules('smoke','Smoke','required|xss_clean');
 
-		$this->form_validation->set_rules('drink','drink','xss_clean');
+		$this->form_validation->set_rules('drink','drink','required|xss_clean');
 
 		if($this->form_validation->run() == false)
 	
@@ -555,19 +557,19 @@ class Update_Profile extends CI_Controller
 		{
 			$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 	    
-			$this->form_validation->set_rules('father_name','Fathers Name','trim|xss_clean|strip_tags');
+			$this->form_validation->set_rules('father_name','Fathers Name','required|trim|xss_clean|strip_tags');
 	    
-			$this->form_validation->set_rules('mother_name','Mother Name','trim|xss_clean|strip_tags');
+			$this->form_validation->set_rules('mother_name','Mother Name','required|trim|xss_clean|strip_tags');
 	    
-			$this->form_validation->set_rules('father_status','Father Status','trim|xss_clean|strip_tags');
+			$this->form_validation->set_rules('father_status','Father Status','required|trim|xss_clean|strip_tags');
 	    
-			$this->form_validation->set_rules('mother_status','Mother Status','trim|xss_clean|strip_tags');
+			$this->form_validation->set_rules('mother_status','Mother Status','required|trim|xss_clean|strip_tags');
 	    
-			$this->form_validation->set_rules('family_status','Family Status','trim|xss_clean|strip_tags');
+			$this->form_validation->set_rules('family_status','Family Status','required|trim|xss_clean|strip_tags');
 	    
-			$this->form_validation->set_rules('brother','Brother(S)','integer|trim|xss_clean|strip_tags');
+			$this->form_validation->set_rules('brother','Brother(S)','required|integer|trim|xss_clean|strip_tags');
 	    
-			$this->form_validation->set_rules('sister','Sister(S)','integer|trim|xss_clean|strip_tags');
+			$this->form_validation->set_rules('sister','Sister(S)','required|integer|trim|xss_clean|strip_tags');
 	    
 			if($this->form_validation->run() == false)
 	    
@@ -631,19 +633,19 @@ class Update_Profile extends CI_Controller
 		{
 			$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 	    
-			$this->form_validation->set_rules('hobby','Hobbies','xss_clean|trim|strip_tags'); 
+			$this->form_validation->set_rules('hobby','Hobbies','required|xss_clean|trim|strip_tags'); 
 	    
-			$this->form_validation->set_rules('interest','Interests','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('interest','Interests','required|xss_clean|trim|strip_tags');
 	    
-			$this->form_validation->set_rules('fav_music','Hobbies','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('fav_music','Hobbies','required|xss_clean|trim|strip_tags');
 	    
 		     // $this->form_validation->set_rules('fav_books','Hobbies','');
 	    
-			$this->form_validation->set_rules('pre_movies','Hobbies','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('pre_movies','Hobbies','required|xss_clean|trim|strip_tags');
 	    
-			$this->form_validation->set_rules('cook_food','Food I Cook','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('cook_food','Food I Cook','required|xss_clean|trim|strip_tags');
 	    
-			$this->form_validation->set_rules('own_words','Hobbies','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('own_words','Hobbies','required|xss_clean|trim|strip_tags');
 	    
 			if($this->form_validation->run() == false)
 	    
@@ -715,33 +717,33 @@ class Update_Profile extends CI_Controller
 
 	    $this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 
-            $this->form_validation->set_rules('country','Country','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('country','Country','xss_clean|trim|required|strip_tags');
 
-            $this->form_validation->set_rules('state','State','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('state','State','xss_clean|trim|required|strip_tags');
 
-            $this->form_validation->set_rules('city','City','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('city','City','xss_clean|trim|required|strip_tags');
 
-            $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean|required|trim|strip_tags');
 
-            $this->form_validation->set_rules('marital_status','Marital Status','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('marital_status','Marital Status','xss_clean|required|trim|strip_tags');
 
-			$this->form_validation->set_rules('heightto','Height','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('heightto','Height','xss_clean|trim|required|strip_tags');
 			
-			$this->form_validation->set_rules('weight','Height','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('weight','Height','xss_clean|trim|required|strip_tags');
 
-            $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean|trim|required|strip_tags');
 
-            $this->form_validation->set_rules('body_type','Body Type','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('body_type','Body Type','xss_clean|trim|required|strip_tags');
 
-            $this->form_validation->set_rules('disability','Disability','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('disability','Disability','xss_clean|trim|required|strip_tags');
 
-            $this->form_validation->set_rules('hiv_positive','HIV Positive','xss_clean|trim|strip_tags');
+            $this->form_validation->set_rules('hiv_positive','HIV Positive','xss_clean|trim|required|strip_tags');
 
             if($this->form_validation->run() == false)
 
             {
 
-		$this->index();
+				$this->index();
 
             }
 
@@ -804,13 +806,13 @@ class Update_Profile extends CI_Controller
 
 		$this->form_validation->set_rules('edu_level','Education Level','required|xss_clean|trim|strip_tags');
 
-		$this->form_validation->set_rules('edu_field','Education field','xss_clean|trim|strip_tags');
+		$this->form_validation->set_rules('edu_field','Education field','required|xss_clean|trim|strip_tags');
 
-		$this->form_validation->set_rules('work_with','Working With','xss_clean|trim|strip_tags');
+		$this->form_validation->set_rules('work_with','Working With','required|xss_clean|trim|strip_tags');
 
-		$this->form_validation->set_rules('work_as','Working As','xss_clean|trim|strip_tags');
+		$this->form_validation->set_rules('work_as','Working As','required|xss_clean|trim|strip_tags');
 
-		$this->form_validation->set_rules('annual_income','Annual Income','xss_clean|trim|strip_tags');
+		$this->form_validation->set_rules('annual_income','Annual Income','required|xss_clean|trim|strip_tags');
 
             
 
@@ -859,17 +861,19 @@ class Update_Profile extends CI_Controller
 
 		$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 
-		$this->form_validation->set_rules('religion','Religion','trim|strip_tags');
+		$this->form_validation->set_rules('religion','Religion','trim|required|strip_tags');
 
-		$this->form_validation->set_rules('community','Community','trim|strip_tags');
+		$this->form_validation->set_rules('community','Community','trim|required|strip_tags');
 
-		$this->form_validation->set_rules('sub_community','Sub Community','strtolower|trim|strip_tags'); 
+		$this->form_validation->set_rules('nashathram','Star','trim|required|xss_clean'); 
+		
+		$this->form_validation->set_rules('sub_community','Sub Community','strtolower|required|trim|strip_tags'); 
 
-		$this->form_validation->set_rules('diet','Diet','trim|strip_tags');
+		$this->form_validation->set_rules('diet','Diet','trim|required|strip_tags');
 
-		$this->form_validation->set_rules('smoke','Smoke','trim|strip_tags');
+		$this->form_validation->set_rules('smoke','Smoke','trim|required|strip_tags');
 
-		$this->form_validation->set_rules('drink','drink','trim|strip_tags');
+		$this->form_validation->set_rules('drink','drink','trim|required|strip_tags');
 
             if($this->form_validation->run() == false)
 
@@ -984,11 +988,11 @@ class Update_Profile extends CI_Controller
 
             $this->form_validation->set_rules('mother_status','Mother Status','required|trim|strip_tags');
 
-            $this->form_validation->set_rules('family_status','Family Status','trim|strip_tags');
+            $this->form_validation->set_rules('family_status','Family Status','required|trim|strip_tags');
 
-            $this->form_validation->set_rules('brother','Brother(S)','trim|strip_tags');
+            $this->form_validation->set_rules('brother','Brother(S)','required|trim|strip_tags');
 
-            $this->form_validation->set_rules('sister','Sister(S)','trim|strip_tags');
+            $this->form_validation->set_rules('sister','Sister(S)','required|trim|strip_tags');
 
             if($this->form_validation->run() == false)
 
@@ -1044,13 +1048,13 @@ class Update_Profile extends CI_Controller
 
 
 			$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
-			$this->form_validation->set_rules('hobby','Hobbies','xss_clean|trim|strip_tags'); 
-			$this->form_validation->set_rules('interest','Interests','xss_clean|trim|strip_tags');
-			$this->form_validation->set_rules('fav_music','Hobbies','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('hobby','Hobbies','required|xss_clean|trim|strip_tags'); 
+			$this->form_validation->set_rules('interest','Interests','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('fav_music','Hobbies','required|xss_clean|trim|strip_tags');
 		     // $this->form_validation->set_rules('fav_books','Hobbies','');
-			$this->form_validation->set_rules('pre_movies','Hobbies','xss_clean|trim|strip_tags');
-			$this->form_validation->set_rules('cook_food','Food I Cook','xss_clean|trim|strip_tags');
-			$this->form_validation->set_rules('own_words','Hobbies','xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('pre_movies','Hobbies','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('cook_food','Food I Cook','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('own_words','Hobbies','required|xss_clean|trim|strip_tags');
 			if($this->form_validation->run() == false){
 			    $this->hobbies(); 
 			}else{

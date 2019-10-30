@@ -91,17 +91,17 @@ class User_profile extends CI_Controller
         {
 		
             $this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
-            $this->form_validation->set_rules('country','Country','xss_clean|strip_tags');
-            $this->form_validation->set_rules('state','State','xss_clean|strip_tags');
-            $this->form_validation->set_rules('city','City','xss_clean|strip_tags');
-            $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean|strip_tags');
-            $this->form_validation->set_rules('marital_status','Marital Status','xss_clean|strip_tags');
-			$this->form_validation->set_rules('heightto','Height','xss_clean|strip_tags');
-			$this->form_validation->set_rules('weight','Height','xss_clean|strip_tags');
-            $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean|strip_tags');
-            $this->form_validation->set_rules('body_type','Body Type','xss_clean|strip_tags');
-            $this->form_validation->set_rules('disability','Disability','xss_clean|strip_tags');
-            $this->form_validation->set_rules('hiv_positive','HIV Positive','xss_clean|strip_tags');
+            $this->form_validation->set_rules('country','Country','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('state','State','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('city','City','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('mtongue','Mother Tongue','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('marital_status','Marital Status','xss_clean|trim|required|strip_tags');
+			$this->form_validation->set_rules('heightto','Height','xss_clean|trim|required|strip_tags');
+			$this->form_validation->set_rules('weight','Height','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('skin_tone','Skin Tone','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('body_type','Body Type','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('disability','Disability','xss_clean|trim|required|strip_tags');
+            $this->form_validation->set_rules('hiv_positive','HIV Positive','xss_clean|trim|required|strip_tags');
             if($this->form_validation->run() == false)
             {
 				echo "validation error !!!!"; die();
