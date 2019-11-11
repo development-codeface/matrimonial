@@ -426,7 +426,26 @@ class Muser extends CI_Controller
 		$data['user_profiles']	= 	$this->matri->global_where('user_profiles',array('user_id'=> $user_id)); 
 		$this->load->view('site_theme/update_containt', $data);
             
-        }
+		}
+		
+		function horoscop()
+        {
+		$user_id = $this->tank_auth->get_user_id();
+		$field_val = array
+				(
+                   'users.id' => $this->tank_auth->get_user_id()
+				);				
+		$data['matches'] 		= 	$this->matri->total_muser_data($field_val);
+		$data['page'] 			=     	'muser/horoscop';
+		$data['title'] 			=    	'Photo | Mplan';
+		$data['keywords'] 		=	'matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] 	=	'Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
+		$data['hobbies']		= 	$this->matri->global_where('user_hobbies', array('user_id'=> $user_id));
+		$data['user_profiles']	= 	$this->matri->global_where('user_profiles',array('user_id'=> $user_id)); 
+		$this->load->view('site_theme/update_containt', $data);
+            
+		}
+		
 	function profile_image_change()
 	{
 		if(isset($_POST['image-data']))
@@ -470,6 +489,80 @@ class Muser extends CI_Controller
 						
 						//$this->matri->global_update('user_file',$field, $profile_image);
 						$user_file_id = $this->matri->insert_update_file($this->tank_auth->get_user_id(),$insert_data);
+						/*$update_user_data = array(
+							'user_id' =>$this->tank_auth->get_user_id(),
+							'profile_pic'=>$user_file_id
+							);
+						$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $update_user_data);*/
+					    
+						//$this->matri->global_insert('user_file', $new_profile_image);
+						$this->photo();
+					}
+					else
+					{
+						echo "Sorry file not found!";die();
+					}
+				}
+				else
+				{
+					
+					$this->photo();
+				}
+		}
+		else
+		{
+			
+			$this->photo();
+			
+		}
+
+		
+	}
+
+
+	function profile_horo_change()
+	{
+		if(isset($_POST['image-data']))
+		{
+			/*check image is */
+
+			$image_contents =file_get_contents($this->input->post('image-data'));
+			$image_detail = getimagesizefromstring($image_contents);
+			
+			if(($image_detail[0] >= 200 ) AND ($image_detail[1] >= 230 ) ){
+
+					$field = array(
+				       'user_horoscop.user_id' => $this->tank_auth->get_user_id(),
+				       'profile_img' => 1
+				       );
+						
+					$file_name = $this->muse->get_userhoroscop($field, 'user_id');
+			
+					$create_file_name = md5($this->tank_auth->get_user_id().date("Y-m-d:h:i:sa")).".jpg";
+					$myfile = fopen("upload/".$create_file_name, "w") or die("Unable to open file!");
+					$txt = file_get_contents($this->input->post('image-data'));
+					fwrite($myfile, $txt);
+					$insert_data = array(
+						'user_id' =>$this->tank_auth->get_user_id(),
+						'img_type'=>"jpg",
+						'file_name' =>'', //file_get_contents($this->input->post('image-data')),
+						'thumb'=>'',
+						'profile_img' => 1,
+						'upload_date' => strtotime(date('d-m-Y')),
+						'path'=>base_url()."upload/".$create_file_name
+						);
+
+					$profile_image = array(
+						'profile_img' => 1,
+						'img_type'=>"jpg",
+						'user_id' =>$this->tank_auth->get_user_id(),
+						'path'=>base_url()."upload/".$create_file_name
+					);
+					if($file_name != NULL)
+					{
+						
+						//$this->matri->global_update('user_file',$field, $profile_image);
+						$user_file_id = $this->matri->insert_update_horo($this->tank_auth->get_user_id(),$insert_data);
 						/*$update_user_data = array(
 							'user_id' =>$this->tank_auth->get_user_id(),
 							'profile_pic'=>$user_file_id

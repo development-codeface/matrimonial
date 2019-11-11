@@ -534,6 +534,20 @@ class Muse
 			return $my_value; 		
 		
 	}
+
+	function display_my_horo($where_field)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$my_value = NULL;
+		$data['get_value'] = $ci->matri->getUserHoro($where_field);
+		foreach($data['get_value']->result() as $row)
+		{
+				$my_value = $row->path;	
+		}		
+			return $my_value; 		
+		
+	}
 	//display data any table any field */
 	function display_basic_info($table, $where_field, $field)
 	{
@@ -607,6 +621,28 @@ class Muse
 		if(isset($field))
 		{
 			$data['get_value'] = $ci->matri->global_where('user_file', $field);
+			if(isset($data['get_value']))
+			{
+				foreach($data['get_value']->result() as $row)
+				{
+					$value = $row->$get_value;
+					return $value;
+				}
+			}
+			return NULL;
+		}
+		return NULL;
+		
+	}
+
+
+	function get_userhoroscop($field, $get_value)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		if(isset($field))
+		{
+			$data['get_value'] = $ci->matri->global_where('user_horoscop', $field);
 			if(isset($data['get_value']))
 			{
 				foreach($data['get_value']->result() as $row)

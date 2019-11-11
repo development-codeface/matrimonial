@@ -19,6 +19,9 @@ class Forme extends CI_Controller
         //geting userinformation
         function get_user($user_id = NULL)
         {
+            if ($this->tank_auth->is_admin_in()){
+                redirect('/fulluserdetail/'.$user_id);
+            }
             if($user_id == NULL)
             {
                 echo "Profile Not Complete!";

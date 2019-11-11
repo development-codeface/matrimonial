@@ -84,7 +84,39 @@ class User_profile extends CI_Controller
 						}
 						/*end user check */
 					}
-        }
+		}
+
+
+		function profile_horodcope($error = NULL)
+        {
+					
+			/*check user already insert data or not */		
+			$field_val = array(
+							'user_id' => $this->tank_auth->get_user_id(),
+							'profile_img' => 1
+							);
+			$data['user_file'] = $this->matri->and_where('user_horoscop', $field_val);
+			if($data['user_file']->num_rows() <= 0){
+				$data['page'] = 'profile_page/profile_image';
+				$data['title'] = 'Profile Image | Mplan | Matrimonial';
+				$data['descripation'] ='';
+				$data['error'] = $error;
+				$this->load->view('site_theme/update_containt',$data);
+			}else{
+				redirect('muser/horoscop');
+			}		
+
+
+
+
+			
+			
+			
+			/*end user check */
+					
+		}
+		
+		
         
         //insert basic information in database        
         function insert_basic_info()
@@ -213,7 +245,69 @@ class User_profile extends CI_Controller
 			$this->profile_image();
 		}
 		
-        } 
+	}
+
+	function insert_horoimage()
+        {
+			
+		if($this->input->post('image-data'))
+		{	 
+			if($this->matri->and_where('user_horoscop', array('user_id' =>$this->tank_auth->get_user_id()))->num_rows >0)
+			{
+				$this->index();
+			}
+			else
+			{
+				$image_contents =file_get_contents($this->input->post('image-data'));
+				
+				$image_detail = getimagesizefromstring($image_contents);
+				if(($image_detail[0] >= 200 ) AND ($image_detail[1] >= 230 ) )
+				{
+					$create_file_name = md5($this->tank_auth->get_user_id().date("Y-m-d:h:i:sa")).".jpg";
+					$myfile = fopen("upload/".$create_file_name, "w") or die("Unable to open file!");
+					$txt = file_get_contents($this->input->post('image-data'));
+					fwrite($myfile, $txt);
+			
+					$insert_data = array(
+							'user_id' =>0,
+							'img_type'=>"jpg",
+							'file_name' =>'', //file_get_contents($this->input->post('image-data')),
+							'thumb'=>'',
+							'user_id' => $this->tank_auth->get_user_id(),
+							'profile_img' => 1,
+							'upload_date' => strtotime(date('d-m-Y')),
+							'path'=>base_url()."upload/".$create_file_name
+							);
+							
+			
+					$insert_id = $this->matri->global_insert('user_horoscop', $insert_data);
+					//$this->matri->adduserUpdate($this->tank_auth->get_user_id(), $update_user_data);	
+					if($insert_id < 0)
+					{
+						
+						$this->profile_horodcope();
+					}
+					else
+					{
+						$this->profile_horodcope();
+					}
+				}
+				else
+				{
+                    
+					$this->profile_horodcope();				
+				}
+			}
+		}
+		else
+		{
+			echo "file missing !!!!";die();
+			$this->profile_image();
+		}
+		
+	}
+	
+	
 	
 	/*some private function */
 	private function create_folder()

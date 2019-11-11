@@ -56,6 +56,7 @@
         $update_about_us  = $row->useraboutus;
         $update_description  = $row->abouthobbies;
         $update_profId    = $row->update_profile_id; 
+        $horoscope        = $row->horoscope; 
     }
   }
   $packagelist=array();
@@ -360,6 +361,17 @@
                                 </div>
 
                                 </form>
+                            </section>
+
+                            <section class=" signinbox">
+                                <h2>Horoscope</h2>
+                                <p>
+                                <?php if(isset($horoscope)){ ?> 
+                                    <img src="<?php echo $horoscope ?>" alt="" data-hash="1">
+                                <?php }else { ?> 
+                                
+                                <?php } ?>     
+                                </p>
                             </section>
 
 

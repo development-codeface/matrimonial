@@ -21,6 +21,9 @@
                 <li class="nav-item">
                     <a href="<?php echo base_url();?>update_profile/hobbies" class="nav-link" id="six-tab-pills"   role="tab" aria-controls="three-pills">Hobbies</a>
                 </li>
+                <li class="nav-item">
+                    <a href="<?php echo base_url();?>update_profile/horoscop" class="nav-link" id="six-tab-pills" role="tab" aria-controls="three-pills">Horoscope</a>
+                </li>
             </ul>        
             <div class="tab-content" id="myTabContent-pills">
                 <div class="tab-pane fade show active" id="one-pills" role="tabpanel" aria-labelledby="one-tab-pills">

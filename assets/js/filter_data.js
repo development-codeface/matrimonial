@@ -40,6 +40,7 @@ function filter_data(data)
         
         var religion = $('select[name=religion]').val();
         
+        var community = $('select[name=community]').val();
         
         
         var link = $('#url').val()+"muser/filter_data?martial_status="+martial_status+"&religion="+religion+"&smoke="+smoke+"&diet="+diet+"&drink="+drink+"&heightto="+heightto+"&mtongue="+mtongue+"&edu_level="+edu_level+"&edu_field="+edu_field+"&work_with="+work_with+"&work_as="+work_as+"&country="+country+"&state="+state+"&city="+city;
@@ -61,7 +62,8 @@ function filter_data(data)
                edu_field:edu_field,
                work_with:work_with,
                work_as:work_as,
-               religion:religion
+               religion:religion,
+               community:community,
                },function(data){
                 $('#matches_change').html(data);
                 document.getElementById('matches_change').scrollIntoView();

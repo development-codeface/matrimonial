@@ -254,7 +254,7 @@ class Matri extends CI_Model
                             user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
                             countries.name as country , states.name as state, users.id as muser_id,
                             cities.name as city, height.id as hid, users.id as main_id,
-                            update_user_file.path as updateprofilepic,nashathram.name as star,user_edu.annual_income as annual_income');
+                            update_user_file.path as updateprofilepic,nashathram.name as star,user_edu.annual_income as annual_income,user_horoscop.path as horoscope');
         $this->db->from('users');
         $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
         $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
@@ -279,6 +279,7 @@ class Matri extends CI_Model
 
         $this->db->join('height', 'height.id = user_profiles.height',  'left');
         $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
+        $this->db->join('user_horoscop','user_horoscop.user_id = users.id', 'left');
         $this->db->where($field_val);
         if(isset($key) && strlen($key) > 0){
             $this->db->like('users.username', $key, 'both');
@@ -297,7 +298,7 @@ class Matri extends CI_Model
                             user_lifestyle.* , mother_tongue.* , religion.*, community.*, height.*, 
                             countries.name as country , states.name as state, users.id as muser_id,
                             cities.name as city, height.id as hid, users.id as main_id,user_package_opt.package_status as packagestatus,
-                            update_user_file.path as updateprofilepic,nashathram.name as star,user_edu.annual_income as annual_income');
+                            update_user_file.path as updateprofilepic,nashathram.name as star,user_edu.annual_income as annual_income,user_horoscop.path as horoscope');
         $this->db->from('users');
         $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
         $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
@@ -323,6 +324,7 @@ class Matri extends CI_Model
         $this->db->join('height', 'height.id = user_profiles.height',  'left');
         $this->db->join('user_package_opt','user_package_opt.userid = users.id', 'left');
         $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
+        $this->db->join('user_horoscop','user_horoscop.user_id = users.id', 'left');
         $this->db->where($field_val);
         $query = $this->db->get();
         return $query;
@@ -434,6 +436,15 @@ class Matri extends CI_Model
         $this->db->from('users');
         $this->db->join('user_file','user_file.user_id = users.id', 'left');
         $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
+        $this->db->where($field_val);
+        $query = $this->db->get();
+        return $query;
+    } 
+
+    function getUserHoro($field_val){
+        $this->db->select('users.*,user_horoscop.*');
+        $this->db->from('users');
+        $this->db->join('user_horoscop','user_horoscop.user_id = users.id', 'left');
         $this->db->where($field_val);
         $query = $this->db->get();
         return $query;
@@ -684,6 +695,23 @@ class Matri extends CI_Model
             $result = $q->result_array()[0]['id'];
         } else {
             $this->db->insert('update_user_file',$field_val);
+            $result =  $this->db->insert_id();
+        }
+
+        return $result; 
+    }
+
+    function insert_update_horo($user_id,$field_val){
+        $result;
+        $this->db->where('user_id',$user_id);
+        $q = $this->db->get('user_horoscop');
+        if ( $q->num_rows() > 0 ) 
+        {
+            $this->db->where('user_id',$user_id);
+            $this->db->update('user_horoscop',$field_val);
+            $result = $q->result_array()[0]['id'];
+        } else {
+            $this->db->insert('user_horoscop',$field_val);
             $result =  $this->db->insert_id();
         }
 

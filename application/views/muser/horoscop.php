@@ -7,7 +7,7 @@
                     <a href="<?php echo base_url();?>update_profile/index" class="nav-link " id="one-tab-pills" role="tab" aria-controls="one-pills" aria-expanded="true">Personal</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url();?>update_profile/photo" class="nav-link active" id="two-tab-pills" role="tab" aria-controls="two-pills"> Profile Image </a>
+                    <a href="<?php echo base_url();?>update_profile/photo" class="nav-link" id="two-tab-pills" role="tab" aria-controls="two-pills"> Profile Image </a>
                 </li>
                 <li class="nav-item">
                     <a href="<?php echo base_url();?>update_profile/education" class="nav-link" id="three-tab-pills" role="tab" aria-controls="three-pills"> Education & Carrer </a>
@@ -22,22 +22,29 @@
                     <a href="<?php echo base_url();?>update_profile/hobbies" class="nav-link" id="six-tab-pills" role="tab" aria-controls="three-pills">Hobbies</a>
                 </li>
                 <li class="nav-item">
-                    <a href="<?php echo base_url();?>update_profile/horoscop" class="nav-link" id="six-tab-pills" role="tab" aria-controls="three-pills">Horoscope</a>
+                    <a href="<?php echo base_url();?>update_profile/horoscop" class="nav-link active" id="six-tab-pills" role="tab" aria-controls="three-pills">Horoscope</a>
                 </li>
+
             </ul>
             <div class="tab-content" id="myTabContent-pills">
                 <div class="tab-pane fade show active" id="one-pills" role="tabpanel" aria-labelledby="one-tab-pills">
                     <section class=" signinbox content a-bg2">
                         <section class="block">
                             <div class="container">
-                                <form action="<?php echo base_url();?>user_profile/insert_pimage" method="post">
+                                <form action="<?php echo base_url();?>muser/profile_horo_change" method="post">
                                     <section>
                                         <div class="row justify-content-center ">
                                             <div class="col-lg-7 col-md-7 signinbox">
-                                                <p style="text-align: center; padding:10px;"> You can upload up to 5 Photos. Only JPG, PNG, BMP formats are allowed and maximum file size up to 2 MB. </p>
+                                                <p style="text-align: center; padding:10px;"> You can upload Your Horoscope Here </p>
                                                 <label class="cabinet center-block">
                                                     <figure class="fig">
-                                                     <img src="" class="gambar img-responsive img-thumbnail" id="item-img-output" />
+                                                        <?php     
+                                                            if($this->muse->display_value('user_horoscop', array('user_id'=>$this->tank_auth->get_user_id(), 'profile_img'=>1), 'user_id') >= 1)
+                                                            {
+                                                                echo "<img src = '".$this->muse->display_my_horo(array('users.id'=>$this->tank_auth->get_user_id()))."'  style='border: 2px solid #FE4D01;' alt='mplan' class='img-responsive img-thumbnail' id='item-img-output' >";
+                                                            }else{
+                                                                redirect('update_profile/photo');
+                                                            }?>
                                                     </figure>
                                                     <input type="file" class="item-img file center-block" name="file_photo" />
                                                 </label>
@@ -99,13 +106,4 @@
 </div>
 </div>
 </section>
-</section> 
-
-
-
-
-
-
-
-
-
+</section>                

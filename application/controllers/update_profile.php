@@ -246,6 +246,34 @@ class Update_Profile extends CI_Controller
 			$this->load->view('site_theme/update_containt', $data);
 		}
 
+		}
+		
+		function horoscop()
+        {
+
+		$field = array(
+				       'user_horoscop.user_id' => $this->tank_auth->get_user_id(),
+				       'profile_img' => 1
+				       );
+		$file_name = $this->muse->get_userhoroscop($field, 'id');
+		
+		if($file_name > 0)
+		{
+			redirect('muser/horoscop');
+		}
+		else
+		{
+			$data['page'] 		=     	'profile_page/profile_horo';  //muser/photo
+	
+			$data['title'] 		=    	'Photo | Mplan';
+	
+			$data['keywords'] 	=	'matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+	
+			$data['descripation'] 	=	'Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
+	
+			$this->load->view('site_theme/update_containt', $data);
+		}
+
         }
 
         /*user background*/

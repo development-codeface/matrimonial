@@ -51,6 +51,7 @@
         $hobbieword       = $row->own_words;
         $age              = $this->muse->agecal($row->dob)." Year";
         $image            = isset($row->path) ?  $row->path : "img/img_not_avalable.jpg";
+        $horoscope        = $row->horoscope; 
         if($userid == $this->tank_auth->get_user_id() && isset($row->updateprofilepic))
             $image     = $row->updateprofilepic;
     }
@@ -334,6 +335,17 @@
                                     </div>
                                     
                                 </div>
+                            </section>
+
+                            <section class=" signinbox">
+                                <h2>Horoscope</h2>
+                                <p>
+                                <?php if(isset($horoscope)){ ?> 
+                                    <img src="<?php echo $horoscope ?>" alt="" data-hash="1">
+                                <?php }else { ?> 
+                                
+                                <?php } ?>     
+                                </p>
                             </section>
 
                              <section class=" signinbox a-bg3" style="display:none">

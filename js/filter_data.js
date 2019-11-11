@@ -38,6 +38,8 @@ function filter_data(data)
         var work_as = $('select[name=work_as]').val();
         
         var religion = $('select[name=religion]').val();
+
+        var community = $('select[name=community]').val();
         
         
         
@@ -60,7 +62,8 @@ function filter_data(data)
                work_with:work_with,
                work_as:work_as,
                keysearch:keysearch,
-               religion:religion
+               religion:religion,
+               community:community,
                },function(data){
                 $('#matches_change').html(data);
                 document.getElementById('matches_change').focus();
