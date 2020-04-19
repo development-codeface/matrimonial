@@ -57,6 +57,7 @@
         $update_description  = $row->abouthobbies;
         $update_profId    = $row->update_profile_id; 
         $horoscope        = $row->horoscope; 
+        $nokid            = $row->nokids; 
     }
   }
   $packagelist=array();
@@ -178,8 +179,12 @@
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($heightto)){echo $heightto;} else {echo "NULL";}?> </label></dd>
                                              <dt ><label class="b-w">Weight (Kg)</label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($weight)){echo $weight;} else {echo "NULL";}?></label></dd>
-                                           <dt ><label class="b-w">Marital Status </label> </dt>
+                                            <dt ><label class="b-w">Marital Status </label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($marital_status)){echo ucwords($marital_status);} else {echo "NULL";}?> </label></dd>
+                                            <?php if($marital_status == 'divorced') {?>
+                                                <dt ><label class="b-w">Number of kids </label> </dt>
+                                                <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($nokid)){echo ucwords($nokid);} else {echo "No Kids";}?> </label></dd>
+                                            <?php } ?>
                                             <dt ><label class="b-w">Mother Tongue </label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($mtongue)){echo ucwords($mtongue);} else {echo "NULL";}?></label></dd>
                                         </dl>

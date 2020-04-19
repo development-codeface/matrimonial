@@ -47,6 +47,7 @@
         $brother         =   $row->brother;
         $sister         =   $row->sister;
         $annual_income  = $row->annual_income;
+        $nokid          = $row->nokids;
 
         $isFetured        = false;    /*(isset($row->packagestatus) && ($row->packagestatus == 1)) ;*/
         $hobbieword       = $row->own_words;
@@ -203,6 +204,10 @@
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($weight)){echo $weight;} else {echo "NULL";}?></label></dd>
                                            <dt ><label class="b-w">Marital Status </label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($marital_status)){echo ucwords($marital_status);} else {echo "NULL";}?> </label></dd>
+                                            <?php if($marital_status == 'divorced') {?>
+                                                <dt ><label class="b-w">Number of kids </label> </dt>
+                                                <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($nokid)){echo ucwords($nokid);} else {echo "No Kids";}?> </label></dd>
+                                            <?php } ?>
                                             <dt ><label class="b-w">Mother Tongue </label> </dt>
                                             <dd class="text-align-right dt-bg"><label class="b-w"><?php if(isset($mtongue)){echo ucwords($mtongue);} else {echo "NULL";}?></label></dd>
                                         </dl>

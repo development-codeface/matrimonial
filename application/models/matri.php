@@ -249,7 +249,7 @@ class Matri extends CI_Model
         
         $this->db->order_by("users.id", "desc"); 
         $this->db->limit($per_page, $page_segment);     
-        $query = $this->db->get();  
+        $query = $this->db->get(); 
         return $query;
     }
 

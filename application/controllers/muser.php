@@ -867,12 +867,15 @@ class Muser extends CI_Controller
 		$ageto          = '';
 		
 		$get_user_search = $this->matri->global_get('user_search', array('user_id'=>$this->tank_auth->get_user_id()));
-		
+		$where_data = array(
+			'gender' => !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : $admingender,
+			'activated' => 1,		
+        );
 		if($get_user_search->num_rows()>0)
 		{
 			foreach($get_user_search->result() as $row)
 			{
-
+                
 				$matrial_status 	= $row->marital_status;
 				$religion_id		= $row->religion_id;
 				$mother_tongue_id	= $row->mother_tongue_id;
@@ -932,7 +935,7 @@ class Muser extends CI_Controller
 		);
 		
 		
-		if($where_data !=NULL)
+		if($where_data !=NULL )
 		{
 			
 			//$config['total_rows'] 		= $this->matri->total_desired_partner($where_data)->num_rows();

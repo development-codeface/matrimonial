@@ -17,10 +17,10 @@
                                         <div class="image">
                                             <h3>
                                                 <a href="#" class="tag category"><?php if(isset($row->work_as)){echo ucwords($row->work_as);} else {echo "";} ?></a>
-                                                <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" class="title"><?php echo ucfirst($row->firstname); ?></a>
+                                                <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" target="_blank"  class="title"><?php echo ucfirst($row->firstname); ?></a>
                                
                                             </h3>
-                                            <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" class="image-wrapper background-image" style="background-image: url(<?php echo (isset($row->path)) ?  $row->path : base_url()."img/img_not_avalable.jpg";?>);">
+                                            <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" target="_blank" class="image-wrapper background-image" style="background-image: url(<?php echo (isset($row->path)) ?  $row->path : base_url()."img/img_not_avalable.jpg";?>);">
                                             <?php
                                                 if($row->path != NULL){?>
                                                         <img src="<?php echo $row->path;?>"  alt="">
@@ -56,7 +56,7 @@
                                             <a  href="#" class="btn  btn-primary text-caps m-l-10 btn-framed" onclick="shortlistme(<?php echo $row->muser_id;?>)" ><i class="fa fa-heart i-f-siz" aria-hidden="true"></i>
 </a> 
                                             
-                                 <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" class="btn btn-primary text-caps btn-framed  m-l-10 pad_16px ">View profile</a> 
+                                 <a href="<?php echo base_url();?>users/<?php echo $row->muser_id;?>" target="_blank class="btn btn-primary text-caps btn-framed  m-l-10 pad_16px ">View profile</a> 
                                        </div>
                                         <!--end description-->
                                         
