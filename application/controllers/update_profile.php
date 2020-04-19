@@ -60,14 +60,10 @@ class Update_Profile extends CI_Controller
 				{
 
 					$data['page'] = "profile_page/cbasic_info";
-
-                                        $data['title'] = 'Basic information | Mplan.in | Matrimonial | Mplan.in | Marriage';
-
-                                        $data['keywords'] ='mplan.in, Matrimonial,shaadi, free register , marriage , community, religion';
-
-                                        $data['descripation'] ='mplan.in trusted matrimonial website. register now free at mplan.in marriage. you can access mobile number.';
-
-                                        $this->load->view('site_theme/update_containt',$data);
+                    $data['title'] = 'Basic information | Mplan.in | Matrimonial | Mplan.in | Marriage';
+                    $data['keywords'] ='mplan.in, Matrimonial,shaadi, free register , marriage , community, religion';
+                    $data['descripation'] ='mplan.in trusted matrimonial website. register now free at mplan.in marriage. you can access mobile number.';
+                    $this->load->view('site_theme/update_containt',$data);
 
 				}
 				else
@@ -665,15 +661,15 @@ class Update_Profile extends CI_Controller
 	    
 			$this->form_validation->set_rules('interest','Interests','required|xss_clean|trim|strip_tags');
 	    
-			$this->form_validation->set_rules('fav_music','Hobbies','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('fav_music','Favourite music','required|xss_clean|trim|strip_tags');
 	    
 		     // $this->form_validation->set_rules('fav_books','Hobbies','');
 	    
-			$this->form_validation->set_rules('pre_movies','Hobbies','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('pre_movie','Preferred Movie','required|xss_clean|trim|strip_tags');
 	    
-			$this->form_validation->set_rules('cook_food','Food I Cook','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('cook_food','Cooking','required|xss_clean|trim|strip_tags');
 	    
-			$this->form_validation->set_rules('own_words','Hobbies','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('own_words','In Your Own Word','required|xss_clean|trim|strip_tags');
 	    
 			if($this->form_validation->run() == false)
 	    
@@ -806,6 +802,8 @@ class Update_Profile extends CI_Controller
                         'disability'=>$this->input->post('disability'),
 
 						'hiv_positive'=>$this->input->post('hiv_positive'),
+
+						'nokids' => $this->input->post('number_child'),
 
 			            'profile_complete'=>1
 
@@ -1078,11 +1076,11 @@ class Update_Profile extends CI_Controller
 			$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
 			$this->form_validation->set_rules('hobby','Hobbies','required|xss_clean|trim|strip_tags'); 
 			$this->form_validation->set_rules('interest','Interests','required|xss_clean|trim|strip_tags');
-			$this->form_validation->set_rules('fav_music','Hobbies','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('fav_music','Favourite music','required|xss_clean|trim|strip_tags');
 		     // $this->form_validation->set_rules('fav_books','Hobbies','');
-			$this->form_validation->set_rules('pre_movies','Hobbies','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('pre_movie','Preferred Movie','required|xss_clean|trim|strip_tags');
 			$this->form_validation->set_rules('cook_food','Food I Cook','required|xss_clean|trim|strip_tags');
-			$this->form_validation->set_rules('own_words','Hobbies','required|xss_clean|trim|strip_tags');
+			$this->form_validation->set_rules('own_words','In Your Own Word','required|xss_clean|trim|strip_tags');
 			if($this->form_validation->run() == false){
 			    $this->hobbies(); 
 			}else{

@@ -41,7 +41,8 @@
                                                         <?php     
                                                             if($this->muse->display_value('user_horoscop', array('user_id'=>$this->tank_auth->get_user_id(), 'profile_img'=>1), 'user_id') >= 1)
                                                             {
-                                                                echo "<img src = '".$this->muse->display_my_horo(array('users.id'=>$this->tank_auth->get_user_id()))."'  style='border: 2px solid #FE4D01;' alt='mplan' class='img-responsive img-thumbnail' id='item-img-output' >";
+                                                                echo "<img src = '".$this->muse->display_my_horo(array('users.id'=>$this->tank_auth->get_user_id()))."'  style='border: 2px solid #FE4D01;' alt='mplan' class='img-responsive img-thumbnail' id='item-img-output' /> <a href='".$this->muse->display_my_horo(array('users.id'=>$this->tank_auth->get_user_id()))."'>download</a>";
+                                                                
                                                             }else{
                                                                 redirect('update_profile/photo');
                                                             }?>
@@ -51,7 +52,7 @@
                                                 <div class="col-lg-8 col-md-9 col-sm-6 ">
                                                     <div class="form-group">
                                                         <input type="hidden" name="image-data" class="hidden-image-data" />
-                                                        <input type="submit" class="btn btn-primary large icon float-right"/>  
+                                                        <input type="submit" id="fileUpload"  class="btn btn-primary large icon float-right"/>  
                                                     </div>
                                                 </div>
 
@@ -100,7 +101,9 @@
         </div> 
     </section>
 </div>          
-                
+ <script>
+   isResize  = true;
+ </script>               
 
 <!-- header closing --->
 </div>

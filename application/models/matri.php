@@ -202,7 +202,7 @@ class Matri extends CI_Model
         $query = $this->db->get();
         return $query;
     }
-    function muser_data_search( $field_val,$keywordVal, $per_page, $page_segment)
+    function muser_data_search( $field_val,$keywordVal, $adminparam, $per_page, $page_segment)
     {
         $this->db->select('users.*, user_profiles.*, education_field.*,
                             education_level.*, working_as.*, working_with.*, user_family.*,
@@ -232,6 +232,13 @@ class Matri extends CI_Model
         $this->db->join('community', 'community.id = user_background.community_id',  'left');
         
         $this->db->where($field_val);
+        
+        if($adminparam != null &&  isset($adminparam['agefrom']) && strlen ($adminparam['agefrom']) > 0  
+            && $adminparam['agefrom'] > 0 && isset($adminparam['ageto']) && strlen ($adminparam['ageto']) > 0 && $adminparam['ageto'] > 0) {
+                $this->db->where("TIMESTAMPDIFF(YEAR, DATE_FORMAT(FROM_UNIXTIME(users.dob), '%Y-%m-%d' ) , CURDATE()) >=",$adminparam['agefrom'],FALSE);
+                $this->db->where("TIMESTAMPDIFF(YEAR, DATE_FORMAT(FROM_UNIXTIME(users.dob), '%Y-%m-%d' ) , CURDATE()) <=",$adminparam['ageto'],FALSE);
+        }
+
         if(isset($keywordVal) && strlen($keywordVal)){
             $this->db->like('users.username', $keywordVal, 'both');
             $this->db->or_like('users.id', $keywordVal, 'both');
@@ -246,7 +253,7 @@ class Matri extends CI_Model
         return $query;
     }
 
-    function total_muser_data_search($field_val,$key)
+    function total_muser_data_search($field_val,$key,$adminparam)
     {
         $this->db->select('users.*, user_profiles.*, education_field.*,
                             education_level.*, working_as.*, working_with.*, user_family.*,
@@ -255,6 +262,7 @@ class Matri extends CI_Model
                             countries.name as country , states.name as state, users.id as muser_id,
                             cities.name as city, height.id as hid, users.id as main_id,
                             update_user_file.path as updateprofilepic,nashathram.name as star,user_edu.annual_income as annual_income,user_horoscop.path as horoscope');
+        $this->db->select("TIMESTAMPDIFF(YEAR, DATE_FORMAT(FROM_UNIXTIME(users.dob), '%Y-%m-%d' ) , CURDATE()) AS age", FALSE);
         $this->db->from('users');
         $this->db->join('user_profiles','user_profiles.user_id = users.id', 'left');
         $this->db->join('user_edu','user_edu.user_id = users.id', 'left');
@@ -281,13 +289,20 @@ class Matri extends CI_Model
         $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
         $this->db->join('user_horoscop','user_horoscop.user_id = users.id', 'left');
         $this->db->where($field_val);
+        if($adminparam != null &&  isset($adminparam['agefrom']) && $adminparam['agefrom'] > 0 && strlen ($adminparam['agefrom']) > 0  
+            && isset($adminparam['ageto']) && strlen ($adminparam['ageto']) > 0 && $adminparam['ageto'] > 0 ){
+                $this->db->where("TIMESTAMPDIFF(YEAR, DATE_FORMAT(FROM_UNIXTIME(users.dob), '%Y-%m-%d' ) , CURDATE()) >=",$adminparam['agefrom'],FALSE);
+                $this->db->where("TIMESTAMPDIFF(YEAR, DATE_FORMAT(FROM_UNIXTIME(users.dob), '%Y-%m-%d' ) , CURDATE()) <=",$adminparam['ageto'],FALSE);
+        }
+        
         if(isset($key) && strlen($key) > 0){
             $this->db->like('users.username', $key, 'both');
             $this->db->or_like('users.id', $key, 'both');
             $this->db->or_like('users.firstname', $key, 'both');
             $this->db->or_like('users.lastname', $key, 'both');
-        }
+        }   
         $query = $this->db->get();
+        $this->db->where($field_val);
         return $query;
     }
     function total_muser_data($field_val)
@@ -326,7 +341,11 @@ class Matri extends CI_Model
         $this->db->join('update_user_file','update_user_file.user_id = users.id', 'left');
         $this->db->join('user_horoscop','user_horoscop.user_id = users.id', 'left');
         $this->db->where($field_val);
+        //print_r($this->db->last_query());   die(); 
         $query = $this->db->get();
+        //print_r($this->db->last_query());    
+        //print_r($query);
+        //die();
         return $query;
     }
 

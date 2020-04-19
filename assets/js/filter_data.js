@@ -41,9 +41,18 @@ function filter_data(data)
         var religion = $('select[name=religion]').val();
         
         var community = $('select[name=community]').val();
+
+        var admingeneder = $('input[name=genderadmin]:checked').val();
+
+        var agefrom = $('select[name=agefrom]').val();
+
+        var ageto = $('select[name=ageto]').val();
+        if(agefrom > ageto){
+                alert("Please select age properly !!");
+                return false;
+        }
         
-        
-        var link = $('#url').val()+"muser/filter_data?martial_status="+martial_status+"&religion="+religion+"&smoke="+smoke+"&diet="+diet+"&drink="+drink+"&heightto="+heightto+"&mtongue="+mtongue+"&edu_level="+edu_level+"&edu_field="+edu_field+"&work_with="+work_with+"&work_as="+work_as+"&country="+country+"&state="+state+"&city="+city;
+        var link = $('#url').val()+"muser/filter_data?martial_status="+martial_status+"&religion="+religion+"&smoke="+smoke+"&diet="+diet+"&drink="+drink+"&heightto="+heightto+"&mtongue="+mtongue+"&edu_level="+edu_level+"&edu_field="+edu_field+"&work_with="+work_with+"&work_as="+work_as+"&country="+country+"&state="+state+"&city="+city+"&genderadmin="+admingeneder;
         $.post($('#url').val()+"muser/filter_data",{
                gender:gender,smoke:smoke,
                martial_status:martial_status,
@@ -53,6 +62,7 @@ function filter_data(data)
                hiv_positive:hiv_positive,
                heightto:heightto,
                keysearch:keysearch,
+               genderadmin: admingeneder,
                country:country,
                state:state,
                city:city,
@@ -64,6 +74,8 @@ function filter_data(data)
                work_as:work_as,
                religion:religion,
                community:community,
+               agefrom:agefrom,
+               ageto: ageto, 
                },function(data){
                 $('#matches_change').html(data);
                 document.getElementById('matches_change').scrollIntoView();

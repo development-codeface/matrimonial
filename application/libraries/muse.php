@@ -384,11 +384,11 @@ class Muse
 		return $data;
 	}
 
-	function mymatch_search($field_val ,$keywordVal, $per_page, $page_segment)
+	function mymatch_search($field_val ,$keywordVal, $adminparam, $per_page, $page_segment)
 	{
 		$ci =  & get_instance();
 		$ci->load->model('matri');
-		$data = $ci->matri->muser_data_search($field_val,$keywordVal, $per_page, $page_segment);
+		$data = $ci->matri->muser_data_search($field_val,$keywordVal, $adminparam, $per_page, $page_segment);
 		return $data;
 	}
 	

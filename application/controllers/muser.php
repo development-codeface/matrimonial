@@ -681,16 +681,20 @@ class Muser extends CI_Controller
 		$disability		= '';
 		$hiv_positive		= '';
 		$keySearch      = $this->input->post('keysearch');
+		$agefrom        = $this->input->post('agefrom'); 
+		$ageto          = $this->input->post('ageto');
+
+		$admingender    = (null!==$this->input->post('genderadmin')) ? $this->input->post('genderadmin') :'';
 		
 		$get_user_search = $this->matri->global_get('user_search', array('user_id'=>$this->tank_auth->get_user_id()));
 		$where_data = array(
-					   'gender' => $this->muse->sex_match($this->tank_auth->get_user_id()),
+					   'gender' => !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : $admingender,
 					   'activated' => 1,
 					   
 			);
 		$insertData = array(
 			'user_id' 	=> 	$this->tank_auth->get_user_id(),
-			'gender'		=>	!$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : '',
+			'gender'		=>	!$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : $admingender,
 			);
 
 		$data = array(
@@ -705,7 +709,9 @@ class Muser extends CI_Controller
 				  'community_id'	=> $this->input->post('community'),
 			      'diet'		=>	$this->input->post('diet'),
 			      'disability'	=>	$this->input->post('disability'),
-			      'hiv_positive'	=>	$this->input->post('hiv_positive')
+				  'hiv_positive'	=>	$this->input->post('hiv_positive'),
+				  'agefrom'        => $this->input->post('agefrom'),
+				  'ageto'          => $this->input->post('ageto')
 		);
 		if (is_array($data) && count($data) >= 1)
 		{
@@ -748,7 +754,7 @@ class Muser extends CI_Controller
 		}
 		
 		$field_val = array(
-			'gender' 				=> !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : '',
+			'gender' 				=> !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : $admingender,
 			'user_profiles.marital_status'		=> $this->input->post('martial_status'),	
 			'user_background.religion_id'		=> $this->input->post('religion'),			
 			'user_profiles.mother_tongue_id'	=> $this->input->post('mtongue'),
@@ -768,6 +774,11 @@ class Muser extends CI_Controller
 			//'user_profiles.hiv_positive'		=> $this->input->post('hiv_positive'),
 			'activated' => 1
 		);
+
+		$adminparam = array(
+			'agefrom' =>$agefrom ,
+			'ageto'   => $ageto
+		);
 		
 		if (is_array($field_val) && count($field_val) >= 1)
 		{
@@ -785,16 +796,15 @@ class Muser extends CI_Controller
 			
 			//$config['total_rows'] 		= $this->matri->total_desired_partner($where_data)->num_rows();
 			$user_id = $this->tank_auth->get_user_id();
-			
 			$config['base_url'] = base_url().'muser/ajaxFilter_data';
-			$config['total_rows'] = $this->matri->total_muser_data_search($where_data,$keySearch)->num_rows();
+			$config['total_rows'] = $this->matri->total_muser_data_search($where_data,$keySearch,$adminparam)->num_rows();
 			$data['totalcount'] = $config['total_rows'];
 			$config['per_page'] 	= 9; 
 			$config["uri_segment"] = 3;
 			$config["num_links"] = 3;
 			$page_segment = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0; //Today Change
 			
-			$data['matches'] = $this->muse->mymatch_search($where_data, $keySearch,$config['per_page'], 0/*$page_segment*/);
+			$data['matches'] = $this->muse->mymatch_search($where_data, $keySearch,$adminparam,$config['per_page'], 0/*$page_segment*/);
 			
 			//pagination configuration
 			$config['first_link']  = 'First';
@@ -852,6 +862,9 @@ class Muser extends CI_Controller
 		$disability		= '';
 		$hiv_positive		= '';
 		$keySearch      = '';
+		$admingender    = '';
+		$agefrom        = '';
+		$ageto          = '';
 		
 		$get_user_search = $this->matri->global_get('user_search', array('user_id'=>$this->tank_auth->get_user_id()));
 		
@@ -872,11 +885,14 @@ class Muser extends CI_Controller
 				$disability		= $row->disability;
 				$hiv_positive		= $row->hiv_positive;
 				$keySearch      = $row->keyword == 0 ? "" :  $row->keyword;
+				$admingender    = $row->gender;
+				$agefrom        = $row->agefrom;
+				$ageto          = $row->ageto;
 			}
 		}
-		
+		$admingender    =  isset($admingender) ?  $admingender : '';
 		$field_val = array(
-			'gender' 				=> !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : '',
+			'gender' 				=> !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : $admingender,
 			'user_profiles.marital_status'		=> $matrial_status ,			
 			'user_background.religion_id'		=> $religion_id,			
 			'user_profiles.mother_tongue_id'	=> $mother_tongue_id,
@@ -910,6 +926,10 @@ class Muser extends CI_Controller
 			}
 		}
 
+        $adminparam = array(
+			'agefrom' =>$agefrom ,
+			'ageto'   => $ageto
+		);
 		
 		
 		if($where_data !=NULL)
@@ -920,14 +940,14 @@ class Muser extends CI_Controller
 			
 			$config['base_url'] = base_url().'muser/ajaxFilter_data';
 			
-			$config['total_rows'] = $this->matri->total_muser_data_search($where_data,$keySearch)->num_rows();
+			$config['total_rows'] = $this->matri->total_muser_data_search($where_data,$keySearch,$adminparam)->num_rows();
 			$data['totalcount']   = $config['total_rows'];
 			$config['per_page'] 	= 9; 
 			$config["uri_segment"] = 3;
 			$config["num_links"] = 3;
 			$page_segment = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0; //Today Change
 			
-			$data['matches'] = $this->muse->mymatch_search($where_data, $keySearch,$config['per_page'], $offset/*$page_segment*/);
+			$data['matches'] = $this->muse->mymatch_search($where_data, $keySearch,$adminparam,$config['per_page'], $offset/*$page_segment*/);
 			
 			//pagination configuration
 			$config['first_link']  = 'First';
@@ -963,7 +983,8 @@ class Muser extends CI_Controller
 		}else {
 			$data = array(
 				'userid'=>$user_id,
-				'package_id'=>$packid
+				'package_id'=>$packid,
+				'package_status' =>0
 				  );
 	
 			if($this->matri->global_insert('user_package_opt', $data))

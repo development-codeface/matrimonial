@@ -112,6 +112,22 @@
                                 </div>
                                 <!--end col-md-8-->
                             </div>
+                            <div class="row" id="children" style="display:none;">
+                                <div class="col-md-6">
+                                <label for="title" class="col-form-label required">No. of child edit</label>
+                                        <select name="number_child">
+                                            <option value="0" <?php echo set_select( 'nokids', '0'); ?> > No Child </option>
+                                            <option value='1' <?php echo set_select( 'nokids', '1'); ?> > 1 </option>
+                                            <option value="2" <?php echo set_select( 'nokids', '2'); ?>> 2</option>
+                                            <option value="3" <?php echo set_select( 'nokids', '3'); ?>> 3</option>
+                                            <option value="4" <?php echo set_select( 'nokids', '4'); ?>> 4 </option>
+                                            <option value="5" <?php echo set_select( 'nokids', '5'); ?>> 5 </option>
+                                            <option value="6" <?php echo set_select( 'nokids', '6'); ?>> 6 </option>
+                                            <option value="7" <?php echo set_select( 'nokids', '7'); ?>> > 6 </option>
+                                        </select>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -219,6 +235,7 @@
                     <input type="hidden" name="udisability" value="<?php echo $this->muse->display_basic_info('user_profiles', array('user_id' => $this->tank_auth->get_user_id()), 'disability');?>">  
                     <input type="hidden" name="uhiv_positive" value="<?php echo $this->muse->display_basic_info('user_profiles', array( 'user_id' =>$this->tank_auth->get_user_id()), 'hiv_positive');?>">
                     <input type="hidden" name="uhiv_weight" value="<?php echo $this->muse->display_basic_info('user_profiles', array( 'user_id' =>$this->tank_auth->get_user_id()), 'weight');?>">
+                    <input type="hidden" name="uno_kids" value="<?php echo $this->muse->display_basic_info('user_profiles', array( 'user_id' =>$this->tank_auth->get_user_id()), 'nokids');?>">
                     
                 </div>
                 <div class="tab-pane fade" id="two-pills" role="tabpanel" aria-labelledby="two-tab-pills"></div>
@@ -279,7 +296,9 @@
 
 	  $udisability 		= $('input[name=udisability]').val();
 
-	  $uhiv_positive 	= $('input[name=uhiv_positive ]').val();
+      $uhiv_positive 	= $('input[name=uhiv_positive ]').val();
+      
+      $no_kids          = $('input[name=uno_kids]').val(); 
 
 	  $('select[name=country]').val($country_id);
 
@@ -293,7 +312,9 @@
 
 	  $('select[name=mtongue]').val($mtonuge_id);
 
-	  $('select[name=marital_status]').val($user_marital_status);
+      $('select[name=marital_status]').val($user_marital_status);
+      
+      $('select[name=number_child]').val($no_kids);
 
 	  $('input:radio[name=skin_tone][value='+$uskin_tone+']').attr("checked", "checked");
 

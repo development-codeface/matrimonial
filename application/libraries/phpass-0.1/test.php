@@ -16,7 +16,9 @@ $ok = 0;
 # the weaker portable hashes.
 $t_hasher = new PasswordHash(8, FALSE);
 
-$correct = "test12345";
+
+
+$correct = "pkeralamarry@0987";
 $hash = $t_hasher->HashPassword($correct);
 
 print "Hash: " . $hash . "\n";

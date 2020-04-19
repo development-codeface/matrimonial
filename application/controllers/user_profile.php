@@ -156,6 +156,7 @@ class User_profile extends CI_Controller
                         'disability'=>$this->input->post('disability'),
 						'hiv_positive'=>$this->input->post('hiv_positive'),
 						'about_me'  =>"",
+						'nokids' => $this->input->post('number_child'),
 						'profile_complete'=>1
 				);
 				$updateInfo = array (

@@ -106,6 +106,22 @@
                                 </div>
                                 <!--end col-md-8-->
                             </div>
+                            <div class="row" id="children" style="display:none;">
+                                <div class="col-md-6">
+                                <label for="title" class="col-form-label required">No. of child</label>
+                                <select name="number_child">
+                                    <option value="0" <?php echo set_select( 'nokids', '0'); ?> selected> No Child </option>
+                                    <option value='1' <?php echo set_select( 'nokids', '1'); ?> > 1 </option>
+                                    <option value="2" <?php echo set_select( 'nokids', '2'); ?>> 2</option>
+                                    <option value="3" <?php echo set_select( 'nokids', '3'); ?>> 3</option>
+                                    <option value="4" <?php echo set_select( 'nokids', '4'); ?>> 4 </option>
+                                    <option value="5" <?php echo set_select( 'nokids', '5'); ?>> 5 </option>
+                                    <option value="6" <?php echo set_select( 'nokids', '6'); ?>> 6 </option>
+                                    <option value="7" <?php echo set_select( 'nokids', '7'); ?>> > 6 </option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">

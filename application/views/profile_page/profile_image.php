@@ -34,7 +34,7 @@
                                     <section>
                                         <div class="row justify-content-center ">
                                             <div class="col-lg-7 col-md-7 signinbox">
-                                                <p style="text-align: center; padding:10px;"> You can upload up to 5 Photos. Only JPG, PNG, BMP formats are allowed and maximum file size up to 2 MB. </p>
+                                                <p style="text-align: center; padding:10px;"> You can upload your profile Photos. Only JPG, PNG, BMP formats are allowed and maximum file size up to 2 MB. </p>
                                                 <label class="cabinet center-block">
                                                     <figure class="fig">
                                                      <img src="" class="gambar img-responsive img-thumbnail" id="item-img-output" />
@@ -44,7 +44,7 @@
                                                 <div class="col-lg-8 col-md-9 col-sm-6 ">
                                                     <div class="form-group">
                                                         <input type="hidden" name="image-data" class="hidden-image-data" />
-                                                        <input type="submit" class="btn btn-primary large icon float-right"/>  
+                                                        <input type="submit" id="fileUpload" class="btn btn-primary large icon float-right"/>  
                                                     </div>
                                                 </div>
 

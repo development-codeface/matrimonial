@@ -28,6 +28,7 @@ class Admin extends CI_Controller
 		$config['base_url'] = base_url().'admin/alluser';	
 		$config['total_rows'] = $this->adminmodel->total_muser_data(NULL,NULL)->num_rows();
 		$data['totalcount']      = $config['total_rows'];
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
 		$config["num_links"] = 3;	
@@ -49,6 +50,7 @@ class Admin extends CI_Controller
 		$banstatus = $this->input->post('ban');
 		$banreason = $this->input->post('reason_ban');
 		$userid = $this->input->post('userid');
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
 		$data = array(
                 'banned' => ($banstatus == "yes") ? 1 : 0, 
                 'ban_reason'=>($banstatus == "yes") ? $banreason : "",
@@ -60,6 +62,7 @@ class Admin extends CI_Controller
 	function paymentrequest(){	
 		$data['matches'] = $this->adminmodel->pending_package_request();
 		$data['page'] =     'admin/paymentrequest';
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
@@ -123,6 +126,7 @@ class Admin extends CI_Controller
 	function blockeduser(){		
 		$data['matches'] = $this->adminmodel->total_blocked_user();
 		$data['page'] =     'admin/adminblockuser';
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
@@ -132,6 +136,7 @@ class Admin extends CI_Controller
 	function newphotoupdate(){
 		$data['matches'] = $this->adminmodel->new_newphotoupdate();
 		$data['page'] =     'admin/adminphotoupdated';
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
@@ -221,6 +226,7 @@ class Admin extends CI_Controller
 	function profileupdate(){
 		$data['matches'] = $this->adminmodel->profileUpdateRequest();
 		$data['page'] =     'admin/recentprofileupdate';
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
@@ -230,6 +236,7 @@ class Admin extends CI_Controller
 	function inactiveuser(){
 		$data['matches'] = $this->adminmodel->total_inactive_user();
 		$data['page'] =     'admin/inactiveusers';
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
@@ -262,6 +269,7 @@ class Admin extends CI_Controller
 		$data['totalcount']      = $config['total_rows'];
 		$config['per_page'] 	= 9; 
 		$config["uri_segment"] = 3;
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
 		$config["num_links"] = 3;	
 		//$data['matches'] = $this->muse->mymatch($field_val, $config['per_page'], 0/*$page_segment*/);
 		$config['first_link']  = 'First';

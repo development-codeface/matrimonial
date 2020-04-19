@@ -87,7 +87,7 @@
 						<select name="regFor" class=" col-md-4 form-control">
 						<option value=""> Created by </option>
 
-						    option value="self" label="Self" <?php echo set_select('profile_for', 'self'); ?>>Self</option>
+						    <option value="self" label="Self" <?php echo set_select('profile_for', 'self'); ?>>Self</option>
 
 						    <option value="family" label="Family" <?php echo set_select('profile_for', 'family'); ?>>Family</option>
 

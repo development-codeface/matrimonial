@@ -44,7 +44,7 @@
                                                 <div class="col-lg-8 col-md-9 col-sm-6 ">
                                                     <div class="form-group">
                                                         <input type="hidden" name="image-data" class="hidden-image-data" />
-                                                        <input type="submit" class="btn btn-primary large icon float-right"/>  
+                                                        <input type="submit" id="fileUpload" class="btn btn-primary large icon float-right"/>  
                                                     </div>
                                                 </div>
 
@@ -99,6 +99,10 @@
 </div>
 </div>
 </section>
+<script>
+   isResize  = true;
+
+ </script> 
 </section> 
 
 
