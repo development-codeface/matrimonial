@@ -867,7 +867,8 @@ class Muser extends CI_Controller
 		$ageto          = '';
 		
 		$get_user_search = $this->matri->global_get('user_search', array('user_id'=>$this->tank_auth->get_user_id()));
-		$where_data = array(
+		
+ 	    $where_data = array(
 			'gender' => !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : $admingender,
 			'activated' => 1,		
         );
@@ -887,12 +888,13 @@ class Muser extends CI_Controller
 				$comminity      = $row->community_id;
 				$disability		= $row->disability;
 				$hiv_positive		= $row->hiv_positive;
-				$keySearch      = $row->keyword == 0 ? "" :  $row->keyword;
+				$keySearch      = $row->keyword == "0" ? "" :  $row->keyword;
 				$admingender    = $row->gender;
 				$agefrom        = $row->agefrom;
 				$ageto          = $row->ageto;
 			}
 		}
+		echo "outside ".$keySearch;
 		$admingender    =  isset($admingender) ?  $admingender : '';
 		$field_val = array(
 			'gender' 				=> !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : $admingender,
@@ -933,7 +935,6 @@ class Muser extends CI_Controller
 			'agefrom' =>$agefrom ,
 			'ageto'   => $ageto
 		);
-		
 		
 		if($where_data !=NULL )
 		{
