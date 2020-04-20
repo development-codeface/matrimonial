@@ -894,7 +894,6 @@ class Muser extends CI_Controller
 				$ageto          = $row->ageto;
 			}
 		}
-		echo "outside ".$keySearch;
 		$admingender    =  isset($admingender) ?  $admingender : '';
 		$field_val = array(
 			'gender' 				=> !$this->tank_auth->is_admin_in() ? $this->muse->sex_match($this->tank_auth->get_user_id()) : $admingender,
