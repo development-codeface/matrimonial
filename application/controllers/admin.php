@@ -355,7 +355,7 @@ class Admin extends CI_Controller
 			redirect('/admin');
 		}
 		$data['page'] =     'admin/manageuser';
-		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['title'] =    'Admin - Manage Users';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='';
 		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
