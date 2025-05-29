@@ -348,6 +348,63 @@ class Admin extends CI_Controller
 		$data['descripation'] ='';
 		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
 	}
+
+	function manageusers(){
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
+	    if ($this->session->userdata('role') != '1'){
+			redirect('/admin');
+		}
+		$data['page'] =     'admin/manageuser';
+		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='';
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
+	}
+
+    function search_users() {
+
+		$keyword = $this->input->post('profile');
+		$data['users'] = $this->adminmodel->search_users_by_name_or_id($keyword);
+		$this->load->view('admin/user_result_ajax', $data);
+	}
+
+    function delete_user() {
+        $id = $this->input->post('id');
+
+        if (!$id) {
+            echo json_encode(['success' => false, 'message' => 'User ID missing']);
+            return;
+        }
+
+        // Soft delete: set delete_status = 'Yes'
+        $update =  $this->adminmodel->update_user($id, ['delete_status' => 'Yes']);
+
+        if ($update) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Update failed']);
+        }
+    }
+
+    function change_user_role() {
+        $id = $this->input->post('id');
+        $role = $this->input->post('role');
+
+        if (!$id || !$role) {
+            echo json_encode(['success' => false, 'message' => 'Missing parameters']);
+            return;
+        }
+
+        // Update role
+        $update =  $this->adminmodel->update_user($id, ['role' => $role]);
+
+        if ($update) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Update failed']);
+        }
+    }
+
 	
 	function addtotheuser(){
 		$addid = $this->input->post('useradd');

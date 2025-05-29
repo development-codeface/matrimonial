@@ -147,7 +147,7 @@ $config['recaptcha_private_key'] = '6Lcl-eASAAAAADBuuN9RzrgiM45WkmNML9C0CtRl';
 $config['db_table_prefix'] = '';
 
 
-$config['admin_memberid'] = 'PK013';
+$config['admin_memberid'] = 'PK014';
 
 
 /* End of file tank_auth.php */

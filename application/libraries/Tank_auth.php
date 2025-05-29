@@ -267,11 +267,16 @@ class Tank_auth
 	 * @param	bool
 	 * @return	bool
 	 */
-	function is_admin_in($activated = TRUE)
+	function is_admin_inold($activated = TRUE)
 	{
 		
 		return $this->ci->session->userdata('role') === '1' && $this->ci->session->userdata('member_id') == $this->ci->config->item('admin_memberid', 'tank_auth');
 	}
+
+	function is_admin_in($activated = TRUE)
+	{
+		return (($this->ci->session->userdata('role') === '1' && $this->ci->session->userdata('member_id') == $this->ci->config->item('admin_memberid', 'tank_auth'))|| $this->ci->session->userdata('role') === '3');
+    }
 
 	/**
 	 * Get user_id
