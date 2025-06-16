@@ -43,22 +43,33 @@
                         </div>
     <!--end page-->
     
-  <script src="<?php echo base_url();?>assets/js/jquery-3.3.1.min.js"></script>
-  <script type="text/javascript" src="<?php echo base_url();?>assets/js/popper.min.js"></script>
-	<script type="text/javascript" src="<?php echo base_url();?>assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="<?php echo base_url();?>assets/js/croppie.js"></script>
+  <script src="<?php echo base_url().SITE_THEME; ?>assets/js/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="<?php echo base_url().SITE_THEME; ?>assets/js/popper.min.js"></script>
+	<script type="text/javascript" src="<?php echo base_url().SITE_THEME; ?>assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url().SITE_THEME; ?>assets/js/croppie.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBEDfNcQRmKQEyulDN8nGWjLYPm8s4YB58&amp;libraries=places"></script>
-	<script src="<?php echo base_url();?>assets/js/selectize.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/masonry.pkgd.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/icheck.min.js"></script>
+	<script src="<?php echo base_url().SITE_THEME; ?>assets/js/selectize.min.js"></script>
+	<script src="<?php echo base_url().SITE_THEME; ?>assets/js/masonry.pkgd.min.js"></script>
+	<script src="<?php echo base_url().SITE_THEME; ?>assets/js/icheck.min.js"></script>
 	
 	<script src="../../../cdn.jsdelivr.net/npm/jquery-validation%401.17.0/dist/jquery.validate.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/jQuery.MultiFile.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/owl.carousel.min.js"></script>
-	<script src="<?php echo base_url();?>assets/js/custom.js"></script>
-  <script src="<?php echo base_url();?>assets/js/choosen.js"></script>
+	<script src="<?php echo base_url().SITE_THEME; ?>assets/js/jquery-validate.bootstrap-tooltip.min.js"></script>
+	<script src="<?php echo base_url().SITE_THEME; ?>assets/js/jQuery.MultiFile.min.js"></script>
+	<script src="<?php echo base_url().SITE_THEME; ?>assets/js/owl.carousel.min.js"></script>
+	<script src="<?php echo base_url().SITE_THEME; ?>assets/js/custom.js"></script>
+  <script src="<?php echo base_url().SITE_THEME; ?>assets/js/choosen.js"></script>
 
 
+<!--   <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+  <script type="text/javascript">
+      $(".chosen").chosen();
+  </script> -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $('#category').select2();   //id category commen\footer.php
+      });
+  </script>
+  
     </body>
 </html>

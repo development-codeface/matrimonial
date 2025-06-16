@@ -6,7 +6,7 @@
                     <!--============ Side Bar ===============================================================-->
                     <aside class="sidebar">
                         <?php 
-                        $this->load->view('site_theme/muser_navigation');   
+                        $this->load->view(SITE_THEME_FOR_VIEW.'site_theme/muser_navigation');   
                     ?>
                     </aside>
                     <!--============ End Side Bar ===========================================================-->
@@ -69,8 +69,10 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">State</label>
-                                                                    <div id="state">
+                                                                    <div>
+                                                                        <select name="state" id="state" class="state cstm_dropdown" >
                                                                         <?php echo $this->address->state();?>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <!--end form-group-->
@@ -81,8 +83,9 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">City</label>
-                                                                    <div id="city">
-                                                                        <?php echo $this->address->city();?>
+                                                                     <div>
+                                                                        <select name="city" id="city" class="city cstm_dropdown" >
+                                                                        <?php echo $this->address->city();?></select>
                                                                     </div>
                                                                 </div>
                                                                 <!--end form-group-->
@@ -93,7 +96,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Mother tongue</label>
-                                                                    <select name="mtongue">
+                                                                    <select name="mtongue" id="mtongue" class=" cstm_dropdown">
                                                                         <option value=""> Select </option>
                                                                         <?php
                                             if(isset($mother_tongue))
@@ -114,7 +117,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Marital Status</label>
-                                                                    <select name="marital_status">
+                                                                    <select name="marital_status" id="martial_status" class=" cstm_dropdown">
                                                                         <option value=""> Select </option>
                                                                         <option value='never married' <?php echo set_select( 'marital_status', 'never married'); ?> selected> Not Married </option>
                                                                         <option value="divorced" <?php echo set_select( 'marital_status', 'divorced'); ?>> Divorced </option>
@@ -131,7 +134,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Age from </label>
-                                                                    <select name="age">
+                                                                    <select name="age" id="agefrom" class=" cstm_dropdown" >
                                                                         <option value="">Select </option>
                                                                         <?php
                                             for($i=18;$i<70;$i++)
@@ -145,7 +148,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Age To </label>
-                                                                    <select name="ageto">
+                                                                    <select name="ageto"  id="ageto" class=" cstm_dropdown">
                                                                         <option value="">Select </option>
                                                                         <?php
                                             for($i=18;$i<70;$i++)

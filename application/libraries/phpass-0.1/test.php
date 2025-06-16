@@ -16,12 +16,10 @@ $ok = 0;
 # the weaker portable hashes.
 $t_hasher = new PasswordHash(8, FALSE);
 
-
-
-$correct = "pkeralamarry@0987";
+$correct = "codeface@9867";
 $hash = $t_hasher->HashPassword($correct);
 
-print "Hash: " . $hash . "\n";
+print "Hash: " . $hash . "\n"; 
 
 $check = $t_hasher->CheckPassword($correct, $hash);
 if ($check) $ok++;

@@ -31,7 +31,37 @@
                     <section class=" signinbox content a-bg2">
                         <section class="block">
                             <div class="container">
-                                <form action="<?php echo base_url();?>muser/profile_image_change" method="post">
+                                <?php if(PARENT_WEBSITE_FLAG == true){ ?>
+                                     <form action="<?php echo base_url();?>muser/profile_image_change" method="post">
+                                        <section>
+                                            <div class="row justify-content-center ">
+                                                <div class="col-lg-7 col-md-7 signinbox">
+                                                    <p style="text-align: center; padding:10px;"> You can upload your profile Photos. Only JPG, PNG, BMP formats are allowed and maximum file size up to 2 MB. </p>
+                                                    <label class="cabinet center-block">
+                                                        <figure class="fig">
+                                                            <?php     
+                                                                if($this->muse->display_value('user_file', array('user_id'=>$this->tank_auth->get_user_id(), 'profile_img'=>1), 'user_id') >= 1)
+                                                                {
+                                                                    echo "<img src = '".$this->muse->display_my_photo(array('users.id'=>$this->tank_auth->get_user_id()))."'  style='border: 2px solid #FE4D01;' alt='mplan' class='img-responsive img-thumbnail' id='item-img-output' >";
+                                                                }else{
+                                                                    redirect('update_profile/photo');
+                                                                }?>
+                                                        </figure>
+                                                        <input type="file" class="item-img file center-block" name="file_photo" />
+                                                    </label>
+                                                    <div class="col-lg-8 col-md-9 col-sm-6 ">
+                                                        <div class="form-group">
+                                                            <input type="hidden" name="image-data" class="hidden-image-data" />
+                                                            <input type="submit"  class="btn btn-primary large icon float-right"/>  
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </form>
+                                <?php }else{ ?>
+                                <form action="" method="post"> 
                                     <section>
                                         <div class="row justify-content-center ">
                                             <div class="col-lg-7 col-md-7 signinbox">
@@ -59,6 +89,12 @@
                                         </div>
                                     </section>
                                 </form>
+                                <?php   } ?>  
+
+
+
+
+
                                 <!--end form-submit-->
                             </div>
                             <!--end container-->

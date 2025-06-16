@@ -31,6 +31,7 @@
                         <section class="block">
                             <div class="container">
                                 <form action="<?php echo base_url();?>user_profile/insert_pimage" method="post">
+                                
                                     <section>
                                         <div class="row justify-content-center ">
                                             <div class="col-lg-7 col-md-7 signinbox">

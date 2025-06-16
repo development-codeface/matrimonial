@@ -9,7 +9,15 @@ $mobile_no = array(
 	
 	'class'	=> 'form-control',
 		   );
-
+$whatsapp_no = array(
+    'type' =>'tel',
+    'name' => 'whatsapp_no',
+    'required' =>'required',
+    'id' => 'phone',
+    'placeholder'=>'Whatsapp No',
+    'value' => $this->muse->display_value('users', array('id'=>$this->tank_auth->get_user_id()),'whatsapp_no'),    
+    'class' => 'form-control',
+           );
 
 ?>
 <section class="content">
@@ -20,7 +28,7 @@ $mobile_no = array(
                     <!--============ Side Bar ===============================================================-->
                     <aside class="sidebar">
                         <?php 
-                        $this->load->view('site_theme/muser_navigation');   
+                        $this->load->view(SITE_THEME_FOR_VIEW.'site_theme/muser_navigation');   
                     ?>
                     </aside>
                     <!--============ End Side Bar ===========================================================-->
@@ -51,7 +59,22 @@ $mobile_no = array(
                                                             <?php echo form_error('name');?>
                                                             </td>
                                                         </tr>
-                                                        
+
+                                                        <tr> 
+                                                            <td class="col-md-3"> Gender 
+                                                                <?php 
+                                                                $gender=  $this->muse->display_value('users', array('id'=>$this->tank_auth->get_user_id()),'gender');                                   
+                                                                ?>
+                                                            </td>
+
+                                                             <td class="col-md-4">
+                                                                <?php if(isset($this->session->userdata['logged_in_as'])&&($this->session->userdata['logged_in_as'] == 'admin')){ 
+                                                                    ?>                         
+                                                                <input type="radio" class="form-controler" name="gender" value="male" <?=(($gender == 'male')?'checked':'')?>> Male
+                                                                <input type="radio" class="form-controler" name="gender" value="female" <?=(($gender == 'female')?'checked':'')?> > Female
+                                                                <?php }else{  echo ucfirst(strtolower($gender)); }?>
+                                                            </td>
+                                                        </tr>
                                                         <tr>
                                                             <td class="col-md-3"> Date Of Birthday</td> <td class="col-md-4">
                                                             <select name="day" id="day" style="width:90px" required>
@@ -105,6 +128,13 @@ $mobile_no = array(
                                                                     </select>						
                                                                     <select name="year" id="year"  style="width:100px" required>
                                                                         <option value="" label="Year" selected="selected">Year</option>
+                                                                        <option value="2004" label="2004">2004</option>
+                                                                        <option value="2003" label="2003">2003</option>
+                                                                        <option value="2002" label="2002">2002</option>
+                                                                         <option value="2001" label="2001">2001</option>
+                                                                        <option value="2000" label="2000">2000</option>
+                                                                        <option value="1999" label="1999">1999</option>
+                                          <option value="1998" label="1998">1998</option>                              
                                                                         <option value="1997" label="1997">1997</option>
                                                                         <option value="1996" label="1996">1996</option>
                                                                         <option value="1995" label="1995">1995</option>
@@ -171,7 +201,12 @@ $mobile_no = array(
                                                             <?php echo form_error('mobile_no');?>
                                                         </td>
                                                         </tr>
-                                                        
+                                                        <tr>
+                                                            <td class="col-md-3"> WhatsApp No.</td> <td class="col-md-4">
+                                                            <?php echo form_input($whatsapp_no); ?>
+                                                            <?php echo form_error('whatsapp_no');?>
+                                                        </td>
+                                                        </tr>
                                                         <tr> <td class="col-md-3"> Mobile number show </td> <td class="col-md-4">
                                                         <input type="radio" class="form-controler" name="mobile_display" value="1"> Yes
                                                         <input type="radio" class="form-controler" name="mobile_display" value="0"> No</td>
@@ -191,7 +226,16 @@ $mobile_no = array(
                                                         </tr>
                                                     </table>
                                                     </form>
+                                                </div> 
+                                                <?php 
+                                                    $session_data = $this->session->all_userdata();
+                                                 if(isset($session_data['logged_in_as'])&&($session_data['logged_in_as'] == 'admin')){ ?>
+                                                <div class="col-md-12 pt-5 text-right">
+                                                    <form action="<?=base_url('auth/delete_account')?>" id="form_delete_account" method="post">
+                                                        <button type="button" data-toggle="modal"  data-backdrop="static" data-target="#myModal" class="btn btn-danger"><i class="fa fa-trash"></i>  Delete Account</button>
+                                                    </form>
                                                 </div>
+                                                <?php  } ?>
                                             </div>
                                         </div>
                                         <input type="hidden" name="db_mobile_display" value="<?php echo $this->muse->display_value('account_setting', array('user_id'=>$this->tank_auth->get_user_id()),'display_mobile');?>">
@@ -214,9 +258,51 @@ $mobile_no = array(
 </section>   
 
 
+    <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title"><i class="fa fa-trash"></i> CONFIRM DELETE</h4>
+        <button type="button" class="close delete_modal_close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body text-center"> <i class="fa fa-user-times" style="font-size: 22px"></i>
+       <h3 class="">Are you sure you want to delete your account  ?<br> <small><b>( <?=$this->muse->display_value('users', array('id'=>$this->tank_auth->get_user_id()),'email')?> )</b></small></h3>
+            
+      </div>
+      <div class="modal-footer">
 
+        <button type="button" class="btn btn-info delete_modal_close" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+        <button class="btn btn-sm btn-danger" id="confirm_delete_account" ><i class="fa fa-check"></i> Yes, Continue to Delete</button>
+      </div>
+    </div>
 
+  </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#confirm_delete_account').on('click',function(){
+            $('.delete_modal_close').prop('disabled', true)
+            $('#confirm_delete_account').prop('disabled', true).html('<i class="fa fa-spin fa-spinner"></i> Deleting...');
+            // setTimeout(function(){ 
+                $.ajax({
+                    type: "POST",
+                    url:"<?=base_url()?>" + 'auth/delete_account', 
+                    success: function(data) { 
+                    $('#confirm_delete_account').prop('disabled', true).html('<i class="fa fa-check"></i>Account Deleted.');
+                      window.location.href = "<?=base_url()?>";
+                    },
+                    error: function() {                       
+                    }
+                });
+            // }, 500);
+            // $('#form_delete_account').submit();
+        });
+    });
+</script>
 <!-- for change value -->
 <script type="text/javascript">
      $(document).ready(function(){

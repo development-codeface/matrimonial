@@ -18,7 +18,7 @@ class Forme extends CI_Controller
 	}
         //geting userinformation
         function get_user($user_id = NULL)
-        {
+        { 
             if ($this->tank_auth->is_admin_in()){
                 redirect('/fulluserdetail/'.$user_id);
             }
@@ -39,14 +39,14 @@ class Forme extends CI_Controller
                      );
                 
                     $data['main_id'] = $user_id;
-                    $data['matches'] = $this->matri->total_muser_data($field_val);
+                    $data['matches'] = $this->matri->total_muser_data_new($field_val); //edited by safir 
                     $data['isadmin'] = $this->tank_auth->is_admin_in();
                     $data['suggestion'] = $this->matri->randomuser($field_match);
                     $data['userid']  = $user_id ;
                     $data['page'] =     'muser/mhome';
                     $data['title'] =    'Muser | Home Page | Mplan';
                     $data['descripation'] ='';
-                    $this->load->view('site_theme/site_containt', $data);
+                    $this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
             }            
         }
 }

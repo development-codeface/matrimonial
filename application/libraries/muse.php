@@ -19,7 +19,7 @@ class Muse
 		$ci =  & get_instance();
 		$ci->load->model('matri');
 		$data['gheight'] = $ci->matri->global_select('height');
-		echo "<select name='".$hname."' class='".$class."' ".$event.">";
+		echo "<select name='".$hname."' id='".$hname."' class='".$class."' ".$event.">";
 		echo "<option value=''>Select </option>";
 		foreach($data['gheight']->result() as $row)
 		{
@@ -51,6 +51,43 @@ class Muse
 				  });
 			</script>";
 	}
+	
+	function gaddstatus($hname=NULL, $class=NULL, $event=NULL, $select=NULL)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$data = array(1=> 'ACTIVE', 0=>'INACTIVE');
+		echo "<select name='".$hname."' class='".$class."' ".$event.">";
+	
+		foreach($data as $i => $item)
+		{
+			echo "<option value='".$i."' ". set_select($select, $i) .">".$item."</option>";
+		}
+			echo "</select>";
+			echo "<script type='text/javascript'>
+			$(document).ready(function(){
+			$('select[name=$hname]').val($select);
+				  });
+			</script>";
+	}
+	
+	function get_user_add($hname=NULL, $class=NULL, $event=NULL, $select=NULL){
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		$data = $ci->matri->global_get('useradvertisement', array('ad_status'=>1));
+		echo "<select name='".$hname."' class='".$class."' ".$event.">";
+		echo "<option value=''>Select </option>";
+		foreach($data->result() as $item)
+		{
+			echo "<option value='".$item->id."' ". set_select($select, $i) .">".$item->ad_name."</option>";
+		}
+			echo "</select>";
+			echo "<script type='text/javascript'>
+			$(document).ready(function(){
+			$('select[name=$hname]').val($select);
+				  });
+			</script>";
+	}
 
     function mother_tongue($event= NULL)
         {
@@ -59,7 +96,7 @@ class Muse
             
                         $data['mother_tongue'] = $ci->matri->global_select('mother_tongue');
                         
-                        echo "<select name='mtongue' id='mtongue' ".$event.">";
+                        echo "<select class='cstm_dropdown' name='mtongue' id='mtongue' ".$event.">";
                         echo "<option value=''> Mother Tongue </option>";
                         foreach($data['mother_tongue']->result() as $row)
                         {
@@ -83,7 +120,8 @@ class Muse
 		$ci =  & get_instance();
 		$ci->load->model('matri');
 		$data['religion'] = $ci->matri->global_select('religion');
-		 echo "<select name='religion' id='religion' ".$event.">";
+		$dis_ena = (COMMUNITY_CONDITION_ACTIVATED?"disabled='disabled'":'');
+		 echo "<select class='cstm_dropdown' name='religion' id='religion' ".$event." ".$dis_ena." >";
                             echo "<option value=''>  Religion </option>";
 		    if(isset($data['religion']))
                             {
@@ -100,8 +138,8 @@ class Muse
 		$ci =  & get_instance();
 		$ci->load->model('matri');
 		$data['community'] = $ci->matri->get_community('community' ,'religion_id', $religion_id );
-		
-		echo "<select name='community' id='community'> ";
+		$dis_ena = (COMMUNITY_CONDITION_ACTIVATED?"disabled='disabled'":'');
+		echo "<select name='community' class='cstm_dropdown' id='community' ".$dis_ena."> ";
 		echo "<option value=''>  Community </option>";
 		foreach($data['community']->result() as $row)
 		{
@@ -115,7 +153,7 @@ class Muse
 		$ci =  & get_instance();
 		$ci->load->model('matri');
 		$data['nashathram'] = $ci->matri->global_select('nashathram');
-		 echo "<select name='nashathram' id='nashathram' ".$event.">";
+		 echo "<select name='nashathram' class='cstm_dropdown' id='nashathram' ".$event.">";
                             echo "<option value=''>  Star </option>";
 		    if(isset($data['nashathram']))
                             {
@@ -134,7 +172,7 @@ class Muse
 		$ci->load->model('matri');
 		$data['edu_level'] = $ci->matri->global_select('education_level'); //retrive in data base
                 
-			echo "<select name='edu_level' id='edu_level' ".$event.">";
+			echo "<select class='cstm_dropdown' name='edu_level' id='edu_level' ".$event.">";
                         echo "<option value=''>Education Level</option>";
                         
                             if(isset($data['edu_level']))
@@ -152,7 +190,7 @@ class Muse
 		$ci =  & get_instance();
 		$ci->load->model('matri');
 		$data['edu_field'] = $ci->matri->global_select('education_field'); //retrive in data base
-                echo "<select name='edu_field' ".$event.">";
+                echo "<select class='cstm_dropdown' id='edu_field' name='edu_field' ".$event.">";
                             echo "<option value=''> Select</option>";
                             
                             if(isset($data['edu_field']))
@@ -170,7 +208,7 @@ class Muse
 		$ci =  & get_instance();
 		$ci->load->model('matri');
 		$data['work_with'] = $ci->matri->global_select('working_with'); //retrive in data base
-                 echo "<select name='work_with' ".$event.">";
+                 echo "<select class='cstm_dropdown' id='working_with' name='work_with' ".$event.">";
                             echo "<option value=''> Select</option>";
                             
                             if(isset($data['work_with']))
@@ -188,7 +226,7 @@ class Muse
 		$ci =  & get_instance();
 		$ci->load->model('matri');
 		$data['work_as'] = $ci->matri->global_select('working_as'); //retrive in data base
-		echo "<select name='work_as' ".$event.">";
+		echo "<select class='cstm_dropdown 'id='work_as' name='work_as' ".$event.">";
                             echo "<option value=''> Select</option>";
                             
                             if(isset($data['work_as']))
@@ -293,7 +331,7 @@ class Muse
 		}
 		else
 		{
-			$user = $ci->matri->global_where('users', array('id'=>$user_id));
+			$user = $ci->matri->global_where('users', array('id'=>$user_id,'delete_status'=>'No'));
 			foreach($user->result() as $row)
 			{
 				$sex = $row->gender;
@@ -328,7 +366,7 @@ class Muse
 			return $sex;
 		}
 	}
-
+	
 	function get_aboutus($user_id = null)
 	{
 		$ci =  & get_instance();

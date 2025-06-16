@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$root = "http://".$_SERVER['HTTP_HOST'];
+$root = "https://".$_SERVER['HTTP_HOST'];
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 $config['base_url'] = $root; //"http://mplan.orbitplus.org/";
 
@@ -29,6 +29,7 @@ $config['base_url'] = $root; //"http://mplan.orbitplus.org/";
 |
 */
 $config['index_page'] = '';
+
 
 /*
 |--------------------------------------------------------------------------
@@ -246,18 +247,7 @@ $config['encryption_key'] = 'Dti33!+B@A48x|Q';
 | 'sess_match_useragent'	= Whether to match the User Agent when reading the session data
 | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
 |
-
-$config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
-$config['sess_expire_on_close']	        = FALSE;
-$config['sess_encrypt_cookie']	        = FALSE;
-$config['sess_use_database']	        = TRUE;
-$config['sess_table_name']		= 'ci_sessions';
-$config['sess_match_ip']		= TRUE;
-$config['sess_match_useragent'] 	= TRUE;
-$config['sess_time_to_update']	        = 300;
 */
-
 $config['sess_cookie_name']     = 'ci_session';
 $config['sess_expiration']      = 0;
 $config['sess_expire_on_close'] = FALSE;
@@ -375,3 +365,8 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
+
+/* Website Settings for Religion and Caste */
+
+
+

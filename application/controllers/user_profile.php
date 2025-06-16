@@ -43,7 +43,7 @@ class User_profile extends CI_Controller
 					$data['keywords'] ='mplan.in, Matrimonial,shaadi, free register , marriage , community, religion, marriage plan, planmyparriage, marriage solution, marriage event';
 					$data['descripation'] ='mplan.in trusted matrimonial website. register now free at mplan.in marriage. you can access mobile number.';
 					$data['mother_tongue'] = $this->matri->global_select('mother_tongue');
-					$this->load->view('site_theme/update_containt',$data);
+					$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/update_containt',$data);
 				}
 			
         }
@@ -76,7 +76,7 @@ class User_profile extends CI_Controller
 								$data['title'] = 'Profile Image | Mplan | Matrimonial';
 								$data['descripation'] ='';
 								$data['error'] = $error;
-								$this->load->view('site_theme/update_containt',$data);
+								$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/update_containt',$data);
 						}
 						else
 						{
@@ -101,7 +101,7 @@ class User_profile extends CI_Controller
 				$data['title'] = 'Profile Image | Mplan | Matrimonial';
 				$data['descripation'] ='';
 				$data['error'] = $error;
-				$this->load->view('site_theme/update_containt',$data);
+				$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/update_containt',$data);
 			}else{
 				redirect('muser/horoscop');
 			}		

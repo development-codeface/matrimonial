@@ -49,9 +49,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = "localhost";
-$db['default']['username'] = "root";
-$db['default']['password'] = "root";
-$db['default']['database'] = "mplan";
+$db['default']['username'] = "theweddinghub_user";
+$db['default']['password'] = "(C$3L(QLv=-a";
+$db['default']['database'] = "theweddinghub_db";
 $db['default']['dbdriver'] = 'mysqli';
 $db['default']['dbprefix'] = "";
 $db['default']['pconnect'] = TRUE;
@@ -63,6 +63,7 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
+
 
 
 

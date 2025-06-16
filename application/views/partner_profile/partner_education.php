@@ -6,7 +6,7 @@
                     <!--============ Side Bar ===============================================================-->
                     <aside class="sidebar">
                         <?php 
-                        $this->load->view('site_theme/muser_navigation');   
+                        $this->load->view(SITE_THEME_FOR_VIEW.'site_theme/muser_navigation');   
                     ?>
                     </aside>
                     <!--============ End Side Bar ===========================================================-->
@@ -52,7 +52,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Education Level</label>
-                                                                    <select name="edu_level">
+                                                                    <select name="edu_level" id="edu_level" class="cstm_dropdown">
                                                                         <option value=""> Select</option>
                                                                         <?php
                                                                     if(isset($edu_level))
@@ -73,7 +73,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Education Field</label>
-                                                                    <select name="edu_field">
+                                                                    <select name="edu_field" id="edu_field" class="cstm_dropdown">
                                                                         <option value=""> Select</option>
                                                                         <?php
                                                                     if(isset($edu_field))
@@ -95,7 +95,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Working With</label>
-                                                                    <select name="work_with">
+                                                                    <select name="work_with" id="working_with" class="cstm_dropdown">
                                                                         <option value=""> Select</option>
                                                                         <?php
                                                                     if(isset($work_with))
@@ -116,7 +116,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Working As</label>
-                                                                    <select name="work_as">
+                                                                    <select name="work_as" id="work_as" class="cstm_dropdown">
                                                                         <option value=""> Select</option>
                                                                         <?php
                                                                     if(isset($work_as))
@@ -137,7 +137,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Annual income</label>
-                                                                    <select name="annual_income">
+                                                                    <select name="annual_income" id="annual_income" class="cstm_dropdown">
                                                                         <option value=""> Select </option>
                                                                         <option value="60000" label="60,000">60,000</option>
                                                                         <option value="90000" label="90,000">90,000</option>

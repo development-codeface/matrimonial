@@ -261,15 +261,16 @@ class Ajax_pagination{
 
         if( $this->div == '')
             return '<li class=\"page-item\"> <a href="'. $this->anchor_class . ' ' . $this->base_url . $count . '">'. $text .'</a></li>';
-            
         $pageCount = $count?$count:0;
         $this->additional_param = "{'page' : $pageCount}";
-
+        // safir starts
 		return "<li class=\"page-item\"> <a class=\"page-link\" href=\"javascript:void(0);\"
 		         " . $this->anchor_class . "
-					onclick=\"$.post('". $this->base_url . $count ."', ". $this->additional_param .", function(data){
+					onclick=\"$('html, body').animate({scrollTop : 0},700);$('.items').html('');$('.loader').show();$.post('". $this->base_url . $count ."', ". $this->additional_param .", function(data){
+
 					$('#". $this->div . "').html(data)" . $this->js_rebind ."; }); return false;\">"
 				. $text .'</a></li>';
+		// safir ends
 	}
 
 }

@@ -320,6 +320,13 @@ $error_message = "<small class=\"error\">".form_error($captcha['name'])."</small
 </select>						
 <select name="year" id="year"  style="width:100px" required>
     <option value="" label="Year" selected="selected">Year</option>
+    <option value="2004" label="2004">2004</option>
+    <option value="2003" label="2003">2003</option>
+    <option value="2002" label="2002">2002</option>
+    <option value="2001" label="2001">2001</option>
+    <option value="2000" label="2000">2000</option>
+    <option value="1999" label="1999">1999</option>
+    <option value="1998" label="1998">1998</option>
     <option value="1997" label="1997">1997</option>
     <option value="1996" label="1996">1996</option>
     <option value="1995" label="1995">1995</option>

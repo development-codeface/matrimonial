@@ -54,7 +54,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="title" class="col-form-label required">Community</label>
-                                        <div id="community">
+                                        <div>
                                             <?php $this->muse->get_community($this->muse->display_value('user_background', array('user_id'=>$this->tank_auth->get_user_id()), 'religion_id'));?>
                                         </div>
                                     </div>

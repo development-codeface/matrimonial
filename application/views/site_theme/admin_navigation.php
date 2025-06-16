@@ -18,8 +18,15 @@
                                         <li>
                                             <a href="<?php echo base_url();?>admin/paymentrequest">Payment request</a>
                                         </li>
+                                        <li>
+                                            <a href="<?php echo base_url();?>admin/listAdvertisement">Advertisement Management</a>
+                                        </li>
                                         
-                                        
+                                        <?php if ($this->session->userdata('role') === '1'): ?>
+                                        <li>
+                                            <a href="<?php echo base_url(); ?>admin/manageusers">Manage Users</a>
+                                        </li>
+                                        <?php endif; ?>
                                        
                                         
                                         <!--<li>

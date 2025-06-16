@@ -23,7 +23,7 @@ class Welcome extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan';
         $data['descripation'] ='';
 		$data['page'] = 'commen/contact';
-		$this->load->view('commen/containt',$data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'commen/containt',$data);
 	}
 	function privacypolicy()
 	{
@@ -31,7 +31,7 @@ class Welcome extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan';
         $data['descripation'] ='';
 		$data['page'] = 'commen/privacypolicy';
-		$this->load->view('commen/containt',$data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'commen/containt',$data);
 	}
 	function terms_conditions()
 	{
@@ -39,7 +39,7 @@ class Welcome extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan';
         $data['descripation'] ='';
 		$data['page'] = 'commen/terms-conditions';
-		$this->load->view('commen/containt',$data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'commen/containt',$data);
 	}
 
 	function about_us()
@@ -48,16 +48,16 @@ class Welcome extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan';
         $data['descripation'] ='';
 		$data['page'] = 'commen/about-us';
-		$this->load->view('commen/containt',$data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'commen/containt',$data);
 	}
-
+	
 	function sucess_story()
 	{
 		$data['page'] =     'muser/payment_option';
 		$data['title'] =    'Muser | Home Page | Mplan';
         $data['descripation'] ='';
 		$data['page'] = 'commen/sucess_story';
-		$this->load->view('commen/containt',$data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'commen/containt',$data);
 	}
 	function send_message()
 	{
@@ -76,10 +76,10 @@ class Welcome extends CI_Controller
 			if($this->muse->send_feedback($email, $subject, $message) == true)
 			{
 				$data = array(
-				      'email' => $email,
-				      'subject'=>$subject,
-				      'message'=>$message
-				      );
+						      'email' => $email,
+						      'subject'=>$subject,
+						      'message'=>$message
+						      );
 				$query = $this->matri->global_insert('feedback_message', $data);
 				if($query>0)
 				{

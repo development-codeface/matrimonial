@@ -10,13 +10,15 @@ class Auth extends CI_Controller
 
 	function new_home()
 	{
-		$this->load->view('home_theme/index');			
+		$this->load->view(SITE_THEME_FOR_VIEW.'home_theme/index');			
 	}
 	function index()
 	{
+		
+
 		if ($message = $this->session->flashdata('message')) {
 			redirect('/muser/matches');
-			//$this->load->view('auth/general_message', array('message' => $message));
+			//$this->load->view(SITE_THEME_FOR_VIEW.'auth/general_message', array('message' => $message));
 		} else {
 			redirect('/auth/login/');
 		}
@@ -24,7 +26,15 @@ class Auth extends CI_Controller
 	/**
 	 * irshad illisa
 	 */
+	function loginAs($id=''){
+		$login_data = $this->tank_auth->login_as($id);
+
+	}
+	function backToAdmin($id='',$delete_msg='false'){
+		$login_data = $this->tank_auth->back_to_admin($id,$delete_msg);
+	}
 	function signin(){
+
 		if ($this->tank_auth->is_logged_in())
 		{									// logged in
 			redirect('/muser/matches');
@@ -34,7 +44,7 @@ class Auth extends CI_Controller
 			redirect('/auth/send_again/');
 		}else{
 			$data['page'] = 'auth/singin_form'; //change by shiva manhar 
-			$this->load->view('template/containt', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'template/containt', $data);
 		}	
 	}
 	/**
@@ -44,16 +54,19 @@ class Auth extends CI_Controller
 	 */
 	function login()
 	{
-		
 		if ($this->tank_auth->is_logged_in())
-		{									// logged in
+		{		
+		 
+									// logged in
 			redirect('/muser/matches');
 
-		} elseif ($this->tank_auth->is_logged_in(FALSE)) {						// logged in, not activated
+		} elseif ($this->tank_auth->is_logged_in(FALSE)){						// logged in, not activated
+		 
 			
 			redirect('/auth/send_again/');
 
 		} else {
+
 			$data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
 			$this->config->item('use_username', 'tank_auth'));
 			$data['login_by_email'] = $this->config->item('login_by_email', 'tank_auth');
@@ -89,8 +102,10 @@ class Auth extends CI_Controller
 					$data['login_by_username'],
 					$data['login_by_email'])) {								// success
 						if($this->tank_auth->is_admin_in()){
+
 							redirect('/admin'); 
 						}else if ($this->tank_auth->is_logged_in()){ 
+
 							redirect('/muser/matches'); 
 						}
 
@@ -125,7 +140,7 @@ class Auth extends CI_Controller
 				}
 			}			
 			$data['page'] = 'auth/singin_form'; //change by shiva manhar 
-			$this->load->view('template/containt', $data);			
+			$this->load->view(SITE_THEME_FOR_VIEW.'template/containt', $data);			
 		}
 	}
 
@@ -148,7 +163,8 @@ class Auth extends CI_Controller
 	 */
 	
 	function register()
-	{
+	{ 
+
 		if($this->tank_auth->is_admin_in()){
 			redirect('/admin');
 		}
@@ -163,7 +179,6 @@ class Auth extends CI_Controller
 			echo "registration disabled";
 
 		} else {
-
 			$use_username = $this->config->item('use_username', 'tank_auth');
 			if ($use_username) {
 				$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean|min_length['.$this->config->item('username_min_length', 'tank_auth').']|max_length['.$this->config->item('username_max_length', 'tank_auth').']|alpha_dash');
@@ -215,7 +230,8 @@ class Auth extends CI_Controller
 						$this->form_validation->set_value('profile_for'),
 						$this->form_validation->set_value('gender'),
 						$dob,
-						$email_activation))
+						$email_activation,WEBSITE_ID
+					  ))
 						) {
 					$data['login_by_username'] = ($this->config->item('login_by_username', 'tank_auth') AND
 					$this->config->item('use_username', 'tank_auth'));
@@ -269,9 +285,10 @@ class Auth extends CI_Controller
 			$data['captcha_registration'] = $captcha_registration;
 			$data['use_recaptcha'] = $use_recaptcha;
 			$data['lateProfile']   = $this->matri->getlatestprofile();
+			 
 			$data['page'] = 'auth/login_form';
-			$this->load->view('template/containt', $data);
-			//$this->load->view('auth/register_form', $data); //change by shiva manhar
+			$this->load->view(SITE_THEME_FOR_VIEW.'template/containt', $data);
+			//$this->load->view(SITE_THEME_FOR_VIEW.'auth/register_form', $data); //change by shiva manhar
 		}
 	}
 	
@@ -307,7 +324,7 @@ class Auth extends CI_Controller
 				}
 			}
 			$data['page'] = 'auth/send_again_form';
-			$this->load->view('site_theme/partner_containt', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 		}
 	}
 
@@ -368,8 +385,8 @@ class Auth extends CI_Controller
 				}
 			}
 			$data['page'] = 'auth/forgot_password_form';
-			$this->load->view('site_theme/partner_containt', $data);
-			//$this->load->view('auth/forgot_password_form', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
+			//$this->load->view(SITE_THEME_FOR_VIEW.'auth/forgot_password_form', $data);
 		}
 	}
 
@@ -415,7 +432,7 @@ class Auth extends CI_Controller
 				$this->_show_message($this->lang->line('auth_message_new_password_failed'));
 			}
 		}
-		$this->load->view('auth/reset_password_form', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'auth/reset_password_form', $data);
 	}
 
 	/**
@@ -446,7 +463,7 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/change_password_form', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'auth/change_password_form', $data);
 		}
 	}
 
@@ -483,7 +500,7 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/change_email_form', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'auth/change_email_form', $data);
 		}
 	}
 
@@ -534,7 +551,7 @@ class Auth extends CI_Controller
 					foreach ($errors as $k => $v)	$data['errors'][$k] = $this->lang->line($v);
 				}
 			}
-			$this->load->view('auth/unregister_form', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'auth/unregister_form', $data);
 		}
 	}
 
@@ -565,8 +582,8 @@ class Auth extends CI_Controller
 		//$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
 		$this->email->to($email);
 		$this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), $this->config->item('website_name', 'tank_auth')));
-		$this->email->message($this->load->view('email/'.$type.'-html', $data, TRUE));
-		//$this->email->set_alt_message($this->load->view('email/'.$type.'-txt', $data, TRUE));
+		$this->email->message($this->load->view(SITE_THEME_FOR_VIEW.'email/'.$type.'-html', $data, TRUE));
+		//$this->email->set_alt_message($this->load->view(SITE_THEME_FOR_VIEW.'email/'.$type.'-txt', $data, TRUE));
 		$this->email->send();
 	}
 
@@ -663,5 +680,24 @@ class Auth extends CI_Controller
 			return FALSE;
 		}
 		return TRUE;
+	}
+
+	public function delete_account()
+	{  
+
+		$userId = $this->session->userdata('user_id');
+		if($this->session->userdata('logged_in_as') == 'admin')
+		{ 
+
+			$last_admin_id = $this->session->userdata('logged_in_from_id');
+			$this->users->delete_account($userId); 
+			$this->backToAdmin($last_admin_id,'true');
+		}else{
+			$this->users->delete_account($userId);
+ 			$this->session->set_flashdata('success_delete_account', 'Account has been successfully deleted !');
+			$this->logout();
+		}
+	 
+
 	}
 }?>

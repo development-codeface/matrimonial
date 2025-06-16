@@ -1,4 +1,4 @@
-  <?php
+      <?php
   /* database data access */
   /*block for testing 
   
@@ -7,6 +7,7 @@
   {
     foreach($matches->result() as $row)
     {
+        // var_dump($row);
         $name             = $row->firstname." ".$row->lastname;
         $marital_status   = $row->marital_status;
         $heightto         = $row->global_height;
@@ -57,6 +58,8 @@
         $update_description  = $row->abouthobbies;
         $update_profId    = $row->update_profile_id; 
         $horoscope        = $row->horoscope; 
+        $horoscope_birth_time        = $row->horoscope_birth_time; 
+        $horoscope_birth_place        = $row->horoscope_birth_place; 
         $nokid            = $row->nokids; 
     }
   }
@@ -124,7 +127,6 @@
                     <div class="container clearfix">
                         <div class="float-left float-xs-none col-md-10">
                             <h1> <?php if(isset($name)){echo ucwords($name);} else {echo "NULL";}?>
-                               
                             </h1>
                            
                             <h4 class="location">
@@ -149,7 +151,21 @@
 
                     </div>
                     <!--end container-->
-                </div><div class="col-md-12 col-sm-12"><a href="#" class="btn btn-primary text-caps small"><i class="fa fa-heart-o" aria-hidden="true"></i> Send interest</a> <a href="#" class="btn btn-secondary text-caps small"><i class="fa fa-star-o" aria-hidden="true"></i> Shortlist </a> <a href="#" class="btn btn-secondary text-caps small"> <i class="fa fa-envelope-o" aria-hidden="true"></i> Send Message </a> </div>
+                </div>
+                <div class="col-md-12 col-sm-12">
+                    <a href="#" class="btn btn-primary text-caps small">
+                        <i class="fa fa-heart-o" aria-hidden="true"></i> Send interest
+                    </a> 
+                    <a href="#" class="btn btn-secondary text-caps small">
+                        <i class="fa fa-star-o" aria-hidden="true"></i> Shortlist 
+                    </a> 
+                    <a href="#" class="btn btn-secondary text-caps small"> 
+                        <i class="fa fa-envelope-o" aria-hidden="true"></i> Send Message 
+                    </a> 
+                    <a href="<?=base_url('auth/loginAs')?>/<?=$userid?>" class="btn btn-info float-right text-caps small"> 
+                        <i class="fa fa-sign-in" aria-hidden="true"></i> Login to Edit Profile 
+                    </a> 
+                </div>
                       <!--end Gallery Carousel--> </div>
 
 
@@ -321,6 +337,26 @@
                             </section>
                             
                             <section class=" signinbox">
+                                <form class="hero-form form" action="<?php echo base_url();?>admin/addtotheuser" method="post"> 
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                    <h2>Add advertisement to the user</h2>
+                                    
+                                    <?php $this->muse->get_user_add('useradd', '45 cstm_dropdown' ,"id='weight' ", $user_add);?>
+                                   <input type="hidden" name="userid" value="<?php echo $userid?>" />
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                            <input type="submit" value="save" />
+                                    </div>
+                                </div>
+
+                                </form>
+                            </section>
+                            
+                            <section class=" signinbox">
                                 <form class="hero-form form" action="<?php echo base_url();?>admin/banuse" method="post">   
                                 <div class="row">
                                     <div class="col-md-6">
@@ -371,11 +407,18 @@
                             <section class=" signinbox">
                                 <h2>Horoscope</h2>
                                 <p>
-                                <?php if(isset($horoscope)){ ?> 
+                                <?php /* if(isset($horoscope)){ ?> 
                                     <img src="<?php echo $horoscope ?>" alt="" data-hash="1">
                                 <?php }else { ?> 
                                 
-                                <?php } ?>     
+                                <?php } */ ?>  
+                                <dl> 
+                                    <dt ><label class="b-w">Birth Time </label> </dt>
+                                    <dd class="text-align-right dt-bg"><label class="b-w">&nbsp; <?php echo  (isset($horoscope_birth_time)? date('d-M-Y h:i A',strtotime($horoscope_birth_time)):'NIL'); ?></label></dd>
+                                    <dt ><label class="b-w">Birth Place </label> </dt>
+                                    <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;  <?php echo  (isset($horoscope_birth_place)? $horoscope_birth_place:'NIL'); ?></label></dd>
+                                </dl> 
+                                         
                                 </p>
                             </section>
 
@@ -422,7 +465,7 @@
                                                         </div>
                                                    </div>
 
-                                                <? } elseif($row->package_status == 2){ ?>
+                                                <?php } elseif($row->package_status == 2){ ?> 
                                                     <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;Package Rejected</label></dd>
                                                 <?php }else {?>
                                                     <dd class="text-align-right dt-bg"><label class="b-w">&nbsp;Package expired</label></dd>

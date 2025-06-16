@@ -94,7 +94,7 @@ class Message extends CI_Controller
 		$config['last_tag_close'] 	= '</li>';
 		$this->pagination->initialize($config); 
 		$data['create_link'] = $this->pagination->create_links();
-		$this->load->view('site_theme/partner_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 	}
 	function inbox()
 	{
@@ -126,7 +126,7 @@ class Message extends CI_Controller
 		$config['last_tag_close'] 	= '</li>';
 		$this->pagination->initialize($config); 
 		$data['create_link'] = $this->pagination->create_links();
-		$this->load->view('site_theme/partner_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 	}
 	
 	//get theme //
@@ -156,7 +156,7 @@ class Message extends CI_Controller
 		
 		$this->email->to($email);
 		$this->email->subject($subject);
-		$this->email->message($this->load->view('email/muser_msg', $data, TRUE));		
+		$this->email->message($this->load->view(SITE_THEME_FOR_VIEW.'email/muser_msg', $data, TRUE));		
 		$this->email->send();
 	}
 }

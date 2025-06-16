@@ -732,7 +732,7 @@ class Template
 			{
 				$this->_ci->load->vars($data);
 				
-				// Load it directly, bypassing $this->load->view() as ME resets _ci_view
+				// Load it directly, bypassing $this->load->view(SITE_THEME_FOR_VIEW.) as ME resets _ci_view
 				$content = $this->_ci->load->file(
 					$override_view_path.$view.self::_ext($view),
 					TRUE

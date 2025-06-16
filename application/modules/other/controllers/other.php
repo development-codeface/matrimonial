@@ -4,7 +4,7 @@ class Other extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('users_view');
+		$this->load->view(SITE_THEME_FOR_VIEW.'users_view');
 	}
 	public function offer()
 	{

@@ -99,8 +99,8 @@ class Auth_oa2 extends CI_Controller
 		$this->email->reply_to($this->config->item('webmaster_email', 'tank_auth'), $this->config->item('website_name', 'tank_auth'));
 		$this->email->to($email);
 		$this->email->subject(sprintf($this->lang->line('auth_subject_'.$type), $this->config->item('website_name', 'tank_auth')));
-		$this->email->message($this->load->view('email/'.$type.'-html', $data, TRUE));
-		$this->email->set_alt_message($this->load->view('email/'.$type.'-txt', $data, TRUE));
+		$this->email->message($this->load->view(SITE_THEME_FOR_VIEW.'email/'.$type.'-html', $data, TRUE));
+		$this->email->set_alt_message($this->load->view(SITE_THEME_FOR_VIEW.'email/'.$type.'-txt', $data, TRUE));
 		$this->email->send();
 	}
 }?>

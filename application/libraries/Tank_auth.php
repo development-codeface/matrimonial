@@ -42,23 +42,26 @@ class Tank_auth
 	 */
 	function login($login, $password, $remember, $login_by_username, $login_by_email)
 	{
+		//var_dump("tank login");exit;
 		if ((strlen($login) > 0) AND (strlen($password) > 0)) {
 
 			// Which function to use to login (based on config)
-			if ($login_by_username AND $login_by_email) {
+			if ($login_by_username AND $login_by_email) { 
 				$get_user_func = 'get_user_by_login';
-			} else if ($login_by_username) {
+			} else if ($login_by_username) {  
 				$get_user_func = 'get_user_by_username';
-			} else {
+			} else { 
 				$get_user_func = 'get_user_by_email';
 			}
-
+			$sample = $this->ci->users->$get_user_func($login);
+			//var_dump($get_user_func);exit;
 			if (!is_null($user = $this->ci->users->$get_user_func($login))) {	// login ok
-
+				 
 				// Does password match hash in database?
 				$hasher = new PasswordHash(
 						$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
 						$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
+				//var_dump($hasher->CheckPassword($password, $user->password));exit;
 				if ($hasher->CheckPassword($password, $user->password)) {		// password ok
 
 					if ($user->banned == 1) {									// fail - banned
@@ -68,13 +71,14 @@ class Tank_auth
 						$this->ci->session->set_userdata(array(
 								'user_id'	=> $user->id,
 								'username'	=> $user->username,
+								'member_id' => $user->member_id,
+								'base_site_id' => $user->base_site_id,
 								'role'      => $user->role,
 								'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
 						));
-
+						// var_dump($this->ci->session->all_userdata());exit;
 						if ($user->activated == 0) {							// fail - not activated
 							$this->error = array('not_activated' => '');
-
 						} else {												// success
 							if ($remember) {
 								$this->create_autologin($user->id);
@@ -100,8 +104,79 @@ class Tank_auth
 		}
 		return FALSE;
 	}
+	function get_community_details($user_id = null)
+	{
+		$ci =  & get_instance();
+		$ci->load->model('matri');
+		
+		if($user_id == NULL)
+		{
+			return 0;
+		}
+		else
+		{
+			$user = $this->ci->matri->get_user_community_db($user_id);
+			 
+		}
+	}
+	public function login_as($id='')
+	{ 
+		$last_id = $this->ci->session->userdata['user_id'];
+		$user = $this->ci->users->get_user_by_id($id,true);
+		if($this->ci->session->userdata['role'] == 1){
+			$this->ci->session->set_userdata(array(
+					'user_id'	=> $user->id,
+					'username'	=> $user->username,
+					'email'		=> $user->email,
+					'role'      => $user->role,
+					'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+					'logged_in_as'=>'admin',
+					'logged_in_from_id'=>$last_id,
+			));
+		}	
+		redirect(' ');
+	
+	}
+	public function back_to_admin($id='', $delete_msg='false')
+	{
+		 
+		
+		$user = $this->ci->users->get_user_by_id($id,true);
+		$this->ci->session->unset_userdata(array('email'=>'',
+												'logged_in_as'=>'',
+												'logged_in_from_id'=>''));
 
-
+		$this->ci->session->set_userdata(array(
+				'user_id'	=> $user->id,
+				'username'	=> $user->username,
+				'role'      => $user->role,
+				'status'	=> ($user->activated == 1) ? STATUS_ACTIVATED : STATUS_NOT_ACTIVATED,
+		)); 
+		 
+		if($delete_msg == 'true'){ 
+			$this->ci->session->set_flashdata('success_delete_account', 'Account has been successfully deleted !');
+		}
+		
+		redirect(' ');
+		 
+	}
+	// start Community related settings 
+    public function communityConditions( $joinUsersBackground='true', 
+    									 $Religion = SITE_RELIGION_STATUS ,
+    									 $Community = SITE_COMMUNITY_STATUS, 
+    									 $Condition_activated = COMMUNITY_CONDITION_ACTIVATED ){  
+    	if($Condition_activated){
+	    	if($joinUsersBackground == 'true'){
+	    		$this->ci->db->join('user_background', 'user_background.user_id = users.id',  'left'); 
+	    	}
+	    	if($Religion){
+	    		$this->ci->db->where('user_background.religion_id',SITE_RELIGION_ID);
+	    	}
+	    	if($Community){    	
+	    		$this->ci->db->where('user_background.community_id',SITE_COMMUNITY_ID); 
+	    	}
+	    }
+    }
 	/**
 	 * Login user with Oauth2. Return TRUE if login is successful
 	 * (user exists and activated, password is correct), otherwise FALSE.
@@ -113,6 +188,7 @@ class Tank_auth
 	 */
 	function login_oa2($login, $image)
 	{
+		//var_dump("expression login_oa2");exit;
 		if ((strlen($login) > 0)) {
 
 			// Which function to use to login (based on config)
@@ -191,10 +267,16 @@ class Tank_auth
 	 * @param	bool
 	 * @return	bool
 	 */
+	function is_admin_inold($activated = TRUE)
+	{
+		
+		return $this->ci->session->userdata('role') === '1' && $this->ci->session->userdata('member_id') == $this->ci->config->item('admin_memberid', 'tank_auth');
+	}
+
 	function is_admin_in($activated = TRUE)
 	{
-		return $this->ci->session->userdata('role') === '1';
-	}
+		return (($this->ci->session->userdata('role') === '1' && $this->ci->session->userdata('member_id') == $this->ci->config->item('admin_memberid', 'tank_auth'))|| $this->ci->session->userdata('role') === '3');
+    }
 
 	/**
 	 * Get user_id
@@ -226,7 +308,7 @@ class Tank_auth
 	 * @param	bool
 	 * @return	array
 	 */
-	function create_user($username, $firstname, /*$lastname,*/ $email, $password, $mobile_no, $profile_for, $gender, $dob, $email_activation)
+	function create_user($username, $firstname, /*$lastname,*/ $email, $password, $mobile_no, $profile_for, $gender, $dob, $email_activation, $website_id)
 	{
 		if ((strlen($username) > 0) AND !$this->ci->users->is_username_available($username)) {
 			$this->error = array('username' => 'auth_username_in_use');
@@ -242,6 +324,7 @@ class Tank_auth
 					$this->ci->config->item('phpass_hash_strength', 'tank_auth'),
 					$this->ci->config->item('phpass_hash_portable', 'tank_auth'));
 			$hashed_password = $hasher->HashPassword($password);
+			
 
 			$data = array(
 				'username'		=> $username,
@@ -254,6 +337,7 @@ class Tank_auth
 				'gender'		=> $gender,
 				'dob'			=> $dob,
 				'last_ip'		=> $this->ci->input->ip_address(),
+				'base_site_id'  => $website_id
 			);
 
 			if ($email_activation) {
@@ -661,7 +745,7 @@ class Tank_auth
 	private function autologin()
 	{
 		if (!$this->is_logged_in() AND !$this->is_logged_in(FALSE)) {			// not logged in (as any user)
-
+			//var_dump("expression-autologin");exit;
 			$this->ci->load->helper('cookie');
 			if ($cookie = get_cookie($this->ci->config->item('autologin_cookie_name', 'tank_auth'), TRUE)) {
 
@@ -670,6 +754,7 @@ class Tank_auth
 				if (isset($data['key']) AND isset($data['user_id'])) {
 
 					$this->ci->load->model('tank_auth/user_autologin');
+
 					if (!is_null($user = $this->ci->user_autologin->get($data['user_id'], md5($data['key'])))) {
 
 						// Login user

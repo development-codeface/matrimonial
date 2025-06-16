@@ -306,7 +306,9 @@ if ( ! function_exists('show_error'))
 	function show_error($message, $status_code = 500, $heading = 'An Error Was Encountered')
 	{
 		$_error =& load_class('Exceptions', 'core');
-		echo $_error->show_error($heading, $message, 'error_general', $status_code);
+		// echo $_error->show_error($heading, $message, 'error_general', $status_code);
+		echo $_error->show_error($heading, $message, 'error_404_new', $status_code);
+		
 		exit;
 	}
 }

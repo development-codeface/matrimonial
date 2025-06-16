@@ -6,7 +6,7 @@
                     <!--============ Side Bar ===============================================================-->
                     <aside class="sidebar">
                         <?php 
-                        $this->load->view('site_theme/muser_navigation');   
+                        $this->load->view(SITE_THEME_FOR_VIEW.'site_theme/muser_navigation');   
                     ?>
                     </aside>
                     <!--============ End Side Bar ===========================================================-->
@@ -48,7 +48,9 @@
                                                             echo '<p>'.form_error('drink').'</p>';
                                                             ?>
                                                         </div>
+                                                        <?php if(COMMUNITY_CONDITION_ACTIVATED != true){ ?>
                                                         <div class="row">
+
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Religion</label>
@@ -69,19 +71,23 @@
                                                             </div>
                                                             <!--end col-md-8-->
                                                         </div>
+
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="title" class="col-form-label required">Community</label>
-                                                                    <div id="community">
-                                                                    
-                                                                    </div>
+                                                                    <!-- <div id="community">
+                                                                        
+                                                                    </div> -->
+                                                                    <select name="community" id="community">                             
+                                                                    </select>
+
                                                                 </div>
                                                                 <!--end form-group-->
                                                             </div>
                                                             <!--end col-md-8-->
                                                         </div>
-
+                                                        <?php } ?>
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="form-group">

@@ -33,7 +33,7 @@ class Partner_Profile extends CI_Controller
 			$data['title'] =    'Muser | Home Page | Mplan';
 			$data['descripation'] ='';
 			$data['mother_tongue'] = $this->matri->global_select('mother_tongue');
-			$this->load->view('site_theme/partner_containt', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 		   }
 		
 	}
@@ -52,7 +52,7 @@ class Partner_Profile extends CI_Controller
 			$data['edu_field'] = $this->matri->global_select('education_field'); //retrive in data base
 			$data['work_with'] = $this->matri->global_select('working_with'); //retrive in data base
 			$data['work_as'] = $this->matri->global_select('working_as'); //retrive in data base
-			$this->load->view('site_theme/partner_containt', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 		}
 		
 	}
@@ -68,7 +68,7 @@ class Partner_Profile extends CI_Controller
 			$data['title'] =    'Muser | Home Page | Mplan';
 			$data['descripation'] ='';
 			$data['religion'] = $this->matri->global_select('religion'); //retrive in data base
-			$this->load->view('site_theme/partner_containt', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 		}
 		
 		
@@ -78,14 +78,14 @@ class Partner_Profile extends CI_Controller
 		$data['page'] =     'partner_profile/partner_family';
 		$data['title'] =    'Muser | Home Page | Mplan';
 		$data['descripation'] ='';
-		$this->load->view('site_theme/partner_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 	}
 	public function partner_hobbies($user_id = NULL)
 	{
 		$data['page'] =     'partner_profile/partner_hobbies';
 		$data['title'] =    'Muser | Home Page | Mplan';
 		$data['descripation'] ='';
-		$this->load->view('site_theme/partner_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 	}
 	public function partner_lifestyle($user_id = NULL)
 	{
@@ -98,7 +98,7 @@ class Partner_Profile extends CI_Controller
 			$data['page'] =     'partner_profile/partner_lifestyle';
 			$data['title'] =    'Muser | Home Page | Mplan';
 			$data['descripation'] ='';
-			$this->load->view('site_theme/partner_containt', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 		}
 		
 		
@@ -207,27 +207,29 @@ class Partner_Profile extends CI_Controller
 	}	
 	/*after complete partner profile */
 	function pinsert_background()
-	{
+	{ 
 		$this->form_validation->set_error_delimiters("<tr > <td colspan='2' class='ferror' style='line-height: 15px;'>", '</td></tr>');
-		$this->form_validation->set_rules('religion','Religion','required|xss_clean');
-		$this->form_validation->set_rules('community','Community','required|xss_clean');
-		$this->form_validation->set_rules('sub_community','Community','required|xss_clean');
+		// $this->form_validation->set_rules('religion','Religion','required|xss_clean');
+		// $this->form_validation->set_rules('community','Community','required|xss_clean');
+		$this->form_validation->set_rules('sub_commuinty','Community','required|xss_clean');
 		$this->form_validation->set_rules('diet','Diet','required|xss_clean');
 		$this->form_validation->set_rules('smoke','Smoke','required|xss_clean');
 		$this->form_validation->set_rules('drink','Drink','required|xss_clean');
             if($this->form_validation->run() == false)
             {
-                
+            	 
                 $this->partner_background();
             }
             else
-            {
+            {  
                 $data = array
                 (
                         'user_id' => $this->tank_auth->get_user_id(),
-                        'preligion_id' => $this->input->post('religion'),
-                        'pcommunity_id' => $this->input->post('community'),
-                        'psub_community' => $this->input->post('subcommunity'),
+                        // 'preligion_id' => $this->input->post('religion'),
+                        // 'pcommunity_id' => $this->input->post('community'),
+                        'preligion_id' => (COMMUNITY_CONDITION_ACTIVATED)?SITE_RELIGION_ID:$this->input->post('religion'),
+                        'pcommunity_id' => (COMMUNITY_CONDITION_ACTIVATED)?SITE_COMMUNITY_ID:$this->input->post('community'),
+                        'psub_community' => $this->input->post('sub_commuinty'),
                                                
                 );
 				$this->matri->global_insert('partner_background', $data);
@@ -303,7 +305,7 @@ class Partner_Profile extends CI_Controller
 				);
 		$data['matches'] = $this->matri->partner_data($field_val);
 		$data['mother_tongue'] = $this->matri->global_select('mother_tongue');
-		$this->load->view('site_theme/partner_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 	}	
 	private function complete_edu_page()
 	{
@@ -314,7 +316,7 @@ class Partner_Profile extends CI_Controller
 				   'users.id' => $this->tank_auth->get_user_id()
 				);
 		$data['matches'] = $this->matri->partner_data($field_val);
-		$this->load->view('site_theme/partner_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 	}
 	function complete_background()
 	{
@@ -348,7 +350,7 @@ class Partner_Profile extends CI_Controller
 				   'users.id' => $this->tank_auth->get_user_id()
 				);
 		$data['matches'] = $this->matri->get_partner_background($field_val);
-		$this->load->view('site_theme/partner_containt', $data);		
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);		
 	}
 	private function complete_lifestyle_page()
 	{
@@ -360,7 +362,7 @@ class Partner_Profile extends CI_Controller
 				   'user_id' => $this->tank_auth->get_user_id()
 				);
 		$data['matches'] = $this->matri->and_where('partner_lifestyle',$field_val);
-		$this->load->view('site_theme/partner_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/partner_containt', $data);
 	}
 	/*edit profile */
 	/*partner profile update */

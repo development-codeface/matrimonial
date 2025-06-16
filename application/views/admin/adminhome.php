@@ -1,32 +1,46 @@
 <section class="content">
+
             <section class="block">
                 <div class="container">
+                    <?php  if($this->session->flashdata('success_delete_account')){ ?>
+                            <div class="alert alert-warning alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                <strong>Successfully Deleted! </strong> <?php echo $this->session->flashdata('success_delete_account')?>.
+                            </div>
+                        <?php } ?>
                     <div class="row">
                         <div class="col-md-3">
                             <!--============ Side Bar ===============================================================-->
                             <aside class="sidebar">
                             <?php 
-                                $this->load->view('site_theme/admin_navigation');   
-                                $this->load->view('site_theme/site_search_box');
+                                $this->load->view(SITE_THEME_FOR_VIEW.'site_theme/admin_navigation');   
+                                $this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_search_box');
                                 
                             ?>   
                             </aside>
                             <!--============ End Side Bar ===========================================================-->
                         </div>
+
                         <!--end col-md-3-->
                         <!--============ Listing Detail =============================================================-->
                         <div class="col-lg-9 col-md-12 col-sm-12">
 
-
+                                
 
                        <!--============ Section Title===================================================================-->
                          <section class=" signinbox" id="matches_change">  
+
                             <?php if(isset($matches)){ ?> 
                                 <h2> <?php echo $totalcount ?> Profiles </h2>
                             <?php } ?>
-
+                             <!-- safir starts -->
+                                <div class="loader d-flex justify-content-center " style="font-size: 35px; display: none !important;">
+                                    <i class="fa-spin fa fa-circle-o-notch"></i>
+                                </div>
+                                <!-- safir ends -->
                             <!--============ Items ==========================================================================-->
                             <div class="items grid compact grid-xl-3-items grid-lg-3-items grid-md-2-items">
+                               
                                 <?php
                                   //metches data retrive //
                                   if(isset($matches)){
@@ -41,7 +55,7 @@
                                                 <a href="<?php echo base_url();?>fulluserdetail/<?php echo $row->muser_id;?>" class="title"><?php echo ucfirst($row->firstname); ?></a>
                                
                                             </h3>
-                                            <a href="<?php echo base_url();?>fulluserdetail/<?php echo $row->muser_id;?>" class="image-wrapper background-image">
+                                            <a href="<?php echo base_url();?>fulluserdetail/<?php echo $row->muser_id;?>" class="image-wrapper background-image" >
                                             <?php
                                                 if($row->path != NULL){?>
                                                         <img src="<?php echo $row->path;?>"  alt="">
@@ -65,11 +79,11 @@
                                             <figure>
                                                 <i class="fa fa-calendar-o"></i><?php echo $this->muse->agecal($row->dob) ." Year"; ?>
                                             </figure>
-                                            <figure>
+                                            <!-- <figure>
                                                 <a href="#">
                                                     <i class="fa fa-user"></i>5 Ft 3 In
                                                 </a>
-                                            </figure>
+                                            </figure> -->
                                         </div>
                                         <!--end meta-->
                                     

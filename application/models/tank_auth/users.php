@@ -35,7 +35,6 @@ class Users extends CI_Model
 	{
 		$this->db->where('id', $user_id);
 		$this->db->where('activated', $activated ? 1 : 0);
-
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
@@ -49,12 +48,29 @@ class Users extends CI_Model
 	 */
 	function get_user_by_login($login)
 	{
-		$this->db->where('LOWER(username)=', strtolower($login));
-		$this->db->or_where('LOWER(email)=', strtolower($login));
+		// $this->db->where('LOWER(username)=', strtolower($login));
+		// $this->db->where('users.delete_status', 'No');
 
+		// $this->db->or_where('LOWER(email)=', strtolower($login));
+
+		// $query = $this->db->get($this->table_name);
+		// if ($query->num_rows() == 1) return $query->row();
+		// return NULL;
+		$this->db->where('LOWER(username)=', strtolower($email));
+		$this->db->where('users.delete_status', 'No');
 		$query = $this->db->get($this->table_name);
-		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
+		$rowValues = $query->row();
+		if($rowValues->role == 1){ 
+			if ($query->num_rows() == 1) return $query->row();
+		} else{ 
+			$this->db->select('users.*,user_background.religion_id,user_background.community_id');
+			
+			$this->db->where('LOWER(username)=', strtolower($email));
+			$this->db->where('users.delete_status', 'No');
+			$this->tank_auth->communityConditions(); 
+			$qry = $this->db->get($this->table_name);
+			if ($qry->num_rows() == 1) return $qry->row();
+		}
 	}
 
 	/**
@@ -65,12 +81,30 @@ class Users extends CI_Model
 	 */
 	function get_user_by_username($username)
 	{
-		$this->db->where('LOWER(username)=', strtolower($username));
+		// $this->db->where('LOWER(username)=', strtolower($username));
+		// $this->db->where('users.delete_status', 'No');
 
+		// $query = $this->db->get($this->table_name);
+		// if ($query->num_rows() == 1) return $query->row();
+		// return NULL;
+		$this->db->where('LOWER(username)=', strtolower($email));
+		$this->db->where('users.delete_status', 'No');
 		$query = $this->db->get($this->table_name);
-		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
+		$rowValues = $query->row();
+		if($rowValues->role == 1){ 
+			if ($query->num_rows() == 1) return $query->row();
+		} else{ 
+			$this->db->select('*');
+
+			$this->db->where('LOWER(username)=', strtolower($email));
+			$this->db->where('users.delete_status', 'No');
+			$this->tank_auth->communityConditions(); 
+			$qry = $this->db->get($this->table_name);
+			if ($qry->num_rows() == 1) return $qry->row();
+		}
 	}
+
+
 
 	/**
 	 * Get user record by email
@@ -80,11 +114,23 @@ class Users extends CI_Model
 	 */
 	function get_user_by_email($email)
 	{
+		//var_dump($this->table_name,$email);exit;
 		$this->db->where('LOWER(email)=', strtolower($email));
-
+		$this->db->where('users.delete_status', 'No');
 		$query = $this->db->get($this->table_name);
-		if ($query->num_rows() == 1) return $query->row();
-		return NULL;
+		$rowValues = $query->row();
+		if($rowValues->role == 1){  
+			if ($query->num_rows() == 1) return ($query->row());
+		} else{ 
+			$this->db->select('*');
+			$this->db->where('LOWER(email)=', strtolower($email));
+			$this->db->where('users.delete_status', 'No');
+			$this->tank_auth->communityConditions(); 
+			$qry = $this->db->get($this->table_name);
+			if ($qry->num_rows() == 1) return ($qry->row()); 
+		}
+		// if ($query->num_rows() == 1) return $query->row();
+	    return NULL;
 	}
 
 	/**
@@ -97,6 +143,7 @@ class Users extends CI_Model
 	{
 		$this->db->select('1', FALSE);
 		$this->db->where('LOWER(username)=', strtolower($username));
+		$this->db->where('users.delete_status', 'No');
 
 		$query = $this->db->get($this->table_name);
 		return $query->num_rows() == 0;
@@ -112,6 +159,7 @@ class Users extends CI_Model
 	{
 		$this->db->select('1', FALSE);
 		$this->db->where('LOWER(email)=', strtolower($email));
+		$this->db->where('users.delete_status', 'No');
 		$this->db->or_where('LOWER(new_email)=', strtolower($email));
 
 		$query = $this->db->get($this->table_name);
@@ -129,6 +177,7 @@ class Users extends CI_Model
 		$this->db->select('1', FALSE);
 		$this->db->where('LOWER(mobile_no)=', strtolower($mobile));
 		$this->db->or_where('LOWER(mobile_no)=', strtolower($mobile));
+		$this->db->where('users.delete_status', 'No');
 
 		$query = $this->db->get($this->table_name);
 		return $query->num_rows() == 0;
@@ -149,10 +198,26 @@ class Users extends CI_Model
 
 		if ($this->db->insert($this->table_name, $data)) {
 			$user_id = $this->db->insert_id();
-			if ($activated)	$this->create_profile($user_id);
+			$this->user_community_set($user_id);
+			if ($activated)	$this->create_profile($user_id); 	
 			return array('user_id' => $user_id);
 		}
 		return NULL;
+	}
+	public function user_community_set($userId)
+	{
+	    if(COMMUNITY_CONDITION_ACTIVATED){
+	        $religion_id = SITE_RELIGION_ID;
+		    $community_id = SITE_COMMUNITY_ID;
+    		$data = array(
+    		        'user_id' => $userId,
+    		        'religion_id' => $religion_id,
+    		        'community_id' => $community_id
+    		);
+		    $this->db->insert('user_background', $data);
+	    }
+		
+		return true;
 	}
 
 	/**
@@ -174,6 +239,8 @@ class Users extends CI_Model
 			$this->db->where('new_password_key', $activation_key);
 		}
 		$this->db->where('activated', 0);
+		$this->db->where('users.delete_status', 'No');
+
 		$query = $this->db->get($this->table_name);
 
 		if ($query->num_rows() == 1) {
@@ -198,6 +265,8 @@ class Users extends CI_Model
 	function purge_na($expire_period = 172800)
 	{
 		$this->db->where('activated', 0);
+		$this->db->where('users.delete_status', 'No');
+		
 		$this->db->where('UNIX_TIMESTAMP(created) <', time() - $expire_period);
 		$this->db->delete($this->table_name);
 	}
@@ -251,6 +320,7 @@ class Users extends CI_Model
 		$this->db->where('id', $user_id);
 		$this->db->where('new_password_key', $new_pass_key);
 		$this->db->where('UNIX_TIMESTAMP(new_password_requested) >', time() - $expire_period);
+		$this->db->where('users.delete_status', 'No');
 
 		$query = $this->db->get($this->table_name);
 		return $query->num_rows() == 1;
@@ -273,7 +343,7 @@ class Users extends CI_Model
 		$this->db->where('id', $user_id);
 		$this->db->where('new_password_key', $new_pass_key);
 		$this->db->where('UNIX_TIMESTAMP(new_password_requested) >=', time() - $expire_period);
-
+		
 		$this->db->update($this->table_name);
 		return $this->db->affected_rows() > 0;
 	}
@@ -408,6 +478,12 @@ class Users extends CI_Model
 	{
 		$this->db->where('user_id', $user_id);
 		$this->db->delete($this->profile_table_name);
+	}
+	public function delete_account($uId='')
+	{ 
+		$this->db->where('id', $uId);
+		$this->db->update('users',['delete_status'=>'Yes']);
+		
 	}
 }
 ?>

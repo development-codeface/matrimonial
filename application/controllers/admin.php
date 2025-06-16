@@ -18,8 +18,8 @@ class Admin extends CI_Controller
 		}
                 
     }
-    function index($user_id = NULL){
-	
+    function index($user_id = NULL){	
+
 		if($user_id == NULL)
 		{
 			$user_id = $this->tank_auth->get_user_id();
@@ -39,11 +39,12 @@ class Admin extends CI_Controller
 		$data['create_link'] = $this->pagination->create_links();
 
 		$data['matches'] = $this->adminmodel->total_muser_data($config['per_page'], 0);
+
 		$data['page'] =     'admin/adminhome';
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
-		$this->load->view('site_theme/site_containt', $data);    
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);    
 	}
 	
 	function banuse(){
@@ -66,9 +67,10 @@ class Admin extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
-		$this->load->view('site_theme/site_containt', $data); 
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data); 
 	}
 	function userdetail($user_id = NULL){
+
 		if($user_id == NULL){
                 echo "Profile Not Complete!";
         }else{
@@ -85,7 +87,7 @@ class Admin extends CI_Controller
 			$data['page'] =     'admin/userdetail';
 			$data['title'] =    'Muser | Home Page | Mplan';
 			$data['descripation'] ='';
-			$this->load->view('site_theme/site_containt', $data);
+			$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
         } 
 	}
 	function package_activate(){
@@ -130,7 +132,7 @@ class Admin extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
-		$this->load->view('site_theme/site_containt', $data); 
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data); 
 	}
 
 	function newphotoupdate(){
@@ -140,7 +142,7 @@ class Admin extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
-		$this->load->view('site_theme/site_containt', $data); 
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data); 
 	}
 	function approveimage(){
 		$imageid 		= $this->input->post('updateid');
@@ -230,7 +232,7 @@ class Admin extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
-		$this->load->view('site_theme/site_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
 	}
 
 	function inactiveuser(){
@@ -240,7 +242,7 @@ class Admin extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
-		$this->load->view('site_theme/site_containt', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
 	}
 
 	function activateuser(){
@@ -282,7 +284,139 @@ class Admin extends CI_Controller
 		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
 		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
 		$data['descripation'] ='Mplan.in best matrimonial service website. We are providing online matchmaking. We are using advanced search technology. Registraion is free. Create your profile and start searching for prospective brides and grooms today';
-		$this->load->view('muser/ajaxMaches', $data);
+		$this->load->view(SITE_THEME_FOR_VIEW.'muser/ajaxMaches', $data);
+	}
+	
+	function insert_adddetail(){
+		$addtitle = $this->input->post('addtitle');
+		$adddiscription = $this->input->post('adddiscption');
+		$addid = $this->input->post('add_id');
+		$addstatus = $this->input->post('addstatus');
+		$addurl = $this->input->post('addurl');
+		$addimagePath = NULL;
+		$updateInfo = array (
+			"ad_status" => $addstatus
+		);
+		if(isset($addtitle))
+			$updateInfo['ad_name'] = $addtitle;
+		if(isset($adddiscription))
+			$updateInfo['ad_description'] = trim($adddiscription);
+		if(isset($addurl))
+			$updateInfo['ad_url'] = trim($addurl);
+
+		if($this->input->post('image-data'))
+		{
+			
+			$image_contents =file_get_contents($this->input->post('image-data'));
+			
+			$image_detail = getimagesizefromstring($image_contents);
+			if(($image_detail[0] >= 200 ) AND ($image_detail[1] >= 230 ) )
+			{
+				$create_file_name = md5($this->tank_auth->get_user_id().date("Y-m-d:h:i:sa")).".jpg";
+				$myfile = fopen("upload/".$create_file_name, "w") or die("Unable to open file!");
+				$txt = file_get_contents($this->input->post('image-data'));
+				fwrite($myfile, $txt);
+				$addimagePath = base_url()."upload/".$create_file_name;
+			}
+		}
+		if(isset($addimagePath))
+			$updateInfo['ad_imagepath'] = $addimagePath; 
+
+		$this->matri->addAdvertiseUpdate($addid , $updateInfo);
+		
+		redirect('/admin/listAdvertisement');
+	}
+
+	function addAdvertisement($ad_id = NULL){
+
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
+		$data['addetail'] = isset($ad_id) ? $this->adminmodel->get_ad_detail($ad_id) : NULL;
+		$data['isEdit']  = isset($ad_id);
+		$data['page'] =     'admin/addedituserad';
+		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='';
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
+	}
+
+	function listAdvertisement(){
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
+		$data['addlist'] = $this->adminmodel->list_ad($ad_id);
+		$data['page'] =     'admin/listuserad';
+		$data['title'] =    'Muser | Home Page | Mplan - Mplan.in';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='';
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
+	}
+
+	function manageusers(){
+		$data['isadmin'] = $this->tank_auth->is_admin_in();
+	    if ($this->session->userdata('role') != '1'){
+			redirect('/admin');
+		}
+		$data['page'] =     'admin/manageuser';
+		$data['title'] =    'Admin - Manage Users';
+		$data['keywords'] ='matrimony, matrimonials, matchmaking, brides, grooms, matrimonial blog';
+		$data['descripation'] ='';
+		$this->load->view(SITE_THEME_FOR_VIEW.'site_theme/site_containt', $data);
+	}
+
+    function search_users() {
+
+		$keyword = $this->input->post('profile');
+		$data['users'] = $this->adminmodel->search_users_by_name_or_id($keyword);
+		$this->load->view('admin/user_result_ajax', $data);
+	}
+
+    function delete_user() {
+        $id = $this->input->post('id');
+
+        if (!$id) {
+            echo json_encode(['success' => false, 'message' => 'User ID missing']);
+            return;
+        }
+
+        // Soft delete: set delete_status = 'Yes'
+        $update =  $this->adminmodel->update_user($id, ['delete_status' => 'Yes']);
+
+        if ($update) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Update failed']);
+        }
+    }
+
+    function change_user_role() {
+        $id = $this->input->post('id');
+        $role = $this->input->post('role');
+
+        if (!$id || !$role) {
+            echo json_encode(['success' => false, 'message' => 'Missing parameters']);
+            return;
+        }
+
+        // Update role
+        $update =  $this->adminmodel->update_user($id, ['role' => $role]);
+
+        if ($update) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Update failed']);
+        }
+    }
+
+	
+	function addtotheuser(){
+		$addid = $this->input->post('useradd');
+		$userid = $this->input->post('userid');
+		if(isset($addid)){
+			$data['isadmin'] = $this->tank_auth->is_admin_in();
+			$data = array(
+					'user_add' => $addid, 
+			);
+			$this->update->global_update('users','id', $userid , $data);
+		}	
+		redirect('admin');   
 	}
         
 }
